@@ -6,7 +6,7 @@
 <title>Vivian Min — Design Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#f4f1ee; --paper:#fbfaf7; --edge:#d9d6cf; --ink:#1b1b1b;
@@ -27,7 +27,7 @@
      A scaled-down transform makes iOS rasterize huge layers, which crashes Safari when you pinch-zoom. */
   .stage.z{left:0;top:0;transform:none}
   .stage.portrait .bro-scene{zoom:var(--bz,1.6)}
-  .stage.portrait .scene{zoom:1.22}
+  .stage.portrait .scene{zoom:1.42}
   .stage.portrait .hello{font-size:88px}
   .stage.portrait .hint{font-size:26px}
   .stage.portrait .enter{font-size:40px}
@@ -94,6 +94,49 @@
     font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;font-weight:700;letter-spacing:.18em;font-size:46px;
     text-transform:uppercase;pointer-events:none;mix-blend-mode:multiply}
   .scanned .stamp{animation:stamp .35s cubic-bezier(.3,1.6,.5,1) forwards}
+
+
+  /* ---------- TICKET v2: blue museum ticket with a perforated stub ---------- */
+  .scene,.ticket3d{width:640px}
+  .face{--tk:#17345f;--tk2:#3d6aa3;border-radius:10px;color:var(--tk);
+    background:linear-gradient(118deg,#fbfdff 0%,#e3edf8 30%,#a9c6e6 62%,#cfe0f2 82%,#f6f9fd 100%)}
+  .face.front,.face.back{display:grid;min-height:300px}
+  .face.front{grid-template-columns:1fr 190px}
+  .face.back{grid-template-columns:190px 1fr}
+  .tk-main{position:relative;z-index:2;padding:22px 26px 18px 30px;display:flex;flex-direction:column}
+  .tk-stub{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,.12))}
+  .front .tk-stub{border-left:2px dashed rgba(23,52,95,.35)}
+  .back .tk-stub{border-right:2px dashed rgba(23,52,95,.35)}
+  .notch{position:absolute;z-index:5;width:22px;height:22px;border-radius:50%;background:var(--bg);pointer-events:none}
+  .front .notch{left:calc(100% - 190px - 12px)}.back .notch{left:calc(190px - 10px)}
+  .notch.t{top:-11px}.notch.b{bottom:-11px}
+  .pill{display:inline-block;font:600 11.5px/1 'Manrope',sans-serif;letter-spacing:.06em;color:#fff;background:var(--tk);border-radius:999px;padding:6px 12px}
+  .pill.o{background:none;color:var(--tk);border:1.5px solid var(--tk)}
+  .tk-top{display:flex;justify-content:space-between;align-items:center}
+  .star{font-size:18px;color:var(--tk);line-height:1}
+  .star.sm{position:absolute;right:16px;top:14px;font-size:14px}
+  .tk-title{margin:10px 0 8px;line-height:.9;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .tk-title em{font:italic 500 64px/0.95 'Playfair Display',Georgia,serif;letter-spacing:-.01em}
+  .tk-title span{font:500 21px 'Playfair Display',Georgia,serif;letter-spacing:.02em}
+  .tk-lines{list-style:none;font-size:13.5px;line-height:1.35;color:#29466f;border-top:1px solid rgba(23,52,95,.35)}
+  .tk-lines li{padding:4px 0;border-bottom:1px solid rgba(23,52,95,.14)}
+  .front .showing{margin-top:auto;padding-top:12px;display:flex;align-items:center;gap:12px}
+  .front .showing small{display:inline-block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;margin:0;color:var(--tk)}
+  .front .showing strong{font:700 30px/1 'Manrope',sans-serif;letter-spacing:-.02em;color:var(--tk)}
+  .front .foot{font-size:10.5px;line-height:1.4;color:#4a6489;margin-top:10px}
+  .tk-stub .qrbox{padding:0;gap:8px}
+  .tk-stub .qr{width:124px;background:#fff;padding:7px;border-radius:4px;box-shadow:0 1px 0 rgba(23,52,95,.12)}
+  .tk-stub .code{font-size:11.5px;letter-spacing:.1em;color:var(--tk);font-weight:600}
+  .back .tk-main{justify-content:space-between;padding:26px 30px 22px}
+  .back .note-label{margin-bottom:12px}
+  .back .note{font:italic 400 21px/1.45 'Playfair Display',Georgia,serif;color:var(--tk)}
+  .back .barcode{height:38px;margin-top:16px;opacity:.85;
+    background:repeating-linear-gradient(90deg,var(--tk) 0 2px,transparent 2px 5px,var(--tk) 5px 9px,transparent 9px 11px,var(--tk) 11px 12px,transparent 12px 17px)}
+  .stub-mark{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tk)}
+  .stub-mark em{font:italic 500 70px/1 'Playfair Display',Georgia,serif}
+  .stub-mark span{font:600 11px 'Manrope',sans-serif;letter-spacing:.3em}
+  .face::before{opacity:.18}
 
   /* ---------- HANDHELD SCANNER (appears only when scanning) ---------- */
   .scanner{position:absolute;left:0;top:0;width:362px;height:431px;z-index:20;pointer-events:none;transform:translate(4000px,0);
@@ -302,34 +345,39 @@
       <div class="ticket3d" id="ticket" role="button" tabindex="0" aria-label="Scan ticket to enter">
 
         <div class="face front">
-          <div class="band"></div>
-          <div class="body">
-            <div class="info">
-              <div class="title">Museum of Vivian Min</div>
-              General Access - All Visitors<br>
-              Collections: People, Needs, Systems<br>
-              Est. in Hospitality, Travel &amp; Tech<br>
-              Admission: Your curiosity
-              <div class="showing"><small>Now Showing</small><strong>Design Portfolio</strong></div>
-            </div>
+          <div class="tk-main">
+            <div class="tk-top"><span class="pill">General Access - All Visitors</span><span class="star">✦</span></div>
+            <div class="tk-title"><em>Museum</em><span>of Vivian Min</span></div>
+            <ul class="tk-lines">
+              <li>Collections: People, Needs, Systems</li>
+              <li>Est. in Hospitality, Travel &amp; Tech</li>
+              <li>Admission: Your curiosity</li>
+            </ul>
+            <div class="showing"><small class="pill o">Now Showing</small><strong>Design Portfolio</strong></div>
+            <div class="foot">For inquiries please contact vmin@andrew.cmu.edu. Issued by Vivian Min.</div>
+          </div>
+          <div class="tk-stub">
             <div class="qrbox">
               <div class="qr"><svg class="qrsvg" viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true"></svg><div class="laser"></div></div>
               <div class="code">MA-DESIGN-2027</div>
             </div>
-            <div class="foot">For inquiries please contact vmin@andrew.cmu.edu. Issued by Vivian Min.</div>
+            <span class="star sm">✦</span>
           </div>
+          <i class="notch t"></i><i class="notch b"></i>
           <div class="shade"></div><div class="sheen"></div>
         </div>
 
         <div class="face back">
-          <div class="body">
-            <div>
-              <div class="note-label">Curator's Note</div>
-              <div class="note">I approach design as curation, connecting people, needs, and systems into more thoughtful experiences, shaped by my background in hospitality, travel, and technology.</div>
-            </div>
+          <div class="tk-stub">
+            <span class="star">✦</span>
+            <div class="stub-mark"><em>M</em><span>VM</span></div>
+          </div>
+          <div class="tk-main">
+            <div class="note-label"><span class="pill">Curator's Note</span></div>
+            <div class="note">I approach design as curation, connecting people, needs, and systems into more thoughtful experiences, shaped by my background in hospitality, travel, and technology.</div>
             <div class="barcode"></div>
           </div>
-          <div class="band"></div>
+          <i class="notch t"></i><i class="notch b"></i>
           <div class="shade"></div><div class="sheen"></div>
         </div>
 
