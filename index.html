@@ -26,7 +26,7 @@
   /* phones: lay the stage out at its real on-screen size with CSS zoom instead of a scale transform.
      A scaled-down transform makes iOS rasterize huge layers, which crashes Safari when you pinch-zoom. */
   .stage.z{left:0;top:0;transform:none}
-  .stage.portrait .bro-scene{zoom:1.85}
+  .stage.portrait .bro-scene{zoom:var(--bz,1.6)}
   .stage.portrait .scene{zoom:1.22}
   .stage.portrait .hello{font-size:88px}
   .stage.portrait .hint{font-size:26px}
@@ -565,13 +565,16 @@
   const stage = document.getElementById('stage');
   let S = 1;
   function fit(){
-    const vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight;
+    // use the smaller of layout and visible height so Safari's toolbars never cover the content
+    const vw = document.documentElement.clientWidth, vh = Math.min(document.documentElement.clientHeight, window.innerHeight || 1e9);
     const portrait = vw < vh;
     const W = portrait ? 1000 : 1920, H = portrait ? Math.max(1500, 1000 * vh / vw) : 1080;
     stage.style.setProperty('--w', W + 'px'); stage.style.setProperty('--h', H + 'px');
     S = Math.min(vw / W, vh / H);
     stage.style.setProperty('--s', S);
     stage.classList.toggle('portrait', portrait);
+    // brochure: as large as possible while the whole page plus the hint line fit on screen
+    if(portrait) stage.style.setProperty('--bz', Math.max(1, Math.min(1.85, (H - 260) / 990, 760 / 400)).toFixed(3));
     const z = portrait || window.matchMedia('(hover: none)').matches;
     stage.classList.toggle('z', z); stage.style.zoom = z ? S : '';
     document.getElementById('beam').setAttribute('viewBox', `0 0 ${W} ${H}`);
