@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+<title>POOM Identity Design — Vivian Min</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--head:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--body:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit}
+
+  .bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:16px clamp(16px,4vw,48px);background:rgba(244,241,238,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--soft);font-family:var(--body);font-size:15px}
+  .bar a{text-decoration:none}
+  .bar a:hover{color:var(--red)}
+  .bar .where{color:var(--muted)}
+
+  main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 100px}
+
+  .hero{padding:clamp(48px,8vw,96px) 0 40px}
+  .kicker{font-family:var(--body);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--body);font-weight:700;font-size:clamp(40px,7vw,84px);letter-spacing:-.04em;line-height:.98;margin:14px 0 24px}
+  .lede{font-size:clamp(18px,2vw,22px);line-height:1.6;max-width:780px;color:#33312e}
+  .story{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;background:#fff;box-shadow:0 10px 24px rgba(40,30,20,.06)}
+  .story li{padding:24px 26px 26px;position:relative}
+  .story li+li{border-left:1px solid var(--soft)}
+  .story .step{display:block;font-family:var(--body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .story li:first-child .step{color:var(--red)}
+  .story li:last-child .step{color:var(--green)}
+  .story p{font-size:16.5px;line-height:1.5}
+  .facts{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1.5px solid var(--line)}
+  .facts > div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--soft);align-items:baseline}
+  .facts > div:not(.wide):first-child{padding-right:24px}
+  .facts .wide{grid-column:1 / -1}
+  .facts dt{font-family:var(--body);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .facts dd{font-size:16.5px}
+  .facts dd b{font-weight:600}
+  .dim{color:var(--muted)}
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chips li{font-size:14px;padding:5px 12px;border:1px solid var(--ink);border-radius:999px}
+  .chips.light{margin-top:0}
+  .chips.light li{border-color:var(--soft);background:#fff}
+
+  .outcomes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .outcomes div{background:#fff;padding:22px 24px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .outcomes strong{display:block;font-family:var(--body);font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .outcomes p{font-size:15.5px;color:#4a4742;margin-top:10px;line-height:1.45}
+  .lessons{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .lessons h3{margin-top:0!important}
+  .lessons p{font-size:16.5px!important}
+  .next-list{list-style:none;counter-reset:n;max-width:760px;margin:0!important}
+  .next-list li{counter-increment:n;display:grid;grid-template-columns:44px 1fr;font-size:17px;padding:14px 0;border-bottom:1px solid var(--soft);margin:0!important}
+  .next-list li::before{content:counter(n,decimal-leading-zero);font-family:var(--body);font-size:13px;color:var(--muted);padding-top:3px}
+  .next-list b{font-weight:600}
+  .reflect{margin-top:28px;padding:4px 0 4px 22px;border-left:3px solid var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;max-width:760px}
+
+  section{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--soft)}
+  section > h2{font-family:var(--body);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  section > h2 small{display:block;font-family:var(--body);font-weight:400;font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
+  .body p{font-size:17.5px;max-width:740px}
+  .body p+p{margin-top:14px}
+  .body h3{font-family:var(--body);font-size:20px;font-weight:600;margin:28px 0 8px}
+  .body ul{margin:12px 0 0 22px;max-width:740px}
+  .body li{font-size:17px;margin-top:8px}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .stat{background:#fff;padding:22px 22px 20px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .stat strong{display:block;font-family:var(--body);font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .stat span{display:block;font-size:14.5px;color:#4a4742;margin-top:8px;line-height:1.4}
+  .bars{margin-top:22px;max-width:620px}
+  .bars div{display:grid;grid-template-columns:150px 1fr 44px;align-items:center;gap:12px;font-size:15px;margin-top:10px}
+  .bars i{display:block;height:10px;background:var(--ink)}
+  .bars b{font-family:var(--body);font-weight:500;font-size:14px}
+
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .feature{background:#fff;padding:22px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .feature .n{font-family:var(--body);font-size:12px;color:var(--muted)}
+  .feature b{display:block;font-family:var(--body);font-size:19px;margin:6px 0 8px;line-height:1.25}
+  .feature p{font-size:15px;line-height:1.5}
+  .feature .tag{display:inline-block;margin-top:12px;font-family:var(--body);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line)}
+  .feature .tag.off{color:var(--muted);border-color:var(--soft)}
+
+  .timeline{margin-top:16px;border-left:1.5px solid var(--line)}
+  .timeline div{position:relative;padding:0 0 16px 22px;font-size:16.5px}
+  .timeline div::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line)}
+  .timeline b{font-family:var(--body);font-weight:600;margin-right:8px}
+
+  .next{padding-top:56px;font-family:var(--body)}
+  .next a{font-size:20px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+  .next a:hover{color:var(--red);border-color:var(--red)}
+  footer{margin-top:60px;font-size:13px;color:var(--muted)}
+
+  /* ================= editorial pass ================= */
+  body{font-weight:400;letter-spacing:.005em;color:#1d1c1a}
+  .kicker{font-size:12px;letter-spacing:.22em;font-weight:500}
+  h1{font-weight:500;letter-spacing:-.015em;line-height:1.02;font-size:clamp(40px,6.4vw,78px);max-width:16ch}
+  .lede{font-size:clamp(19px,2vw,23px);line-height:1.55;font-weight:400;max-width:34em}
+
+  .story{background:none;box-shadow:none;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--soft);margin-top:44px}
+  .story li{padding:20px 28px 24px 0}
+  .story li+li{border-left:none;padding-left:28px;border-left:1px solid var(--soft)}
+  .story .step{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .story p{font-size:17px}
+
+  .facts{border-top:none;margin-top:28px}
+  .facts > div{grid-template-columns:110px 1fr}
+  .facts dt{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .facts dd{font-size:17px}
+  .chips,.chips.light{display:block;margin-top:2px}
+  .chips li,.chips.light li{display:inline;border:none;background:none;padding:0;border-radius:0;font-size:17px}
+  .chips li+li::before{content:" / ";color:var(--muted)}
+  .facts dd b{font-weight:500;display:block;margin-bottom:2px}
+
+  section{grid-template-columns:220px 1fr;padding:56px 0;border-bottom:none;border-top:1px solid var(--soft)}
+  section > h2{font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;line-height:1.5;color:var(--ink);padding-top:4px}
+  section > h2 small{display:inline;font-size:13px;letter-spacing:.2em;color:var(--muted);margin:0 10px 0 0}
+  .body p,.body li{font-size:18px;line-height:1.6}
+  .body h3{font-weight:500;font-size:22px;letter-spacing:-.005em;margin:36px 0 10px}
+
+  .features{gap:0;border-top:1.5px solid var(--ink)}
+  .feature{background:none;box-shadow:none;padding:18px 24px 6px 0}
+  .feature+.feature{padding-left:24px;border-left:1px solid var(--soft)}
+  .feature b{font-weight:500;font-size:20px}
+  .feature .tag{border:none;padding:0;font-size:11px;letter-spacing:.18em;color:var(--green)}
+  .feature .tag.off{color:var(--amber)}
+
+  .stats,.outcomes{gap:0;border-top:1.5px solid var(--ink)}
+  .stat,.outcomes div{background:none;box-shadow:none;padding:20px 24px 22px 0}
+  .stat+.stat{padding-left:24px;border-left:1px solid var(--soft)}
+  .stat strong,.outcomes strong{font-weight:500;font-size:52px;letter-spacing:-.02em}
+  .stat span,.outcomes p{font-size:15.5px}
+  .outcomes div{border-bottom:1px solid var(--soft)}
+  .outcomes div:nth-child(even){padding-left:24px;border-left:1px solid var(--soft)}
+  .bars i{height:6px}
+  .bars b{font-weight:500}
+
+  .lessons h3{font-size:20px}
+  .next-list li{font-size:18px}
+  .next-list li::before{font-size:13px;letter-spacing:.1em}
+  .next-list b{font-weight:500}
+  .reflect{font-weight:400;font-size:22px;border-left-width:2px}
+  .timeline b{font-weight:500}
+
+  /* ================= type: Manrope throughout ================= */
+  body{font-family:var(--body);letter-spacing:0}
+  h1,h2,h3,.demo-title,section > h2,.kicker,.story .step,.facts dt,.side-label,.winsize b,
+  .stat strong,.outcomes strong,.feature b,.feature .n,.feature .tag,.status,.next-list li::before,
+  .tabs button,.bar,.next a,.facts dd b{font-family:var(--head)}
+  h1{font-weight:600;letter-spacing:-.03em}
+  .demo-title,.stat strong,.outcomes strong{letter-spacing:-.025em}
+  .body p,.body li,.lede,.story p,.facts dd,.note p,.reflect{letter-spacing:-.003em}
+  .lede{font-size:clamp(18px,1.9vw,22px);line-height:1.6}
+  .body p,.body li{font-size:17.5px;line-height:1.65}
+  .reflect{font-size:20px;line-height:1.55}
+
+  section > .body{min-width:0}
+  .wins{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin-top:10px}
+  .wins div{padding:18px 18px 18px 0}
+  .wins div+div{padding-left:18px;border-left:1px solid var(--soft)}
+  .wins b{display:block;font-size:30px;letter-spacing:-.03em;line-height:1.05;margin-bottom:6px}
+  .wins p{font-size:15px!important;margin:0;color:#3a3835}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px}
+  .tabs button{font:500 14px var(--head);border:1px solid var(--soft);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;color:var(--ink)}
+  .tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .pdf-link{display:inline-block;margin-top:10px;font-size:14px;color:var(--ink)}
+  @media (max-width:860px){ .wins{grid-template-columns:1fr} .wins div+div{padding-left:0;border-left:0;border-top:1px solid var(--soft)} }
+
+  .logo-x{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center;margin-top:14px}
+  .logo-fig{position:relative;background:#fff;border:1px solid var(--soft);padding:16px}
+  .logo-fig img{display:block;width:100%;height:auto}
+  .logo-fig .hl{position:absolute;border:2px solid #c0392b;border-radius:50%;opacity:0;transition:opacity .25s,transform .25s;transform:scale(.9);pointer-events:none}
+  .logo-fig .hl.on{opacity:1;transform:none}
+  .parts{list-style:none;margin:0!important;padding:0}
+  .parts li{margin:0!important;border-top:1px solid var(--soft)}
+  .parts li:last-child{border-bottom:1px solid var(--soft)}
+  .parts button{all:unset;cursor:pointer;display:block;width:100%;padding:14px 0}
+  .parts b{display:block;font-size:17px;font-weight:600}
+  .parts span{display:block;font-size:15px;color:var(--muted);margin-top:3px;line-height:1.5}
+  .parts li.on b{color:#c0392b}
+  .parts li.on span{color:#3a3835}
+  .word{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:6px 0 4px}
+  .word b{font-size:40px;letter-spacing:-.02em}
+  .word span{font-size:16px;color:var(--muted)}
+  .card{perspective:1600px;max-width:620px;margin-top:6px;cursor:pointer}
+  .card-in{position:relative;aspect-ratio:944/629;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,.7,.2,1)}
+  .card.flip .card-in{transform:rotateY(180deg)}
+  .card .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 16px 30px rgba(40,30,20,.18);border-radius:6px;overflow:hidden;background:#fff}
+  .card .face.b{transform:rotateY(180deg)}
+  .card img{width:100%;height:100%;object-fit:cover;display:block}
+  .cap{font-size:14px;color:var(--muted);margin-top:10px}
+  .tee{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:28px;align-items:center}
+  .tee img{display:block;width:100%;height:auto;transition:opacity .25s}
+  .tee .why{font-size:16px;line-height:1.6}
+  .shot{margin:14px 0 0}
+  .shot img{display:block;width:100%;height:auto;border:1px solid var(--soft);background:#fff}
+  .days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-top:12px}
+  .days div{background:#fff;border:1px solid var(--soft);padding:10px 12px;font-size:14px;line-height:1.4}
+  .days div b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  @media (max-width:860px){ .logo-x,.tee{grid-template-columns:1fr} .days{grid-template-columns:1fr} }
+  /* phones: single column (these rules were missing on this page) */
+  @media (max-width:860px){
+    .story li,.story li+li{padding:18px 0;border-left:none}
+    .feature,.feature+.feature,.stat,.stat+.stat,.outcomes div,.outcomes div:nth-child(even){padding-left:0;border-left:none;border-bottom:1px solid var(--soft)}
+    section{grid-template-columns:minmax(0,1fr);gap:18px;padding:40px 0}
+    .story{grid-template-columns:1fr}
+    .story li+li{border-top:1px solid var(--soft)}
+    .facts{grid-template-columns:1fr}
+    .facts > div{grid-template-columns:1fr;gap:6px}
+    .outcomes,.lessons{grid-template-columns:1fr}
+    .stats,.features{grid-template-columns:1fr}
+    .bar .where{display:none}
+    .trend .row{grid-template-columns:80px 1fr 40px}
+    .tally strong{font-size:36px}
+    .log td:last-child{white-space:normal}
+  }</style>
+</head>
+<body>
+<header class="bar">
+  <a href="index.html#guide">← Back to the floor guide</a>
+  <span class="where">Museum of Vivian Min · Floor 1 · Personal</span>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="kicker">1.1 · POOM Identity Design · Mission trip, Mongolia 2023</div>
+    <h1>POOM: An Identity Built on an Embrace</h1>
+    <p class="lede">Team POOM (Pray Over Our Mongolia) is a faith-based mission team that traveled to Mongolia in 2023. When the team's designer left unexpectedly, I took over and created the visual identity in 13 days: a logo, prayer cards and team T-shirts.</p>
+    <ol class="story">
+      <li><span class="step">The challenge</span><p>Past materials were functional but forgettable. The new identity had to be bold, meaningful and approachable for older audiences.</p></li>
+      <li><span class="step">What I did</span><p>Designed the logo, prayer cards and T-shirts, then managed printing and vendors.</p></li>
+      <li><span class="step">The result</span><p>500 prayer cards distributed before the trip, and the logo reused for the 2024 mission.</p></li>
+    </ol>
+    <dl class="facts">
+      <div><dt>Timeline</dt><dd>June 2023 <span class="dim">· 13 days</span></dd></div>
+      <div><dt>Team</dt><dd>Solo, with the team lead</dd></div>
+      <div class="wide"><dt>My role</dt><dd><b>Design Lead</b>
+        <ul class="chips"><li>Identity design</li><li>Photography</li><li>Print production</li><li>Vendor coordination</li></ul></dd></div>
+      <div class="wide"><dt>Tools</dt><dd><ul class="chips light"><li>Procreate</li><li>Adobe Photoshop</li></ul></dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <h2><small>01</small>One word</h2>
+    <div class="body">
+      <div class="word"><b>품다</b><span>poom-da · to embrace, to hold close to the heart</span></div>
+      <p>The team name comes from this Korean verb. The whole identity grew out of one idea: reduce an embrace to a single mark that anyone can read, in any language.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>02</small>The logo</h2>
+    <div class="body">
+      <p>Select a part of the logo to see why it's there.</p>
+      <div class="logo-x">
+        <div class="logo-fig" id="logoFig"><img src="assets/poom/logo.jpg" alt="POOM logo: two arms forming a heart, with Pray Over Our Mongolia lettering">
+          <i class="hl" style="left:22%;top:26%;width:56%;height:46%"></i>
+          <i class="hl" style="left:24%;top:38%;width:52%;height:22%"></i>
+          <i class="hl" style="left:4%;top:3%;width:92%;height:20%"></i>
+          <i class="hl" style="left:6%;top:70%;width:88%;height:28%"></i>
+        </div>
+        <ul class="parts" id="parts">
+          <li><button data-k="0"><b>A heart made of two arms</b><span>Two abstract arms wrap around each other to form a heart: the embrace in 품다.</span></button></li>
+          <li><button data-k="1"><b>Red, blue and yellow</b><span>Taken from the Mongolian flag, so the mark feels rooted in the place the team was going.</span></button></li>
+          <li><button data-k="2"><b>Hand-drawn, Keith Haring-style lettering</b><span>Bold outlines and energy lines feel joyful and easy to read, even for older audiences.</span></button></li>
+          <li><button data-k="3"><b>Rounded, continuous lines</b><span>Simple shapes that scale from a small chest print to a full card and to digital use.</span></button></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>03</small>Prayer cards</h2>
+    <div class="body">
+      <p>Cards people would keep, not throw away. Tap the card to turn it over.</p>
+      <div class="card" id="card" role="button" tabindex="0" aria-label="Flip prayer card">
+        <div class="card-in">
+          <div class="face"><img src="assets/poom/card-front.jpg" alt="Prayer card front: team photo on a starry night sky"></div>
+          <div class="face b"><img src="assets/poom/card-back.jpg" alt="Prayer card back: logo, Korean prayer requests and a rider on the grasslands"></div>
+        </div>
+      </div>
+      <p class="cap" id="cardCap">Front · The team photo on a dark, starry background that recalls Mongolia's night sky.</p>
+      <figure class="shot"><img src="assets/poom/card-mockup.jpg" alt="Prayer card mockup with envelope" loading="lazy"></figure>
+      <p class="cap">Double-sided, full color on gloss cardstock.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>04</small>Team T-shirts</h2>
+    <div class="body">
+      <div class="tabs" id="teeTabs"><button data-v="navy-front" class="on">Navy · front</button><button data-v="navy-back">Navy · back</button><button data-v="white-front">White · front</button><button data-v="white-back">White · back</button></div>
+      <div class="tee"><img id="teeImg" src="assets/poom/tee-navy-front.jpg" alt="Team T-shirt"><p class="why" id="teeWhy"></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>05</small>13 days</h2>
+    <div class="body">
+      <div class="days">
+        <div><b>Day 1</b>Logo and layout concept</div>
+        <div><b>Days 2–3</b>Team approval, color and text balance</div>
+        <div><b>Days 4–5</b>Print coordination and vendor negotiation</div>
+        <div><b>Days 6–13</b>Production, proofing and delivery</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>06</small>Outcomes</h2>
+    <div class="body">
+      <div class="wins">
+        <div><b>500</b><p>Prayer cards printed and handed out before the trip.</p></div>
+        <div><b>2</b><p>Other mission teams asked to collaborate on design.</p></div>
+        <div><b>2024</b><p>The logo was reused for the next year's mission.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>07</small>Lessons learned</h2>
+    <div class="body">
+      <div class="lessons">
+        <div><h3>Design and logistics together</h3><p>Running print and vendors while protecting the design.</p></div>
+        <div><h3>One symbol for a feeling</h3><p>Reducing an emotional idea to a single, readable mark.</p></div>
+        <div><h3>Local cues make it personal</h3><p>National colors grounded the identity in its place.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>08</small>Next time</h2>
+    <div class="body">
+      <ol class="next-list">
+        <li><span><b>Learn from local art,</b> with motifs or hand-rendered type inspired by a Mongolian artist.</span></li>
+        <li><span><b>Try other finishes</b> for the cards, such as matte or embossing.</span></li>
+        <li><span><b>Choose heavier shirts</b> so the print holds up after washing.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="next"><a href="index.html#guide">← Back to the floor guide</a></div>
+  <footer>© 2026 Vivian Min · Museum of Vivian Min</footer>
+</main>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const hls = [...$('logoFig').querySelectorAll('.hl')], parts = [...$('parts').children];
+  function part(k){ hls.forEach((h, i) => h.classList.toggle('on', i === k)); parts.forEach((p, i) => p.classList.toggle('on', i === k)); }
+  parts.forEach((p, i) => p.querySelector('button').onclick = () => part(i)); part(0);
+  const card = $('card'), caps = ['Front · The team photo on a dark, starry background that recalls Mongolia\'s night sky.', 'Back · The logo, the team\'s prayer requests in Korean, and grasslands with a rider on horseback.'];
+  const flip = () => { card.classList.toggle('flip'); $('cardCap').textContent = caps[card.classList.contains('flip') ? 1 : 0]; };
+  card.onclick = flip; card.onkeydown = e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); flip(); } };
+  const W = { 'navy-front':'A small heart over the left chest keeps attention on people, not graphics.', 'navy-back':'The full logo and phrase on the back, large enough to read across a camp or event.', 'white-front':'The same small mark works on white, so the team could mix colors.', 'white-back':'On white, the flag colors read at their brightest.' };
+  document.querySelectorAll('#teeTabs button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#teeTabs button').forEach(x => x.classList.toggle('on', x === b));
+    $('teeImg').src = 'assets/poom/tee-' + b.dataset.v + '.jpg'; $('teeWhy').textContent = W[b.dataset.v];
+  });
+  $('teeWhy').textContent = W['navy-front'];
+  ['navy-back','white-front','white-back'].forEach(v => { const i = new Image(); i.src = 'assets/poom/tee-' + v + '.jpg'; });
+})();
+</script>
+<script src="menu.js" defer></script>
+</body>
+</html>
