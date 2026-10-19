@@ -390,14 +390,10 @@
   .stage.portrait .b-hint{flex-direction:column;gap:22px}
   .stage.portrait .b-hint > span{display:none}
 
-  /* "About Me" is the first stop */
-  .it.start{position:relative;background:#1b1b1b;color:#fff;padding:8px 10px 9px;margin:-2px 0 0 -2px;border-radius:3px;box-shadow:0 6px 14px rgba(0,0,0,.18)}
-  .it.start span{color:#fff;text-decoration-color:rgba(255,255,255,.6)}
-  .it.start em{display:block;font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#ff6b5e;margin-bottom:3px}
-  .it.start:hover{background:var(--laser);color:#fff}
-  .it.start:hover em{color:#fff}
-  .lobby2.open .it.start{animation:startpulse 1.6s ease-in-out 1.9s 3}
-  @keyframes startpulse{0%,100%{box-shadow:0 6px 14px rgba(0,0,0,.18),0 0 0 0 rgba(255,43,43,.0)}50%{box-shadow:0 6px 14px rgba(0,0,0,.18),0 0 0 7px rgba(255,43,43,.25)}}
+  /* "About Me" is the first stop: a quiet marker, no box */
+  .it.start em{display:block;font-style:normal;font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--laser);margin-bottom:2px}
+  .it.start{position:relative}
+  .it.start::before{content:"";position:absolute;left:-9px;top:1px;bottom:1px;width:2px;background:var(--laser)}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes scan{0%{top:0;opacity:1}100%{top:calc(100% - 2px);opacity:1}}
   @keyframes flicker{50%{opacity:.7}}
