@@ -262,6 +262,23 @@
   .room.portrait .room-nav{padding:0 40px}
   .room.portrait .exit{font-size:18px}
 
+
+  /* ---------- STACK: brochure waits behind the ticket ---------- */
+  .lobby{z-index:2}
+  .lobby2{z-index:1;opacity:1;transition:none}
+  .lobby2:not(.open) .bro-scene{transform:translate(350px,-4px) scale(.46) rotate(7deg)}
+  .stage.portrait .lobby2:not(.open) .bro-scene{transform:translate(140px,-14px) scale(.27) rotate(6deg)}
+  .lobby2 .bro-scene{transition:transform 1.25s cubic-bezier(.22,.9,.25,1)}
+  .lobby2 .brochure{transition:transform .9s cubic-bezier(.2,.8,.2,1),filter 1s}
+  .lobby2:not(.open) .brochure{filter:brightness(.96) saturate(.9)}
+  .b-hint{transition:opacity .6s .9s}
+  .lobby2:not(.open) .b-hint{opacity:0;transition:opacity .2s}
+  .lobby.leaving{opacity:1}
+  .lobby.leaving > :not(.scene){animation:fadeout .35s ease forwards}
+  .lobby.leaving .scene{animation:flyup 1s cubic-bezier(.55,0,.7,.2) forwards}
+  .lobby.leaving .floor-shadow{opacity:0;transition:opacity .25s}
+  @keyframes fadeout{from{opacity:1}to{opacity:0}}
+  @keyframes flyup{0%{opacity:1;transform:none}18%{opacity:1;transform:translateY(24px) rotate(1deg)}100%{opacity:1;transform:translateY(-1500px) rotate(-7deg)}}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes scan{0%{top:0;opacity:1}100%{top:calc(100% - 2px);opacity:1}}
   @keyframes flicker{50%{opacity:.7}}
@@ -729,12 +746,9 @@
       beam.classList.remove('on'); scanner.classList.remove('fire'); ticket.classList.remove('scanning');
       scanner.classList.add('ok'); setScreen('ADMITTED', '1 Visitor · Welcome'); beepSound();
     }, 1750);
-    setTimeout(() => { scanMode = 'exit'; }, 2900);
-    setTimeout(() => {
-      lobby.classList.add('leaving');
-      lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true;
-    }, 3300);
-    setTimeout(() => { scanMode = 'hidden'; scanner.style.transform = 'translate(4000px,0)'; }, 4300);
+    setTimeout(() => { scanMode = 'exit'; lobby.classList.add('leaving'); }, 2550);
+    setTimeout(() => { lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true; }, 2950);
+    setTimeout(() => { scanMode = 'hidden'; scanner.style.transform = 'translate(4000px,0)'; }, 4000);
   }
 
   // brochure: click to flip between poster and floor guide
