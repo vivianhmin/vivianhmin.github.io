@@ -17,71 +17,91 @@
   html{scroll-behavior:smooth}
   body{background:var(--wall);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.6}
   a{color:inherit}
+  img{display:block}
 
-  /* every block shares one grid: a label column and a content column */
   .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
   .row{display:grid;grid-template-columns:var(--label) 1fr;column-gap:var(--gap)}
-  .lbl{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-top:6px}
+  .lbl{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-top:8px}
 
-  /* ---------- directory sign ---------- */
+  /* ---------- floor sign ---------- */
   .sign{position:sticky;top:0;z-index:5;background:rgba(246,244,240,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
   .sign .row{height:58px;align-items:center;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
   .sign .row > div:last-child{display:flex;justify-content:space-between}
   .sign a{text-decoration:none;color:var(--muted)}
   .sign a:hover{color:var(--ink)}
-  .sign .floor{display:inline-flex;align-items:center;gap:10px}
-  .sign .floor i{font-style:normal;display:inline-grid;place-items:center;width:24px;height:24px;background:var(--ink);color:var(--wall);font-size:12px;letter-spacing:0}
+  .floor{display:inline-flex;align-items:center;gap:10px}
+  .floor i{font-style:normal;display:inline-grid;place-items:center;width:24px;height:24px;background:var(--ink);color:var(--wall);font-size:12px;letter-spacing:0}
 
-  /* ---------- gallery wall: one work, one wall text ---------- */
-  .hero{padding:clamp(56px,9vw,110px) 0 clamp(64px,9vw,110px);position:relative}
-  .hero .wrap{position:relative}
-  .hero::before{content:"";position:absolute;left:max(0px,calc(50% - 560px));top:-58px;width:min(640px,90vw);height:640px;pointer-events:none;
-    background:radial-gradient(ellipse 50% 60% at 40% 0%,rgba(255,238,210,.8),rgba(255,238,210,.18) 55%,transparent 75%)}
-  .hero .row{align-items:end;position:relative}
-  .work{opacity:0;transform:translateY(14px);animation:rise 1s .1s ease forwards}
-  .frame{background:#1d1c1a;padding:10px;box-shadow:0 28px 46px rgba(50,38,24,.18),0 6px 12px rgba(50,38,24,.12)}
-  .mat{background:#fbfaf7;padding:22px}
-  .mat img{display:block;width:100%;aspect-ratio:711/960;object-fit:cover;background:#e9e5de}
-  .tomb{margin-top:22px;font-size:13px;line-height:1.55;color:var(--text)}
-  .tomb b{display:block;font-weight:600;color:var(--ink)}
+  /* ---------- entrance wall text ---------- */
+  .entrance{padding:clamp(64px,9vw,112px) 0 clamp(40px,5vw,56px)}
+  .gal{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .entrance h1{font-weight:600;font-size:clamp(44px,6.4vw,84px);line-height:1;letter-spacing:-.035em;margin:18px 0 0}
+  .entrance .sub{margin-top:22px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- three works hung on one centre line ---------- */
+  .hang{padding:clamp(24px,4vw,40px) 0 clamp(72px,9vw,110px);position:relative}
+  .hang::before{content:"";position:absolute;left:50%;top:-40px;width:min(1100px,100vw);height:110%;transform:translateX(-50%);pointer-events:none;
+    background:radial-gradient(ellipse 20% 55% at 22% 20%,rgba(255,236,205,.55),transparent 70%),
+               radial-gradient(ellipse 20% 55% at 50% 20%,rgba(255,236,205,.6),transparent 70%),
+               radial-gradient(ellipse 20% 55% at 78% 20%,rgba(255,236,205,.55),transparent 70%)}
+  .works{position:relative;display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+  .piece{opacity:0;transform:translateY(16px);animation:rise 1s ease forwards}
+  .piece:nth-child(1){animation-delay:.15s}.piece:nth-child(2){animation-delay:.3s}.piece:nth-child(3){animation-delay:.45s}
+  .frame{background:#1d1c1a;padding:8px;box-shadow:0 26px 40px rgba(50,38,24,.17),0 5px 10px rgba(50,38,24,.12)}
+  .frame.light{background:#e7e2d9}
+  .mat{background:#fbfaf7;padding:clamp(14px,2vw,22px)}
+  .mat img{width:100%;height:auto}
+  .mat.photo{padding:clamp(10px,1.4vw,16px)}
+  .tomb{margin-top:18px;font-size:12.5px;line-height:1.55;color:var(--text)}
+  .tomb b{font-weight:600;color:var(--ink)}
   .tomb i{display:block}
-  .tomb small{display:block;margin-top:8px;font-size:11.5px;letter-spacing:.06em;color:var(--muted)}
+  .tomb small{display:block;color:var(--muted);font-size:11.5px;letter-spacing:.04em;margin-top:2px}
 
-  .walltext{padding-bottom:4px;opacity:0;transform:translateY(14px);animation:rise 1s .35s ease forwards}
-  .walltext .gal{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}
-  .walltext h1{font-weight:600;font-size:clamp(40px,5.6vw,72px);line-height:1.02;letter-spacing:-.03em;margin:16px 0 26px}
-  .walltext p{font-size:clamp(18px,1.8vw,21px);line-height:1.6;color:var(--text);max-width:34em}
-  .walltext .dates{margin-top:26px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-
-  /* ---------- sections ---------- */
-  section{padding:clamp(48px,7vw,80px) 0 0}
-  section .wrap > .row{border-top:1px solid var(--rule);padding-top:clamp(40px,5vw,56px)}
+  /* ---------- curator's statement ---------- */
+  .statement-wrap .row{border-top:1px solid var(--rule);padding:clamp(48px,6vw,72px) 0 clamp(72px,9vw,110px)}
   .statement p{font-size:clamp(18px,1.8vw,20.5px);line-height:1.72;color:var(--text);max-width:36em}
   .statement p+p{margin-top:20px}
   .statement .lead{font-size:clamp(23px,2.5vw,29px);line-height:1.45;color:var(--ink);font-weight:500;letter-spacing:-.012em}
   .statement .quote{margin-top:34px;font-style:italic;color:var(--ink)}
-  .statement .by{margin-top:6px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-style:normal}
 
-  /* exhibition checklist: each role written like an object label */
-  .checklist{list-style:none}
-  .checklist .obj:first-child{padding-top:4px}
-  .obj{display:grid;grid-template-columns:72px 1fr 150px;column-gap:24px;padding:26px 0 28px;border-bottom:1px solid var(--rule)}
-  .obj .no{font-size:12px;letter-spacing:.14em;color:var(--muted);padding-top:7px}
-  .obj h3{font-weight:600;font-size:clamp(20px,2vw,23px);letter-spacing:-.01em;line-height:1.3}
-  .obj .med{font-size:16.5px;color:var(--text);margin-top:2px}
-  .obj p{font-size:16px;color:var(--muted);margin-top:10px;max-width:34em;line-height:1.6}
-  .obj .yr{text-align:right;font-size:13px;letter-spacing:.1em;color:var(--text);padding-top:7px;line-height:1.5}
-  .obj .yr small{display:block;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:11px}
-  .obj .view{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor}
-  .obj .now{display:inline-block;margin-left:10px;vertical-align:middle;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--wall);background:var(--accent);padding:3px 8px;font-weight:700}
-  .obj{opacity:0;transform:translateY(12px);transition:opacity .7s ease,transform .7s ease}
-  .obj.seen{opacity:1;transform:none}
+  /* ---------- timeline wall: dark wall, white line, the way exhibitions open ---------- */
+  .tlwall{background:#161615;color:#efece6;padding:clamp(56px,7vw,88px) 0 clamp(64px,8vw,96px);overflow:hidden}
+  .tlwall .gal{color:#9fc2b2}
+  .tlwall .lbl{color:#7f7b74}
+  .tlwall h2{font-weight:600;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin-top:12px;line-height:1.1}
+  .tlwall .hint{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#7f7b74;margin-top:14px}
+  .track{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin-top:clamp(36px,5vw,56px);cursor:grab}
+  .track::-webkit-scrollbar{display:none}
+  .track{padding:0 clamp(16px,4vw,48px)}
+  .line{position:relative;width:100%;max-width:1024px;min-width:940px;height:380px;margin:0 auto}
+  .line::before{content:"";position:absolute;left:0;right:22px;top:50%;height:5px;margin-top:-2.5px;background:#efece6;border-radius:3px;
+    transform-origin:left;transform:scaleX(var(--p,0));transition:transform 1.8s cubic-bezier(.3,.6,.2,1)}
+  .line .end{position:absolute;right:0;top:50%;width:26px;height:26px;margin-top:-13px;border-radius:50%;border:5px solid #efece6;background:#161615;
+    opacity:0;transition:opacity .5s 1.6s}
+  .tlwall.on .line .end{opacity:1}
+  .ev{position:absolute;top:50%;width:0;opacity:0;transition:opacity .6s}
+  .tlwall.on .ev{opacity:1}
+  .tlwall.on .ev:nth-child(2){transition-delay:.25s}.tlwall.on .ev:nth-child(3){transition-delay:.5s}
+  .tlwall.on .ev:nth-child(4){transition-delay:.8s}.tlwall.on .ev:nth-child(5){transition-delay:1.05s}.tlwall.on .ev:nth-child(6){transition-delay:1.35s}
+  .ev .dot{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:#efece6;box-shadow:0 0 0 4px #161615}
+  .ev .yr{position:absolute;left:0;transform:translateX(-50%);font-weight:500;font-size:clamp(22px,2.2vw,28px);letter-spacing:.02em;white-space:nowrap}
+  .ev:first-child .yr{transform:none;left:-4px}
+  .ev .cap{position:absolute;left:-8px;width:200px;font-size:13px;line-height:1.5;color:#c9c5bd}
+  .ev:first-child .cap{left:-4px}
+  .ev .cap b{display:block;font-weight:600;color:#efece6;font-size:14px}
+  .ev .cap small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7f7b74;margin-bottom:4px}
+  .ev .tick{position:absolute;left:0;width:1px;background:#4a4844}
+  .ev.up .yr{bottom:22px}
+  .ev.up .tick{bottom:62px;height:30px}
+  .ev.up .cap{bottom:100px}
+  .ev.down .yr{top:20px}
+  .ev.down .tick{top:62px;height:30px}
+  .ev.down .cap{top:100px}
+  .ev.now .yr{color:#9fc2b2}
+  .ev.now .cap{left:auto;right:-8px;text-align:right}
 
-  .credits{display:grid;grid-template-columns:150px 1fr;row-gap:16px;column-gap:24px;font-size:16px;color:var(--text)}
-  .credits dt{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:3px;font-weight:600}
-
-  footer{padding:clamp(56px,8vw,96px) 0 60px}
-  footer .wrap > .row{border-top:1px solid var(--rule);padding-top:28px}
+  /* ---------- exit ---------- */
+  footer{padding:36px 0 60px}
   footer .row > div:last-child{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
   footer a{text-decoration:none}
   footer a:hover{color:var(--accent)}
@@ -90,21 +110,15 @@
 
   @keyframes rise{to{opacity:1;transform:none}}
   @media (max-width:860px){
-    :root{--label:1fr;--gap:0}
+    :root{--gap:0}
     .row{grid-template-columns:1fr}
     .lbl{margin-bottom:18px}
     .sign .row > div:first-child{display:none}
-    .hero .row{gap:40px}
-    .work{max-width:300px}
-    .obj{display:flex;flex-direction:column;gap:4px}
-    .obj .no{padding-top:0;order:0}
-    .obj .yr{order:1;text-align:left;padding-top:0;margin-bottom:6px}
-    .obj .yr small{display:inline;margin-right:8px}
-    .obj > div:nth-child(2){order:2}
-    .obj .now{margin-left:8px}
-    .credits{grid-template-columns:1fr;row-gap:4px}
-    .credits dd{margin-bottom:12px}
+    .works{grid-template-columns:1fr 1fr;gap:28px 18px}
+    .works .piece:nth-child(2){grid-column:1 / -1;grid-row:1;max-width:340px;justify-self:center;width:100%}
+    .tomb{font-size:12px}
     footer .row > div:first-child{display:none}
+    footer .row > div:last-child{gap:16px;flex-wrap:wrap}
   }
   @media (prefers-reduced-motion:reduce){ *{animation-duration:.01s!important;transition-duration:.01s!important} }
 </style>
@@ -119,131 +133,96 @@
 </header>
 
 <main>
-  <div class="hero"><div class="wrap">
-    <div class="row">
-      <figure class="work">
-        <div class="frame"><div class="mat">
-          <img src="https://static.wixstatic.com/media/4f7024_baa22f12273a44b3a4deafcd7b8dec63~mv2.jpg/v1/crop/x_213,y_0,w_711,h_960/fill/w_711,h_960,al_c,q_85/vivian-min.jpg" alt="Portrait of Vivian H. Min">
-        </div></div>
-        <figcaption class="tomb">
-          <b>Vivian H. Min</b>
-          <i>The Curator</i>
-          Photograph
-          <small>Seoul · New York · Pittsburgh</small>
-        </figcaption>
-      </figure>
+  <div class="entrance"><div class="wrap"><div class="row">
+    <div class="lbl">Gallery 4</div>
+    <div>
+      <div class="gal">Vivian H. Min · About</div>
+      <h1>Different rooms,<br>one story.</h1>
+      <div class="sub">Hospitality · Travel · Technology · Design</div>
+    </div>
+  </div></div></div>
 
-      <div class="walltext">
-        <div class="gal">Gallery 4 · About</div>
-        <h1>Different rooms, one story.</h1>
-        <p>Hospitality, travel, enterprise software and now design. Four very different rooms, brought together by one curator.</p>
-        <div class="dates">2016 – present · Ongoing</div>
-      </div>
+  <div class="hang"><div class="wrap">
+    <div class="works">
+      <figure class="piece">
+        <div class="frame light"><div class="mat"><img src="assets/illustration.png" alt="Illustration of Vivian waving hello"></div></div>
+        <figcaption class="tomb"><b>Hello</b><i>Self-portrait</i>Digital illustration</figcaption>
+      </figure>
+      <figure class="piece">
+        <div class="frame"><div class="mat photo"><img src="assets/photo.jpg" alt="Photo of Vivian by the sea with a camera"></div></div>
+        <figcaption class="tomb"><b>Vivian H. Min</b><i>The Curator</i>Photograph<small>Seoul · New York · Pittsburgh</small></figcaption>
+      </figure>
+      <figure class="piece">
+        <div class="frame"><div class="mat"><img src="assets/line-drawing.jpg" alt="Line drawing self-portrait"></div></div>
+        <figcaption class="tomb"><b>One Line</b><i>Self-portrait</i>Digital line drawing</figcaption>
+      </figure>
     </div>
   </div></div>
 
-  <section><div class="wrap">
-    <div class="row">
-      <div class="lbl">Curator's statement</div>
-      <div class="statement">
-        <p class="lead">I'm an avid museum-goer, and every gallery reminds me of the same thing: objects that seem to have nothing in common begin to tell one story once a curator places them in the same room.</p>
-        <p>My career looks like one of those rooms. Hotel sales in New York. Partner growth at Expedia. Customer success in enterprise software across Asia-Pacific. On paper, unrelated pieces.</p>
-        <p>Yet each taught me the same thing from a different angle. Hospitality taught me to read people. Technology taught me to read data and the systems it moves through. Working beside customers showed me how every product decision eventually lands in someone's day.</p>
-        <p>That is what drew me to design: the chance to shape those moments before they become problems. I bring my experiences together the way a curator would, so that people, their needs and the systems around them add up to one clear, thoughtful experience.</p>
-        <p class="quote">“Let your skills make a living, but let your passions build a life.”</p>
+  <div class="statement-wrap"><div class="wrap"><div class="row">
+    <div class="lbl">Curator's statement</div>
+    <div class="statement">
+      <p class="lead">I'm an avid museum-goer, and every gallery reminds me of the same thing: objects that seem to have nothing in common begin to tell one story once a curator places them in the same room.</p>
+      <p>My career looks like one of those rooms. Hotel sales in New York. Partner growth at Expedia. Customer success in enterprise software across Asia-Pacific. On paper, unrelated pieces.</p>
+      <p>Yet each taught me the same thing from a different angle. Hospitality taught me to read people. Technology taught me to read data and the systems it moves through. Working beside customers showed me how every product decision eventually lands in someone's day.</p>
+      <p>That is what drew me to design: the chance to shape those moments before they become problems. I bring my experiences together the way a curator would, so that people, their needs and the systems around them add up to one clear, thoughtful experience.</p>
+      <p class="quote">“Let your skills make a living, but let your passions build a life.”</p>
+    </div>
+  </div></div></div>
+
+  <section class="tlwall" id="timeline">
+    <div class="wrap"><div class="row">
+      <div class="lbl">Chronology</div>
+      <div>
+        <div class="gal">The curator, so far</div>
+        <h2>From hotel lobbies to design studios</h2>
+        <div class="hint">Scroll along the wall →</div>
+      </div>
+    </div></div>
+
+    <div class="track" id="track">
+      <div class="line" id="line">
+        <div class="ev up" style="left:0%"><div class="dot"></div><div class="yr">2011</div><div class="tick"></div>
+          <div class="cap"><small>New York</small><b>New York University</b>Studies hospitality, marketing and revenue management</div></div>
+        <div class="ev down" style="left:19%"><div class="dot"></div><div class="yr">2016</div><div class="tick"></div>
+          <div class="cap"><small>New York</small><b>The William Vale Hotel</b>First job, in hotel sales</div></div>
+        <div class="ev up" style="left:38%"><div class="dot"></div><div class="yr">2017</div><div class="tick"></div>
+          <div class="cap"><small>Seoul</small><b>Expedia Group</b>Grows lodging partners across Korea</div></div>
+        <div class="ev down" style="left:57%"><div class="dot"></div><div class="yr">2021</div><div class="tick"></div>
+          <div class="cap"><small>Seoul</small><b>data.ai</b>Moves into enterprise software and customer success</div></div>
+        <div class="ev up" style="left:74%"><div class="dot"></div><div class="yr">2022</div><div class="tick"></div>
+          <div class="cap"><small>Seoul</small><b>Panopto</b>Leads a player redesign for the largest APAC customer</div></div>
+        <div class="ev down now" style="left:93%"><div class="dot"></div><div class="yr">2026</div><div class="tick"></div>
+          <div class="cap"><small>Pittsburgh</small><b>Carnegie Mellon University</b>M.A. in Design, on view now</div></div>
+        <div class="end"></div>
       </div>
     </div>
-  </div></section>
-
-  <section id="history"><div class="wrap">
-    <div class="row">
-      <div class="lbl">Exhibition checklist</div>
-      <ol class="checklist">
-        <li class="obj">
-          <div class="no">Cat. 01</div>
-          <div>
-            <h3>Carnegie Mellon University<span class="now">On view</span></h3>
-            <div class="med">M.A. in Design, School of Design</div>
-            <p>Interaction design, design research, and systems &amp; communication design.</p>
-          </div>
-          <div class="yr"><small>Pittsburgh</small>’27</div>
-        </li>
-        <li class="obj">
-          <div class="no">Cat. 02</div>
-          <div>
-            <h3>Panopto</h3>
-            <div class="med">Strategic Account Manager</div>
-            <p>Enterprise video platform. Turned user research on mobile playback into product changes that secured $400K+ in annual revenue.</p>
-            <a class="view" href="player-redesign.html">See it on Floor 3</a>
-          </div>
-          <div class="yr"><small>Seoul</small>2022 – 2026</div>
-        </li>
-        <li class="obj">
-          <div class="no">Cat. 03</div>
-          <div>
-            <h3>data.ai</h3>
-            <div class="med">Customer Success Manager</div>
-            <p>App market intelligence. Rebuilt a U.S. webinar program for Korean audiences and lifted attendance by 500%.</p>
-          </div>
-          <div class="yr"><small>Seoul</small>2021 – 2022</div>
-        </li>
-        <li class="obj">
-          <div class="no">Cat. 04</div>
-          <div>
-            <h3>Expedia Group</h3>
-            <div class="med">Business Development Manager · Account Manager</div>
-            <p>Moved partner onboarding to a mobile-first messaging flow and designed a support chatbot that cut repeat inquiries by 70%.</p>
-          </div>
-          <div class="yr"><small>Seoul</small>2017 – 2021</div>
-        </li>
-        <li class="obj">
-          <div class="no">Cat. 05</div>
-          <div>
-            <h3>The William Vale Hotel</h3>
-            <div class="med">Sales Coordinator</div>
-            <p>Where it began. Coordinated 190+ group contracts and created shared VIP guest profiles; named Employee of the Month.</p>
-          </div>
-          <div class="yr"><small>New York</small>2016 – 2017</div>
-        </li>
-        <li class="obj">
-          <div class="no">Cat. 06</div>
-          <div>
-            <h3>New York University</h3>
-            <div class="med">B.S. in Marketing &amp; Revenue Management for Hospitality</div>
-          </div>
-          <div class="yr"><small>New York</small>2016</div>
-        </li>
-      </ol>
-    </div>
-  </div></section>
-
-  <section><div class="wrap">
-    <div class="row">
-      <div class="lbl">Credits</div>
-      <dl class="credits">
-        <dt>Languages</dt><dd>Korean (native), English (fluent), Japanese (conversational)</dd>
-        <dt>Tools</dt><dd>Figma, Illustrator, Photoshop, InDesign, Procreate, Jira, Salesforce, Google Workspace</dd>
-        <dt>Honors</dt><dd>NY Marriott Marquis Scholarship, Albert Khudoyan Scholarship, Wasserman Internship Grant, NEWH Women Leader Scholarship</dd>
-      </dl>
-    </div>
-  </div></section>
+  </section>
 </main>
 
-<footer><div class="wrap">
-  <div class="row">
-    <div class="lbl">Museum of Vivian Min</div>
-    <div>
-      <a class="exitsign" href="index.html#guide"><i>EXIT</i>Return to floor guide</a>
-      <a href="mailto:vmin@andrew.cmu.edu">Email the curator</a>
-    </div>
+<footer><div class="wrap"><div class="row">
+  <div class="lbl">Museum of Vivian Min</div>
+  <div>
+    <a class="exitsign" href="index.html#guide"><i>EXIT</i>Return to floor guide</a>
+    <a href="mailto:vmin@andrew.cmu.edu">Email the curator</a>
   </div>
-</div></footer>
+</div></div></footer>
 
 <script>
-  // checklist entries fade in as you reach them, like walking up to each label
-  const items = document.querySelectorAll('.obj');
-  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin:'0px 0px -12% 0px' });
-  items.forEach(i => io.observe(i));
+  // the white line draws itself when the timeline wall comes into view
+  const wall = document.querySelector('.tlwall'), line = document.getElementById('line');
+  new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ wall.classList.add('on'); line.style.setProperty('--p', 1); } }), { threshold:.3 }).observe(wall);
+
+  // drag to walk along the wall with a mouse; touch scrolls natively
+  const track = document.getElementById('track');
+  let down = false, sx = 0, sl = 0;
+  track.addEventListener('pointerdown', e => { if(e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = track.scrollLeft; track.style.cursor = 'grabbing'; });
+  addEventListener('pointerup', () => { down = false; track.style.cursor = ''; });
+  addEventListener('pointermove', e => { if(down) track.scrollLeft = sl - (e.clientX - sx); });
+  // hide the hint when the whole wall already fits
+  const fits = () => document.querySelector('.hint').style.visibility = track.scrollWidth <= track.clientWidth + 2 ? 'hidden' : 'visible';
+  addEventListener('resize', fits); fits();
+  if(location.hash === '#history') document.getElementById('timeline').scrollIntoView();
 </script>
 </body>
 </html>
