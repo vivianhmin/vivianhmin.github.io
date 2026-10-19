@@ -147,6 +147,9 @@
   .stage:not(.portrait) .gal .area{top:calc(var(--ceil) + 34px);bottom:calc(var(--floor) + 34px);gap:56px}
   .salon{position:relative;flex:1;height:100%;display:flex;flex-direction:column;justify-content:center;gap:22px}
   .salon .row{display:flex;justify-content:center;align-items:flex-end;gap:22px}
+  .salon.dense,.salon.dense .row{gap:14px}
+  .salon.dense .ph{padding:4px}
+  .salon.dense .ph.photo .mat{padding:5px}
   .portrait .gal .area{flex-direction:column;align-items:stretch;gap:44px}
   .portrait .gal .vinyl{width:100%}
   .portrait .salon{flex:1;width:100%}
@@ -257,17 +260,6 @@
       </div>
     </section>
 
-    <section class="bay gal" data-label="Photographs, continued">
-      <div class="area">
-        <div class="vinyl">
-          <div class="kick">In my free time · I</div>
-          <h2>From New York to Tokyo.</h2>
-          <p>Streets, gardens and the small things on the shelves.</p>
-        </div>
-        <div class="salon" id="salonP2"></div>
-      </div>
-    </section>
-
     <section class="bay gal" data-label="Drawings">
       <div class="area">
         <div class="vinyl">
@@ -319,10 +311,11 @@ let W = 1920, H = 1080, idx = 0;
 // ---------- hang the photos and drawings: justified rows that fill one wall ----------
 function hang(el, items, kind, offset){
   el.innerHTML = '';
-  const AW = el.offsetWidth, AH = el.offsetHeight, gap = 22, extra = kind === 'photo' ? 28 : 36;
+  el.classList.toggle('dense', items.length > 24);
+  const dense = items.length > 24, AW = el.offsetWidth, AH = el.offsetHeight, gap = dense ? 14 : 22, extra = kind === 'photo' ? (dense ? 18 : 28) : 36;
   const ar = items.map(i => i[2] / i[3]), total = ar.reduce((a, b) => a + b, 0);
   let best = null;
-  for(let rows = 2; rows <= 6; rows++){
+  for(let rows = 2; rows <= 9; rows++){
     const target = total / rows, groups = []; let cur = [], sum = 0;
     ar.forEach((a, k) => { cur.push(k); sum += a; if(sum >= target * .96 && groups.length < rows - 1){ groups.push(cur); cur = []; sum = 0; } });
     if(cur.length) groups.push(cur);
@@ -370,9 +363,7 @@ function fit(){
   stage.style.setProperty('--w', W + 'px'); stage.style.setProperty('--h', H + 'px');
   stage.style.setProperty('--s', S); stage.style.zoom = z ? S : '';
   lamps();
-  const HALF = Math.ceil(PHOTOS.length / 2);
-  hang(document.getElementById('salonP'), PHOTOS.slice(0, HALF), 'photo', 0);
-  hang(document.getElementById('salonP2'), PHOTOS.slice(HALF), 'photo', HALF);
+  hang(document.getElementById('salonP'), PHOTOS, 'photo', 0);
   hang(document.getElementById('salonD'), DRAWINGS, 'drawing', PHOTOS.length);
 }
 
@@ -411,7 +402,7 @@ addEventListener('touchend', e => {
 // ---------- viewer ----------
 const ALL = PHOTOS.concat(DRAWINGS), lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
 let cur = 0;
-function show(i){ cur = (i + ALL.length) % ALL.length; lbImg.src = ALL[cur][0]; lbImg.alt = ALL[cur][1]; lbCap.textContent = ALL[cur][1]; }
+function show(i){ cur = (i + ALL.length) % ALL.length; lbImg.src = ALL[cur][0]; lbImg.alt = ALL[cur][1]; lbCap.textContent = cur < PHOTOS.length ? '' : ALL[cur][1]; }
 function openLb(i){ show(i); lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); }
 function closeLb(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); }
 document.getElementById('lbX').onclick = closeLb;
