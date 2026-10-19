@@ -312,7 +312,7 @@ let W = 1920, H = 1080, idx = 0;
 function hang(el, items, kind, offset){
   el.innerHTML = '';
   el.classList.toggle('dense', items.length > 24);
-  const dense = items.length > 24, AW = el.offsetWidth, AH = el.offsetHeight, gap = dense ? 14 : 22, extra = kind === 'photo' ? (dense ? 18 : 28) : 36;
+  const dense = items.length > 24, AW = el.offsetWidth, AH = el.offsetHeight, gap = dense ? 14 : 22, extra = dense ? 18 : (kind === 'photo' ? 28 : 36);
   const ar = items.map(i => i[2] / i[3]), total = ar.reduce((a, b) => a + b, 0);
   let best = null;
   for(let rows = 2; rows <= 14; rows++){
@@ -323,7 +323,7 @@ function hang(el, items, kind, offset){
     if(hs.some(h => h <= 0)) continue;
     const needH = hs.reduce((a, h) => a + h + extra, 0) + (groups.length - 1) * gap;
     const sc = Math.min(1, (AH - groups.length * extra - (groups.length - 1) * gap) / (needH - groups.length * extra - (groups.length - 1) * gap));
-    const area = groups.reduce((a, g, r) => a + g.reduce((b, k) => b + (hs[r] * sc) ** 2 * ar[k], 0), 0);
+    const area = (AW * sc) * Math.min(AH, needH * sc) + (kind === 'photo' ? 0 : 0);
     if(!best || area > best.area) best = { groups, hs, sc, area };
   }
   best.groups.forEach((g, r) => {
@@ -337,6 +337,10 @@ function hang(el, items, kind, offset){
     });
     el.appendChild(row);
   });
+  // spread rows so a shorter block still fills the same height as the photo wall
+  el.style.rowGap = '';
+  const used = [...el.children].reduce((a, r) => a + r.offsetHeight, 0), n = el.children.length;
+  if(n > 1){ const g = Math.min(44, Math.max(gap, (AH - used) / (n - 1))); el.style.rowGap = g + 'px'; }
 }
 
 // ---------- lamps ----------
@@ -403,7 +407,7 @@ addEventListener('touchend', e => {
 // ---------- viewer ----------
 const ALL = PHOTOS.concat(DRAWINGS), lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
 let cur = 0;
-function show(i){ cur = (i + ALL.length) % ALL.length; lbImg.src = ALL[cur][0]; lbImg.alt = ALL[cur][1]; lbCap.textContent = cur < PHOTOS.length ? '' : ALL[cur][1]; }
+function show(i){ cur = (i + ALL.length) % ALL.length; lbImg.src = ALL[cur][0]; lbImg.alt = ALL[cur][1]; lbCap.textContent = ''; }
 function openLb(i){ show(i); lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); }
 function closeLb(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); }
 document.getElementById('lbX').onclick = closeLb;
