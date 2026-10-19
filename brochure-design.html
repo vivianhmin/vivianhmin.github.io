@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+<title>Brochure Design — Vivian Min</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--head:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--body:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit}
+
+  .bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:16px clamp(16px,4vw,48px);background:rgba(244,241,238,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--soft);font-family:var(--body);font-size:15px}
+  .bar a{text-decoration:none}
+  .bar a:hover{color:var(--red)}
+  .bar .where{color:var(--muted)}
+
+  main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 100px}
+
+  .hero{padding:clamp(48px,8vw,96px) 0 40px}
+  .kicker{font-family:var(--body);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--body);font-weight:700;font-size:clamp(40px,7vw,84px);letter-spacing:-.04em;line-height:.98;margin:14px 0 24px}
+  .lede{font-size:clamp(18px,2vw,22px);line-height:1.6;max-width:780px;color:#33312e}
+  .story{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;background:#fff;box-shadow:0 10px 24px rgba(40,30,20,.06)}
+  .story li{padding:24px 26px 26px;position:relative}
+  .story li+li{border-left:1px solid var(--soft)}
+  .story .step{display:block;font-family:var(--body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .story li:first-child .step{color:var(--red)}
+  .story li:last-child .step{color:var(--green)}
+  .story p{font-size:16.5px;line-height:1.5}
+  .facts{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1.5px solid var(--line)}
+  .facts > div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--soft);align-items:baseline}
+  .facts > div:not(.wide):first-child{padding-right:24px}
+  .facts .wide{grid-column:1 / -1}
+  .facts dt{font-family:var(--body);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .facts dd{font-size:16.5px}
+  .facts dd b{font-weight:600}
+  .dim{color:var(--muted)}
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chips li{font-size:14px;padding:5px 12px;border:1px solid var(--ink);border-radius:999px}
+  .chips.light{margin-top:0}
+  .chips.light li{border-color:var(--soft);background:#fff}
+
+  .outcomes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .outcomes div{background:#fff;padding:22px 24px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .outcomes strong{display:block;font-family:var(--body);font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .outcomes p{font-size:15.5px;color:#4a4742;margin-top:10px;line-height:1.45}
+  .lessons{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .lessons h3{margin-top:0!important}
+  .lessons p{font-size:16.5px!important}
+  .next-list{list-style:none;counter-reset:n;max-width:760px;margin:0!important}
+  .next-list li{counter-increment:n;display:grid;grid-template-columns:44px 1fr;font-size:17px;padding:14px 0;border-bottom:1px solid var(--soft);margin:0!important}
+  .next-list li::before{content:counter(n,decimal-leading-zero);font-family:var(--body);font-size:13px;color:var(--muted);padding-top:3px}
+  .next-list b{font-weight:600}
+  .reflect{margin-top:28px;padding:4px 0 4px 22px;border-left:3px solid var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;max-width:760px}
+
+  section{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--soft)}
+  section > h2{font-family:var(--body);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  section > h2 small{display:block;font-family:var(--body);font-weight:400;font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
+  .body p{font-size:17.5px;max-width:740px}
+  .body p+p{margin-top:14px}
+  .body h3{font-family:var(--body);font-size:20px;font-weight:600;margin:28px 0 8px}
+  .body ul{margin:12px 0 0 22px;max-width:740px}
+  .body li{font-size:17px;margin-top:8px}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .stat{background:#fff;padding:22px 22px 20px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .stat strong{display:block;font-family:var(--body);font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .stat span{display:block;font-size:14.5px;color:#4a4742;margin-top:8px;line-height:1.4}
+  .bars{margin-top:22px;max-width:620px}
+  .bars div{display:grid;grid-template-columns:150px 1fr 44px;align-items:center;gap:12px;font-size:15px;margin-top:10px}
+  .bars i{display:block;height:10px;background:var(--ink)}
+  .bars b{font-family:var(--body);font-weight:500;font-size:14px}
+
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .feature{background:#fff;padding:22px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .feature .n{font-family:var(--body);font-size:12px;color:var(--muted)}
+  .feature b{display:block;font-family:var(--body);font-size:19px;margin:6px 0 8px;line-height:1.25}
+  .feature p{font-size:15px;line-height:1.5}
+  .feature .tag{display:inline-block;margin-top:12px;font-family:var(--body);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line)}
+  .feature .tag.off{color:var(--muted);border-color:var(--soft)}
+
+  .timeline{margin-top:16px;border-left:1.5px solid var(--line)}
+  .timeline div{position:relative;padding:0 0 16px 22px;font-size:16.5px}
+  .timeline div::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line)}
+  .timeline b{font-family:var(--body);font-weight:600;margin-right:8px}
+
+  .next{padding-top:56px;font-family:var(--body)}
+  .next a{font-size:20px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+  .next a:hover{color:var(--red);border-color:var(--red)}
+  footer{margin-top:60px;font-size:13px;color:var(--muted)}
+
+  /* ================= editorial pass ================= */
+  body{font-weight:400;letter-spacing:.005em;color:#1d1c1a}
+  .kicker{font-size:12px;letter-spacing:.22em;font-weight:500}
+  h1{font-weight:500;letter-spacing:-.015em;line-height:1.02;font-size:clamp(40px,6.4vw,78px);max-width:16ch}
+  .lede{font-size:clamp(19px,2vw,23px);line-height:1.55;font-weight:400;max-width:34em}
+
+  .story{background:none;box-shadow:none;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--soft);margin-top:44px}
+  .story li{padding:20px 28px 24px 0}
+  .story li+li{border-left:none;padding-left:28px;border-left:1px solid var(--soft)}
+  .story .step{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .story p{font-size:17px}
+
+  .facts{border-top:none;margin-top:28px}
+  .facts > div{grid-template-columns:110px 1fr}
+  .facts dt{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .facts dd{font-size:17px}
+  .chips,.chips.light{display:block;margin-top:2px}
+  .chips li,.chips.light li{display:inline;border:none;background:none;padding:0;border-radius:0;font-size:17px}
+  .chips li+li::before{content:" / ";color:var(--muted)}
+  .facts dd b{font-weight:500;display:block;margin-bottom:2px}
+
+  section{grid-template-columns:220px 1fr;padding:56px 0;border-bottom:none;border-top:1px solid var(--soft)}
+  section > h2{font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;line-height:1.5;color:var(--ink);padding-top:4px}
+  section > h2 small{display:inline;font-size:13px;letter-spacing:.2em;color:var(--muted);margin:0 10px 0 0}
+  .body p,.body li{font-size:18px;line-height:1.6}
+  .body h3{font-weight:500;font-size:22px;letter-spacing:-.005em;margin:36px 0 10px}
+
+  .features{gap:0;border-top:1.5px solid var(--ink)}
+  .feature{background:none;box-shadow:none;padding:18px 24px 6px 0}
+  .feature+.feature{padding-left:24px;border-left:1px solid var(--soft)}
+  .feature b{font-weight:500;font-size:20px}
+  .feature .tag{border:none;padding:0;font-size:11px;letter-spacing:.18em;color:var(--green)}
+  .feature .tag.off{color:var(--amber)}
+
+  .stats,.outcomes{gap:0;border-top:1.5px solid var(--ink)}
+  .stat,.outcomes div{background:none;box-shadow:none;padding:20px 24px 22px 0}
+  .stat+.stat{padding-left:24px;border-left:1px solid var(--soft)}
+  .stat strong,.outcomes strong{font-weight:500;font-size:52px;letter-spacing:-.02em}
+  .stat span,.outcomes p{font-size:15.5px}
+  .outcomes div{border-bottom:1px solid var(--soft)}
+  .outcomes div:nth-child(even){padding-left:24px;border-left:1px solid var(--soft)}
+  .bars i{height:6px}
+  .bars b{font-weight:500}
+
+  .lessons h3{font-size:20px}
+  .next-list li{font-size:18px}
+  .next-list li::before{font-size:13px;letter-spacing:.1em}
+  .next-list b{font-weight:500}
+  .reflect{font-weight:400;font-size:22px;border-left-width:2px}
+  .timeline b{font-weight:500}
+
+  /* ================= type: Manrope throughout ================= */
+  body{font-family:var(--body);letter-spacing:0}
+  h1,h2,h3,.demo-title,section > h2,.kicker,.story .step,.facts dt,.side-label,.winsize b,
+  .stat strong,.outcomes strong,.feature b,.feature .n,.feature .tag,.status,.next-list li::before,
+  .tabs button,.bar,.next a,.facts dd b{font-family:var(--head)}
+  h1{font-weight:600;letter-spacing:-.03em}
+  .demo-title,.stat strong,.outcomes strong{letter-spacing:-.025em}
+  .body p,.body li,.lede,.story p,.facts dd,.note p,.reflect{letter-spacing:-.003em}
+  .lede{font-size:clamp(18px,1.9vw,22px);line-height:1.6}
+  .body p,.body li{font-size:17.5px;line-height:1.65}
+  .reflect{font-size:20px;line-height:1.55}
+
+  /* ================= William Vale brochure ================= */
+  section > .body{min-width:0}
+  .req{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:12px 0 0!important;padding:0;border-top:1.5px solid var(--ink)}
+  .req li{padding:14px 16px 14px 0;border-bottom:1px solid var(--soft);font-size:15.5px!important;line-height:1.45!important;margin:0!important}
+  .req li:nth-child(3n+2),.req li:nth-child(3n){padding-left:16px;border-left:1px solid var(--soft)}
+  .req b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+
+  /* annotated brochure */
+  .anno{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;margin-top:16px;align-items:start}
+  .an-tabs{display:flex;gap:8px;margin-bottom:12px}
+  .an-tabs button{font:500 14px var(--head);border:1px solid var(--soft);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;color:var(--ink)}
+  .an-tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .sheet{position:relative;perspective:2000px}
+  .sheet-in{position:relative;aspect-ratio:3/4;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,.7,.2,1)}
+  .sheet.back .sheet-in{transform:rotateY(180deg)}
+  .side{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 18px 36px rgba(40,30,20,.18);background:#fff}
+  .side.b{transform:rotateY(180deg)}
+  .side img{display:block;width:100%;height:100%;object-fit:cover}
+  .hot{position:absolute;border:2px solid transparent;border-radius:3px;cursor:pointer;transition:border-color .2s,background .2s;padding:0;background:none}
+  .hot i{position:absolute;right:6px;top:6px;width:24px;height:24px;border-radius:50%;background:#1b1b1b;color:#fff;font:700 12px/24px var(--head);font-style:normal;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .2s,background .2s}
+  .hot:hover{border-color:rgba(27,27,27,.4)}
+  .hot.on{border-color:#c0392b;background:rgba(192,57,43,.07)}
+  .hot.on i{background:#c0392b;transform:scale(1.15)}
+  .an-panel{position:sticky;top:90px}
+  .an-step{font:600 11.5px var(--head);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .an-panel h3{font-size:clamp(22px,2.2vw,28px);line-height:1.2;letter-spacing:-.015em;margin:6px 0 10px}
+  .an-panel p{font-size:16.5px!important;line-height:1.6!important}
+  .an-why{border-top:1px solid var(--soft);margin-top:12px;padding-top:12px;font-size:15px;color:#3a3835}
+  .an-why b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#17703c;margin-bottom:4px}
+  .an-nav{display:flex;align-items:center;gap:10px;margin-top:16px}
+  .an-nav button{font:600 14px var(--head);border:1px solid var(--ink);background:#fff;color:var(--ink);padding:9px 14px;cursor:pointer}
+  .an-nav #anNext{background:var(--ink);color:#fff;margin-left:auto}
+  .an-nav span{font-size:13px;color:var(--muted)}
+  .an-order{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .an-order span{font-size:12.5px;padding:4px 10px;border-radius:999px;background:#ece9e4;color:var(--muted)}
+  .an-order span.on{background:#1b1b1b;color:#fff}
+
+  /* timeline */
+  .weeks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:12px}
+  .weeks > div{background:#fff;border:1px solid var(--soft);padding:16px 18px}
+  .weeks h4{font:700 12px var(--head);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+  .weeks ul{margin:0!important;padding-left:18px}
+  .weeks li{font-size:15px!important;margin:4px 0!important}
+  .weeks .cut{color:var(--muted);text-decoration:line-through}
+
+  /* outcomes */
+  .wins{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin-top:10px}
+  .wins div{padding:18px 18px 18px 0}
+  .wins div+div{padding-left:18px;border-left:1px solid var(--soft)}
+  .wins b{display:block;font-size:34px;letter-spacing:-.03em;line-height:1.05;margin-bottom:6px}
+  .wins p{font-size:15px!important;margin:0;color:#3a3835}
+  .pdf-link{display:inline-block;margin-top:12px;font-size:14px;color:var(--ink)}
+  @media (max-width:860px){
+    .req{grid-template-columns:1fr}
+    .req li:nth-child(n){padding-left:0;border-left:0}
+    .anno{grid-template-columns:1fr}
+    .an-panel{position:static}
+    .weeks,.wins{grid-template-columns:1fr}
+    .wins div+div{padding-left:0;border-left:0;border-top:1px solid var(--soft)}
+  }
+  /* phones: single column (these rules were missing on this page) */
+  @media (max-width:860px){
+    .story li,.story li+li{padding:18px 0;border-left:none}
+    .feature,.feature+.feature,.stat,.stat+.stat,.outcomes div,.outcomes div:nth-child(even){padding-left:0;border-left:none;border-bottom:1px solid var(--soft)}
+    section{grid-template-columns:minmax(0,1fr);gap:18px;padding:40px 0}
+    .story{grid-template-columns:1fr}
+    .story li+li{border-top:1px solid var(--soft)}
+    .facts{grid-template-columns:1fr}
+    .facts > div{grid-template-columns:1fr;gap:6px}
+    .outcomes,.lessons{grid-template-columns:1fr}
+    .stats,.features{grid-template-columns:1fr}
+    .bar .where{display:none}
+    .trend .row{grid-template-columns:80px 1fr 40px}
+    .tally strong{font-size:36px}
+    .log td:last-child{white-space:normal}
+  }</style>
+</head>
+<body>
+
+<header class="bar">
+  <a href="index.html#guide">← Back to the floor guide</a>
+  <span class="where">Museum of Vivian Min · Floor 3 · Professional</span>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="kicker">3.4 · Brochure Design · The William Vale</div>
+    <h1>The First Sales Brochure for The William Vale</h1>
+    <p class="lede">In 2016, The William Vale, a 21-story luxury hotel in Williamsburg, Brooklyn, was preparing to open without a marketing team. The sales team needed collateral for road shows and trade events, but had only raw images and architectural descriptions. I planned, wrote and designed the hotel's first sales brochure in two weeks.</p>
+
+    <ol class="story">
+      <li><span class="step">The problem</span><p>No branded sales material before opening, while competitors had established collateral.</p></li>
+      <li><span class="step">What I did</span><p>Structured the content with sales leadership, wrote the copy and designed a two-sided brochure.</p></li>
+      <li><span class="step">The result</span><p>800 copies printed in three weeks and adopted by sales, front desk, concierge and events.</p></li>
+    </ol>
+
+    <dl class="facts">
+      <div><dt>Timeline</dt><dd>June 2016 <span class="dim">· 2 weeks</span></dd></div>
+      <div><dt>Team</dt><dd>Solo, with the General Manager and Sales Manager</dd></div>
+      <div class="wide"><dt>My role</dt><dd><b>Sales Coordinator</b>
+        <ul class="chips"><li>Concept</li><li>Copywriting</li><li>Layout design</li><li>Print production</li></ul></dd></div>
+      <div class="wide"><dt>Tools</dt><dd><ul class="chips light"><li>Adobe InDesign</li><li>Photoshop</li><li>Illustrator</li><li>Google Workspace</li></ul></dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <h2><small>01</small>Design requirements</h2>
+    <div class="body">
+      <p>The brochure was an interim tool, so it had to look established while staying simple to update.</p>
+      <ul class="req">
+        <li><b>Visual style</b>Match the clean, architectural look of the building.</li>
+        <li><b>Simplicity</b>Keep the layout simple for a pre-opening, interim piece.</li>
+        <li><b>Updatable</b>Structure content so images and details can be swapped easily.</li>
+        <li><b>Sales order</b>Location, rooms, amenities, dining, events.</li>
+        <li><b>Balance</b>Lifestyle appeal alongside facts: room count, event sizes, access.</li>
+        <li><b>Legibility</b>High contrast that reads across a trade-show floor.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>02</small>Inside the brochure</h2>
+    <div class="body">
+      <p>Walk through the brochure in the order a sales manager would present it. Tap a numbered area, or use Next.</p>
+      <div class="anno">
+        <div>
+          <div class="an-tabs"><button data-s="b" class="on">Information side</button><button data-s="f">Image side</button></div>
+          <div class="sheet back" id="sheet">
+            <div class="sheet-in">
+              <div class="side f"><img src="assets/wv/p-1.jpg" alt="Image side: exterior, guest room view, suite and Vale Pool"></div>
+              <div class="side b"><img src="assets/wv/p-2.jpg" alt="Information side: introduction, rooms, at a glance and dining"></div>
+            </div>
+          </div>
+          <a class="pdf-link" href="assets/wv/brochure.pdf" target="_blank" rel="noopener">Open the original PDF ↗</a>
+        </div>
+        <div class="an-panel">
+          <div class="an-step" id="anStep"></div>
+          <h3 id="anT"></h3>
+          <p id="anD"></p>
+          <div class="an-why"><b>Design decision</b><span id="anW"></span></div>
+          <div class="an-order" id="anOrder"></div>
+          <div class="an-nav"><button id="anPrev" aria-label="Previous">←</button><span id="anC"></span><button id="anNext">Next →</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>03</small>Two weeks</h2>
+    <div class="body">
+      <div class="weeks">
+        <div><h4>Week 1 · Content</h4><ul>
+          <li>Three planning meetings with the General Manager and Sales Manager</li>
+          <li>Defined the structure and drafted the copy</li>
+          <li class="cut">Corporate rental and retail space</li>
+          <li>Room-type-focused version deferred for later</li></ul></div>
+        <div><h4>Week 2 · Design</h4><ul>
+          <li>Layouts in InDesign, typography and image selection</li>
+          <li>Fourth meeting for feedback</li>
+          <li>Final print files and PDF</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>04</small>Outcomes</h2>
+    <div class="body">
+      <div class="wins">
+        <div><b>800</b><p>Copies printed: 500 in the first week, 300 more within two weeks.</p></div>
+        <div><b>100%</b><p>Of the sales team used it, then Front Desk, Concierge and Events.</p></div>
+        <div><b>Framework</b><p>The new marketing team built the official brochure on its structure.</p></div>
+      </div>
+      <p style="margin-top:16px">Delivered on time for pre-opening sales and used to support early group and corporate bookings.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>05</small>Lessons learned</h2>
+    <div class="body">
+      <div class="lessons">
+        <div><h3>Step beyond the role</h3><p>Early-stage teams need people to fill gaps outside their job description.</p></div>
+        <div><h3>Stay close to sales</h3><p>Working directly with stakeholders kept every page tied to selling priorities.</p></div>
+        <div><h3>Internal tools scale</h3><p>A piece built for one team was adopted across departments.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>06</small>Next time</h2>
+    <div class="body">
+      <ol class="next-list">
+        <li><span><b>Stronger imagery</b> through earlier work with marketing, operations and photography.</span></li>
+        <li><span><b>Guest input</b> from Front Desk and Concierge on the questions guests ask most.</span></li>
+        <li><span><b>More formats,</b> such as one-page pitch sheets and detailed booklets for event planners.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="next"><a href="index.html#guide">← Back to the floor guide</a></div>
+  <footer>© 2026 Vivian Min · Museum of Vivian Min</footer>
+</main>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  // x, y, w, h in % of the page
+  const H = [
+    { s:'b', r:[4,10,92,8], t:'The headline', g:'Intro',
+      d:'"New York\'s most anticipated new hotel is now open" leads the page.',
+      w:'Opens with momentum: a pre-opening hotel competing with established brands needed to sound inevitable, not new.' },
+    { s:'b', r:[3,18,44,19], t:'Location first', g:'Location',
+      d:'A short introduction places the hotel in the heart of Williamsburg with skyline views and public green space.',
+      w:'Follows the sales order: where the hotel is comes before what it offers.' },
+    { s:'b', r:[3,38,45,50], t:'Rooms, from standard to the residence', g:'Rooms',
+      d:'Six room types with starting rates, from King with Balcony to the two-floor Vale Garden Residence.',
+      w:'Every room has a balcony, so the list leads with balcony size and Manhattan views, the clearest Brooklyn differentiator.' },
+    { s:'b', r:[51,18,46,34], t:'At a Glance', g:'Amenities',
+      d:'183 rooms and suites, the 4,100 sq ft Vale Ballroom, a 60-foot pool, airport access, Wi-Fi and concierge.',
+      w:'A scannable summary of scale and services for planners who need facts in seconds at a trade show.' },
+    { s:'b', r:[51,53,46,34], t:'Dining as a differentiator', g:'Dining',
+      d:'Chef Andrew Carmellini and NoHo Hospitality Group: Leuca, Westlight on the 22nd floor, Mister Dips in Vale Park, and pool service.',
+      w:'A well-known chef gave a new hotel instant credibility, so dining got its own section instead of a single bullet.' },
+    { s:'b', r:[30,90,40,8], t:'The sign-off', g:'Brand',
+      d:'The William Vale wordmark closes the page, with navy and white throughout.',
+      w:'High contrast and a restrained palette stay legible on a busy trade-show floor.' },
+    { s:'f', r:[0,0,50,50], t:'The building', g:'Images',
+      d:'The exterior at dusk, showing the tower above Williamsburg.',
+      w:'Four images only. The architecture was the strongest asset, so it leads.' },
+    { s:'f', r:[53,3,44,44], t:'The view from the room', g:'Images',
+      d:'A balcony looking across to the Manhattan skyline.',
+      w:'Shows the selling point the rooms copy describes.' },
+    { s:'f', r:[3,53,44,44], t:'The biggest suite', g:'Images',
+      d:'The Vale Garden Residence patio with a hot tub.',
+      w:'Signals the top of the range for high-value clients and private events.' },
+    { s:'f', r:[50,50,50,50], t:'Vale Pool', g:'Images',
+      d:'The 60-foot outdoor pool, the longest hotel pool in New York City.',
+      w:'A memorable, ownable fact paired with a lifestyle image.' },
+  ];
+  const ORDER = ['Location','Rooms','Amenities','Dining','Images'];
+  const sheet = $('sheet');
+  ['f','b'].forEach(side => {
+    const host = sheet.querySelector('.side.' + side);
+    H.forEach((h, k) => { if(h.s !== side) return;
+      const el = document.createElement('button'); el.className = 'hot'; el.dataset.k = k; el.setAttribute('aria-label', h.t);
+      el.style.cssText = `left:${h.r[0]}%;top:${h.r[1]}%;width:${h.r[2]}%;height:${h.r[3]}%`;
+      el.innerHTML = `<i>${k + 1}</i>`; el.onclick = () => go(k); host.appendChild(el); });
+  });
+  $('anOrder').innerHTML = ORDER.map(o => `<span data-g="${o}">${o}</span>`).join('');
+  let cur = 0;
+  function side(sd){ sheet.classList.toggle('back', sd === 'b'); document.querySelectorAll('.an-tabs button').forEach(b => b.classList.toggle('on', b.dataset.s === sd)); }
+  function go(k){
+    cur = (k + H.length) % H.length; const h = H[cur];
+    side(h.s);
+    sheet.querySelectorAll('.hot').forEach(x => x.classList.toggle('on', +x.dataset.k === cur));
+    $('anStep').textContent = (cur + 1) + ' · ' + (h.s === 'b' ? 'Information side' : 'Image side');
+    $('anT').textContent = h.t; $('anD').textContent = h.d; $('anW').textContent = h.w;
+    $('anC').textContent = (cur + 1) + ' / ' + H.length;
+    $('anOrder').querySelectorAll('span').forEach(x => x.classList.toggle('on', x.dataset.g === h.g));
+  }
+  document.querySelectorAll('.an-tabs button').forEach(b => b.onclick = () => go(H.findIndex(h => h.s === b.dataset.s)));
+  $('anPrev').onclick = () => go(cur - 1); $('anNext').onclick = () => go(cur + 1);
+  go(0);
+})();
+</script>
+<script src="menu.js" defer></script>
+</body>
+</html>
