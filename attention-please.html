@@ -220,6 +220,19 @@
   .pcards p{font-size:15px!important;line-height:1.5!important;margin:0;color:#3a3835}
   .wlist{font-weight:600}
   @media (max-width:860px){ .pcards,.posters.on{grid-template-columns:1fr} }
+  .shot{margin:18px 0 22px}
+  .shot img{display:block;width:100%;height:auto;cursor:zoom-in;background:#fff;border:1px solid var(--soft)}
+  .shot figcaption{font-size:13.5px;color:var(--muted);margin-top:8px}
+  .shot.narrow{max-width:420px}
+  .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+  .pair .shot{margin:8px 0 14px}
+  .pair .shot.tall img{max-height:620px;object-fit:contain}
+  .pcards{margin:4px 0 8px!important}
+  .lb{position:fixed;inset:0;z-index:2000;background:rgba(15,15,15,.92);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;cursor:zoom-out}
+  .lb.on{display:flex}
+  .lb img{max-width:100%;max-height:calc(100vh - 90px);object-fit:contain}
+  .lb p{color:#ddd;font-size:14px}
+  @media (max-width:860px){ .pair{grid-template-columns:1fr} }
   /* phones: single column (these rules were missing on this page) */
   @media (max-width:860px){
     .story li,.story li+li{padding:18px 0;border-left:none}
@@ -268,13 +281,13 @@
   <section>
     <h2><small>01</small>The series</h2>
     <div class="body">
-      <figure class="cover"><img src="https://miro.medium.com/v2/resize:fit:1600/1*FPsXofFG1JYsos803o4bNQ.png" alt="Attention, Please! poster series for Amnesty International"></figure>
-      <div class="posters" id="posters"></div>
+      <figure class="shot "><img src="assets/posters/final.jpg" alt="Final series: What shoots shatters, What shames silences, What leaks lingers" loading="lazy"><figcaption>Final series: What shoots shatters, What shames silences, What leaks lingers</figcaption></figure>
       <ol class="pcards">
-        <li><b>What leaks lingers</b><span>Corporate accountability</span><p>Oil from a container becomes an oil-covered bird.</p></li>
-        <li><b>What shoots shatters</b><span>Gun violence · Children</span><p>A gun becomes intertwined with the profile of a child.</p></li>
-        <li><b>What shames silences</b><span>Technology · Online violence</span><p>Light from a phone becomes a hand covering a woman's mouth.</p></li>
+        <li><b>What shoots shatters</b><span>Gun violence</span><p>A gun becomes the profile of a child. 46 school shootings in just one year.</p></li>
+        <li><b>What shames silences</b><span>Online violence</span><p>A thumbs-up from a phone becomes a hand over a woman's mouth. 1.1M abusive tweets in one year.</p></li>
+        <li><b>What leaks lingers</b><span>Corporate accountability</span><p>Oil pouring from a barrel becomes an oil-covered bird. 550 oil spills in one year.</p></li>
       </ol>
+      <figure class="shot "><img src="assets/posters/mockup.jpg" alt="The series in context" loading="lazy"><figcaption>The series in context</figcaption></figure>
     </div>
   </section>
 
@@ -282,26 +295,24 @@
     <h2><small>02</small>The question</h2>
     <div class="body">
       <p>I started by comparing two kinds of posters: one that lets the viewer make the connection, and one that says exactly what to think. That became my question: <b>should a poster be read in a second, or leave room to interpret?</b></p>
-      <p>Starting from the word "control", I narrowed Amnesty's causes to three: corporate accountability, gun violence, and technology.</p>
+      <p>Starting from the word "control", I sketched eleven directions across Amnesty's causes, from typography-only statements to symbols cut in half.</p>
+      <figure class="shot "><img src="assets/posters/sketches.jpg" alt="Eleven early directions" loading="lazy"><figcaption>Eleven early directions</figcaption></figure>
+      <p>Words running across a symbol felt closest, but critique flagged legibility and the victim's missing voice. I kept the symbols and kept iterating.</p>
+      <figure class="shot narrow"><img src="assets/posters/paper-sketches.jpg" alt="Narrowing down: words across a symbol, then new ideas" loading="lazy"><figcaption>Narrowing down: words across a symbol, then new ideas</figcaption></figure>
     </div>
   </section>
 
   <section>
     <h2><small>03</small>The turning point</h2>
     <div class="body">
-      <div class="shift">
-        <div class="was"><h4>First concept · Word as object</h4>
-          <p class="wlist">SPILL, SHOOT, MONITOR: each keyword shaped into an object.</p>
-          <p>Clear, but flat. Viewers recognized the topics but missed the context, the hierarchy, and what to do next.</p></div>
-        <div class="arrow" aria-hidden="true">→</div>
-        <div class="now"><h4>Final concept · Cause becomes consequence</h4>
-          <ul class="trans">
-            <li>Oil spill <em>becomes</em> an oil-covered bird</li>
-            <li>A gun <em>becomes</em> a child's profile</li>
-            <li>Phone light <em>becomes</em> a hand over a woman's mouth</li>
-          </ul></div>
+      <p>My first concept shaped each keyword into its object: SPILL, SHOOT, MONITOR. It was clear, but flat. In critique, viewers recognized the topics but missed the context, the hierarchy, and what to do next.</p>
+      <div class="pair">
+        <figure class="shot "><img src="assets/posters/first-digital.jpg" alt="First concept: word as object" loading="lazy"><figcaption>First concept: word as object</figcaption></figure>
+        <figure class="shot "><img src="assets/posters/critique-wall.jpg" alt="First critique, alongside classmates’ work" loading="lazy"><figcaption>First critique, alongside classmates’ work</figcaption></figure>
       </div>
-      <p>Each poster now leads the eye in the same order:</p>
+      <p>Mapping the critique on the whiteboard showed what was missing: a reading order. Each poster needed to grab attention with an image, lead into one clear stat, summarize the issue, and end with an action.</p>
+      <figure class="shot "><img src="assets/posters/whiteboard.jpg" alt="Critique notes, entry point and flow, word associations" loading="lazy"><figcaption>Critique notes, entry point and flow, word associations</figcaption></figure>
+      <p>So I flipped the idea: <b>the thing that causes harm turns into the one it harms.</b> I also switched surveillance to online violence against women, and focused gun violence on children.</p>
       <div class="order"><span>Image</span><span>Consequence</span><span>Evidence</span><span>Amnesty's position</span><span>Take part</span></div>
     </div>
   </section>
@@ -309,15 +320,27 @@
   <section>
     <h2><small>04</small>Refining the system</h2>
     <div class="body">
-      <p>Peer critique said everything had equal weight, so nothing stood out. I tested in black and white first, then made these changes:</p>
+      <p>I tested each poster in black and white first, then explored color until the three worked as one series.</p>
+      <div class="pair">
+        <figure class="shot tall"><img src="assets/posters/iter-shames.jpg" alt="What shames silences, from sketch to color" loading="lazy"><figcaption>What shames silences, from sketch to color</figcaption></figure>
+        <figure class="shot "><img src="assets/posters/iter-shoots.jpg" alt="What shoots shatters, from sketch to color" loading="lazy"><figcaption>What shoots shatters, from sketch to color</figcaption></figure>
+      </div>
+      <figure class="shot "><img src="assets/posters/color-study.jpg" alt="Color study" loading="lazy"><figcaption>Color study</figcaption></figure>
+      <div class="pair">
+        <figure class="shot "><img src="assets/posters/color-round-1.jpg" alt="Color round 1" loading="lazy"><figcaption>Color round 1</figcaption></figure>
+        <figure class="shot "><img src="assets/posters/color-round-2.jpg" alt="Color round 2" loading="lazy"><figcaption>Color round 2</figcaption></figure>
+      </div>
+      <p>Peer critique said everything had equal weight, so nothing stood out. The fixes:</p>
+      <figure class="shot "><img src="assets/posters/critique-notes.jpg" alt="Where hierarchy broke down" loading="lazy"><figcaption>Where hierarchy broke down</figcaption></figure>
       <ul class="fixes">
-        <li>One warm color per poster, yellow type across the series</li>
+        <li>One color per poster, one type system across the series</li>
         <li>Heavier title type and natural line breaks</li>
         <li>Statistics tied to one argument each</li>
         <li>A visible "Take Part" call to action</li>
         <li>The same stroke weight in every illustration</li>
         <li>A bigger logo and URL, no drop shadows</li>
       </ul>
+      <figure class="shot narrow"><img src="assets/posters/print-test.jpg" alt="Print test before the final round" loading="lazy"><figcaption>Print test before the final round</figcaption></figure>
     </div>
   </section>
 
@@ -337,12 +360,14 @@
 </main>
 
 <script>
-// Optional: put the original poster files in assets/posters/ (leaks.jpg, shoots.jpg, shames.jpg) to show them one by one.
+// click any image to view it larger
 (() => {
-  const files = [['leaks.jpg','What leaks lingers'],['shoots.jpg','What shoots shatters'],['shames.jpg','What shames silences']];
-  const box = document.getElementById('posters');
-  let n = 0;
-  files.forEach(([f, t]) => { const im = new Image(); im.alt = t + ' poster'; im.onload = () => { box.appendChild(im); box.classList.add('on'); n++; }; im.src = 'assets/posters/' + f; });
+  const lb = document.createElement('div'); lb.className = 'lb'; lb.innerHTML = '<img alt=""><p></p>'; document.body.appendChild(lb);
+  document.querySelectorAll('.shot img').forEach(im => im.addEventListener('click', () => {
+    lb.querySelector('img').src = im.src; lb.querySelector('p').textContent = im.alt; lb.classList.add('on');
+  }));
+  lb.addEventListener('click', () => lb.classList.remove('on'));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') lb.classList.remove('on'); });
 })();
 </script>
 <script src="menu.js" defer></script>
