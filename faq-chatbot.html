@@ -222,6 +222,10 @@
   .trend .row b{font-weight:500;text-align:right}
   .trend small{display:block;margin-top:12px;font-size:13px;color:var(--muted)}
 
+  /* keep wide content (log, map) inside the column instead of stretching the page */
+  section > .body{min-width:0}
+  .fmap{max-width:100%;overflow:hidden}
+  .fcols{overflow-x:auto}
   /* call log */
   .log{margin:18px 0 10px}
   .chipsrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
