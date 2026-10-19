@@ -59,7 +59,7 @@
   .next-list b{font-weight:600}
   .reflect{margin-top:28px;padding:4px 0 4px 22px;border-left:3px solid var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;max-width:760px}
 
-  section{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--soft)}
+  section{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;padding:44px 0;border-bottom:1px solid var(--soft)}
   section > h2{font-family:var(--body);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
   section > h2 small{display:block;font-family:var(--body);font-weight:400;font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
   .body p{font-size:17.5px;max-width:740px}
@@ -239,7 +239,7 @@
   .chips li+li::before{content:" / ";color:var(--muted)}
   .facts dd b{font-weight:500;display:block;margin-bottom:2px}
 
-  section{grid-template-columns:220px 1fr;padding:56px 0;border-bottom:none;border-top:1px solid var(--soft)}
+  section{grid-template-columns:220px minmax(0,1fr);padding:56px 0;border-bottom:none;border-top:1px solid var(--soft)}
   section > h2{font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;line-height:1.5;color:var(--ink);padding-top:4px}
   section > h2 small{display:inline;font-size:13px;letter-spacing:.2em;color:var(--muted);margin:0 10px 0 0}
   .body p,.body li{font-size:18px;line-height:1.6}
