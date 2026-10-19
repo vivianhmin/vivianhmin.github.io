@@ -78,13 +78,16 @@
   .scanned .stamp{animation:stamp .35s cubic-bezier(.3,1.6,.5,1) forwards}
 
   /* ---------- HANDHELD SCANNER (appears only when scanning) ---------- */
-  .scanner{position:absolute;left:0;top:0;width:340px;height:275px;z-index:20;pointer-events:none;transform:translate(4000px,0);
-    transform-origin:10.5px 76px;filter:drop-shadow(0 30px 26px rgba(50,40,25,.28)) drop-shadow(0 6px 8px rgba(50,40,25,.2))}
+  .scanner{position:absolute;left:0;top:0;width:240px;height:376px;z-index:20;pointer-events:none;transform:translate(4000px,0);
+    transform-origin:116.8px 7px;filter:drop-shadow(0 34px 28px rgba(50,40,25,.3)) drop-shadow(0 6px 8px rgba(50,40,25,.22))}
   .scanner svg{width:100%;height:100%;overflow:visible;display:block}
-  .scanner .led{transition:fill .2s}
-  .scanner.ok .led{fill:#2ed16b}
-  .scanner .glass{opacity:.55;transition:opacity .15s}
-  .scanner.fire .glass{opacity:1}
+  .scanner .win{transition:fill .15s}
+  .scanner.fire .win{fill:#ff3b30;filter:drop-shadow(0 0 6px #ff3b30)}
+  .scr-main{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:34px;letter-spacing:.12em;fill:#d9e6dc}
+  .scr-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;fill:#7f8a82;text-transform:uppercase}
+  .scanner.fire .scr-main{fill:#ff6a5f}
+  .scanner.ok .scr-main{fill:#5ff08e}
+  .scanner.ok .scr{fill:#0f2216}
   .beam{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:15;opacity:0;transition:opacity .12s}
   .beam.on{opacity:1;animation:flicker .09s steps(2) infinite}
 
@@ -192,7 +195,6 @@
             </div>
             <div class="foot">For inquiries please contact vmin@andrew.cmu.edu. Issued by Vivian Min.</div>
           </div>
-          <div class="stamp">Admitted</div>
           <div class="shade"></div><div class="sheen"></div>
         </div>
 
@@ -306,47 +308,55 @@
   </svg>
 
   <div class="scanner" id="scanner" aria-hidden="true">
-    <svg viewBox="0 0 520 420">
+    <svg viewBox="0 0 300 470">
       <defs>
-        <linearGradient id="sBody" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#5a5e66"/><stop offset=".28" stop-color="#3a3d43"/><stop offset=".7" stop-color="#222428"/><stop offset="1" stop-color="#16171a"/>
+        <linearGradient id="dBody" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#3b3c40"/><stop offset=".45" stop-color="#1d1e21"/><stop offset="1" stop-color="#0c0c0d"/>
         </linearGradient>
-        <linearGradient id="sGrip" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#3a3d42"/><stop offset=".45" stop-color="#26282c"/><stop offset="1" stop-color="#121315"/>
+        <linearGradient id="dRim" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#c4c7cc"/><stop offset=".5" stop-color="#8d9096"/><stop offset="1" stop-color="#5e6166"/>
         </linearGradient>
-        <linearGradient id="sCap" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#7d828b"/><stop offset="1" stop-color="#4c5057"/>
+        <linearGradient id="dScreen" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#2a2d2b"/><stop offset="1" stop-color="#0d0f0e"/>
         </linearGradient>
-        <radialGradient id="sGlass" cx=".35" cy=".45" r=".75">
-          <stop offset="0" stop-color="#ff6b5a"/><stop offset=".4" stop-color="#c0161c"/><stop offset="1" stop-color="#2b0606"/>
-        </radialGradient>
-        <linearGradient id="sHi" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        <linearGradient id="dGrip" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#1b1c1e"/><stop offset=".35" stop-color="#5a5c60"/><stop offset=".6" stop-color="#3a3b3e"/><stop offset="1" stop-color="#121314"/>
+        </linearGradient>
+        <linearGradient id="dCap" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#0b0b0c"/><stop offset=".4" stop-color="#3a3b3e"/><stop offset="1" stop-color="#0b0b0c"/>
+        </linearGradient>
+        <linearGradient id="dGlare" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/>
         </linearGradient>
       </defs>
-      <!-- cable -->
-      <path d="M322 410 C 330 470, 410 450, 450 520 S 470 640, 420 700" fill="none" stroke="#1a1b1e" stroke-width="13" stroke-linecap="round"/>
-      <path d="M314 400 L330 400 L332 424 L316 424 Z" fill="#111"/>
       <!-- grip -->
-      <path d="M236 168 C 250 160, 330 160, 340 172 L 372 372 C 376 398, 360 412, 336 412 L 306 412 C 286 412, 276 400, 272 384 Z" fill="url(#sGrip)"/>
-      <path d="M338 186 L 366 368 C 368 384, 362 394, 352 398" fill="none" stroke="#0d0e10" stroke-width="10" stroke-linecap="round" opacity=".55"/>
-      <!-- trigger -->
-      <path d="M200 162 C 194 182, 202 204, 224 212 L 232 196 C 220 190, 216 178, 218 164 Z" fill="#4a4e55"/>
-      <path d="M203 168 C 200 182, 205 196, 218 204" fill="none" stroke="#7a7f88" stroke-width="2" opacity=".6"/>
-      <!-- head -->
-      <path d="M34 78 C 50 48, 110 40, 200 42 L 296 48 C 344 52, 366 84, 356 118 C 350 140, 336 156, 316 162 L 200 166 L 70 152 C 44 148, 30 128, 30 104 Z" fill="url(#sBody)"/>
-      <!-- rubber top panel -->
-      <path d="M92 52 C 150 46, 230 46, 292 54 C 322 58, 338 72, 340 90 L 322 92 C 318 78, 304 70, 286 68 L 96 64 Z" fill="url(#sCap)"/>
-      <!-- top specular -->
-      <path d="M48 70 C 70 50, 120 46, 200 47 L 290 52 C 320 55, 340 64, 348 80 C 320 66, 290 62, 200 60 L 110 60 C 80 60, 60 66, 48 70 Z" fill="url(#sHi)"/>
-      <!-- seam line -->
-      <path d="M40 112 C 120 120, 260 124, 352 112" fill="none" stroke="#0e0f11" stroke-width="2" opacity=".5"/>
-      <!-- status LED -->
-      <circle class="led" cx="246" cy="58" r="5" fill="#ff3b30"/>
-      <!-- nose bezel + window -->
-      <path d="M30 82 C 22 84, 16 92, 16 104 L 16 128 C 16 138, 22 146, 34 148 L 62 151 L 68 80 Z" fill="#0d0d0f"/>
-      <path class="glass" d="M27 92 L 56 88 L 54 142 L 29 139 C 25 138, 23 134, 23 128 L 23 102 C 23 96, 24 93, 27 92 Z" fill="url(#sGlass)"/>
-      <path d="M28 95 L 52 92 L 51 108 L 28 110 Z" fill="#fff" opacity=".22"/>
+      <rect x="104" y="330" width="92" height="40" rx="10" fill="#2a2b2e"/>
+      <rect x="96" y="352" width="108" height="84" rx="22" fill="url(#dGrip)"/>
+      <rect x="114" y="364" width="72" height="56" rx="12" fill="#0e0e0f"/>
+      <rect x="86" y="420" width="128" height="44" rx="22" fill="url(#dCap)"/>
+      <ellipse cx="150" cy="426" rx="54" ry="6" fill="#fff" opacity=".08"/>
+      <!-- body: depth slab then face -->
+      <rect x="24" y="16" width="264" height="330" rx="42" fill="#070708"/>
+      <rect x="14" y="6" width="264" height="330" rx="42" fill="url(#dBody)"/>
+      <rect x="15.5" y="7.5" width="261" height="327" rx="40.5" fill="none" stroke="#5b5d62" stroke-width="2" opacity=".7"/>
+      <!-- scan window on the top edge -->
+      <rect class="win" x="104" y="5" width="84" height="8" rx="4" fill="#3a0a0a"/>
+      <!-- side buttons -->
+      <rect x="8" y="118" width="12" height="34" rx="6" fill="#f2a33a"/>
+      <rect x="8" y="166" width="12" height="34" rx="6" fill="#f2a33a"/>
+      <!-- grey rim + screen -->
+      <rect x="34" y="28" width="224" height="236" rx="26" fill="url(#dRim)"/>
+      <rect x="44" y="38" width="204" height="200" rx="16" fill="url(#dScreen)" class="scr"/>
+      <text class="scr-main" x="146" y="146" text-anchor="middle">READY</text>
+      <text class="scr-sub" x="146" y="178" text-anchor="middle">Museum of Vivian Min</text>
+      <rect x="44" y="38" width="204" height="200" rx="16" fill="url(#dGlare)"/>
+      <!-- front buttons -->
+      <rect x="70" y="284" width="42" height="18" rx="9" fill="#f2a33a"/>
+      <rect x="125" y="284" width="42" height="18" rx="9" fill="#ff4b45"/>
+      <rect x="180" y="284" width="42" height="18" rx="9" fill="#f2a33a"/>
+      <rect x="70" y="284" width="42" height="7" rx="3.5" fill="#fff" opacity=".25"/>
+      <rect x="125" y="284" width="42" height="7" rx="3.5" fill="#fff" opacity=".25"/>
+      <rect x="180" y="284" width="42" height="7" rx="3.5" fill="#fff" opacity=".25"/>
     </svg>
   </div>
 
@@ -426,20 +436,20 @@
     const qL = (q.left - sr.left) / S, qR = (q.right - sr.left) / S;
     const qT = (q.top - sr.top) / S,  qB = (q.bottom - sr.top) / S;
     const qcx = (qL + qR) / 2, qcy = (qT + qB) / 2;
+    // nose = scan window on the device's top edge; device sits below-right, tilted toward the QR
     let tx, ty, k = .08;
-    if(scanMode === 'aim'){ tx = qR + 90; ty = qcy + 6; k = .1; }
-    else if(scanMode === 'exit'){ tx = qR + 1300; ty = qcy + 260; k = .05; }
-    else { tx = qR + 1300; ty = qcy + 260; k = 1; }
+    if(scanMode === 'aim'){ tx = qR + 50; ty = qB + 95; k = .1; }
+    else { tx = qR + 900; ty = qB + 700; k = scanMode === 'exit' ? .05 : 1; }
     nX += (tx - nX) * k; nY += (ty - nY) * k;
-    let a = Math.atan2(qcy - nY, qcx - nX) * 180 / Math.PI - 180;
-    if(a < -180) a += 360;
-    a = Math.max(-30, Math.min(30, a));
+    let a = Math.atan2(qcy - nY, qcx - nX) * 180 / Math.PI + 90;   // device "forward" is up
+    a = Math.max(-70, Math.min(-10, a));
     rot += (a - rot) * .12;
-    scanner.style.transform = `translate(${nX - 10.5}px, ${nY - 76}px) rotate(${rot}deg)`;
-    const r = rot * Math.PI / 180, h = 14;
-    const p1 = [nX + h * Math.sin(r), nY - h * Math.cos(r)], p2 = [nX - h * Math.sin(r), nY + h * Math.cos(r)];
-    beamPoly.setAttribute('points', `${p1} ${qL},${qT} ${qL},${qB} ${p2}`);
-    beamGrad.setAttribute('x1', nX); beamGrad.setAttribute('x2', qL);
+    scanner.style.transform = `translate(${nX - 116.8}px, ${nY - 7}px) rotate(${rot}deg)`;
+    const r = rot * Math.PI / 180, h = 30;
+    const p1 = [nX + h * Math.cos(r), nY + h * Math.sin(r)], p2 = [nX - h * Math.cos(r), nY - h * Math.sin(r)];
+    beamPoly.setAttribute('points', `${p1} ${qR},${qT} ${qL},${qB} ${p2}`);
+    beamGrad.setAttribute('x1', nX); beamGrad.setAttribute('y1', nY);
+    beamGrad.setAttribute('x2', qcx); beamGrad.setAttribute('y2', qcy);
   }
 
   function frame(now){
@@ -479,21 +489,28 @@
   const bro = document.getElementById('brochure');
   let busy = false, broOpen = false;
 
+  const scrMain = document.querySelector('.scr-main'), scrSub = document.querySelector('.scr-sub');
+  function setScreen(main, sub = 'Museum of Vivian Min'){
+    scrMain.textContent = main; scrSub.textContent = sub;
+    scrMain.style.fontSize = main.length > 6 ? '30px' : '34px';
+  }
+
   function enter(){
     if(busy) return; busy = true; locked = true;
     tX = 0; tY = 0; spin = Math.round(spin / 360) * 360;
     scanMode = 'aim'; drawScanner();
-    setTimeout(() => { scanner.classList.add('fire'); beam.classList.add('on'); ticket.classList.add('scanning'); }, 1000);
+    setScreen('READY');
+    setTimeout(() => { scanner.classList.add('fire'); beam.classList.add('on'); ticket.classList.add('scanning'); setScreen('SCANNING'); }, 1100);
     setTimeout(() => {
       beam.classList.remove('on'); scanner.classList.remove('fire'); ticket.classList.remove('scanning');
-      scanner.classList.add('ok'); ticket.classList.add('scanned'); beepSound();
-    }, 3100);
-    setTimeout(() => { scanMode = 'exit'; }, 3700);
+      scanner.classList.add('ok'); setScreen('ADMITTED', '1 Visitor · Welcome'); beepSound();
+    }, 3200);
+    setTimeout(() => { scanMode = 'exit'; }, 4300);
     setTimeout(() => {
       lobby.classList.add('leaving');
       lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true;
-    }, 4300);
-    setTimeout(() => { scanMode = 'hidden'; scanner.style.transform = 'translate(4000px,0)'; }, 5200);
+    }, 4800);
+    setTimeout(() => { scanMode = 'hidden'; scanner.style.transform = 'translate(4000px,0)'; }, 5800);
   }
 
   // brochure: click to flip between poster and floor guide
