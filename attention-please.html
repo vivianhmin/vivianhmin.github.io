@@ -233,6 +233,77 @@
   .lb img{max-width:100%;max-height:calc(100vh - 90px);object-fit:contain}
   .lb p{color:#ddd;font-size:14px}
   @media (max-width:860px){ .pair{grid-template-columns:1fr} }
+  /* finals */
+  .finals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:6px}
+  .fin{margin:0;position:relative;cursor:pointer}
+  .fin img{display:block;width:100%;height:auto;box-shadow:0 16px 30px rgba(40,30,20,.16);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .fin:hover img{transform:translateY(-4px)}
+  .fin-o{position:absolute;left:0;right:0;top:0;aspect-ratio:458/704;background:rgba(20,20,20,.84);color:#fff;padding:9%;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;opacity:0;transition:opacity .3s;pointer-events:none}
+  .fin.show .fin-o{opacity:1}
+  .fin-o b{font:700 11.5px var(--head);letter-spacing:.16em;text-transform:uppercase;color:#ffd84a}
+  .fin-o p{margin:0;font-size:14.5px!important;line-height:1.45!important}
+  .fin-o .eq{font-size:17px!important;font-weight:600}
+  .fin figcaption{font-size:14px;font-weight:600;margin-top:10px}
+  /* progress of thoughts */
+  .tp{margin-top:16px;outline:none}
+  .tp-rail{--p:0;list-style:none;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:0 0 18px!important;padding:0;position:relative}
+  .tp-rail::before{content:"";position:absolute;left:14px;right:14px;top:14px;height:2px;background:var(--soft)}
+  .tp-rail::after{content:"";position:absolute;left:14px;top:14px;height:2px;width:calc((100% - 28px) * var(--p));background:var(--ink);transition:width .5s}
+  .tp-rail li{margin:0!important;font-size:inherit!important}
+  .tp-rail button{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1}
+  .tp-rail i{font:700 12px/28px var(--head);font-style:normal;width:28px;height:28px;border-radius:50%;text-align:center;background:var(--bg,#f4f1ee);border:2px solid var(--soft);color:var(--muted);transition:all .3s}
+  .tp-rail button.done i{border-color:var(--ink);color:var(--ink)}
+  .tp-rail button.on i{background:var(--ink);border-color:var(--ink);color:#fff;transform:scale(1.12)}
+  .tp-rail span{font-size:12.5px;line-height:1.3;color:var(--muted);padding-right:4px}
+  .tp-rail button.on span{color:var(--ink);font-weight:600}
+  .tp-card{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;background:#fff;border:1px solid var(--soft);padding:20px;align-items:start}
+  .tp-media img#tpImg{display:block;width:100%;max-height:520px;object-fit:contain;background:#f4f2ee;cursor:zoom-in}
+  .tp-media img.in{animation:tpin .45s ease}
+  @keyframes tpin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .tp-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .tp-thumbs button{all:unset;cursor:pointer;width:72px;height:52px;border:2px solid transparent;opacity:.55;transition:opacity .2s}
+  .tp-thumbs button.on{border-color:var(--ink);opacity:1}
+  .tp-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+  .tp-n{font:600 11.5px var(--head);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .tp-text h3{font-size:clamp(22px,2.2vw,28px);line-height:1.2;letter-spacing:-.015em;margin:6px 0 14px}
+  .tp-text dl{margin:0}
+  .tp-text dl > div{border-top:1px solid var(--soft);padding:10px 0}
+  .tp-text dt{font:700 11px var(--head);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .tp-text dd{margin:0;font-size:15.5px;line-height:1.5}
+  .tp-text .nx dt{color:#17703c}
+  .tp-text .nx dd{font-weight:600}
+  .ord{display:flex;flex-wrap:wrap;gap:6px}
+  .ord span{font-size:13px;background:#f4f2ee;padding:5px 10px;border-radius:999px}
+  .ord span:not(:last-child)::after{content:" →";color:var(--muted)}
+  .tp-nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+  .tp-nav button{font:600 14px var(--head);border:1px solid var(--ink);background:#fff;color:var(--ink);padding:9px 14px;cursor:pointer}
+  .tp-nav #tpNext{background:var(--ink);color:#fff;margin-left:auto}
+  .tp-nav button:disabled{opacity:.3;cursor:default}
+  .tp-nav span{font-size:13px;color:var(--muted)}
+  /* version scrubber */
+  .evo{background:#fff;border:1px solid var(--soft);padding:18px;margin-top:14px}
+  .evo-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .evo-tabs button{font:500 14px var(--head);border:1px solid var(--soft);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;color:var(--ink)}
+  .evo-tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .evo-stage{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:28px;align-items:center}
+  .evo-stage img{display:block;width:100%;aspect-ratio:151/236;object-fit:cover;box-shadow:0 14px 28px rgba(40,30,20,.16);cursor:zoom-in}
+  .evo-side b{display:block;font-size:30px;letter-spacing:-.02em}
+  .evo-side span{display:block;font-size:16px;color:var(--muted);margin:4px 0 16px}
+  .evo-phases{display:flex;gap:4px;margin-bottom:16px}
+  .evo-phases i{font:600 11px var(--head);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:3px solid var(--soft);padding-top:6px;transition:all .2s}
+  .evo-phases i.on{border-color:var(--ink);color:var(--ink)}
+  #evoPlay{font:600 14px var(--head);border:1px solid var(--ink);background:#fff;padding:9px 16px;cursor:pointer}
+  #evoRange{--fill:0%;width:100%;margin-top:18px;-webkit-appearance:none;appearance:none;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--ink) var(--fill),var(--soft) var(--fill));cursor:pointer}
+  #evoRange::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--ink);border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+  #evoRange::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:3px solid #fff}
+  @media (max-width:860px){
+    .finals{grid-template-columns:1fr;max-width:420px}
+    .tp-rail{grid-template-columns:repeat(7,28px);justify-content:space-between}
+    .tp-rail span{display:none}
+    .tp-card{grid-template-columns:1fr;padding:14px}
+    .evo-stage{grid-template-columns:1fr}
+    .evo-stage img{max-width:280px;margin:0 auto}
+  }
   /* phones: single column (these rules were missing on this page) */
   @media (max-width:860px){
     .story li,.story li+li{padding:18px 0;border-left:none}
@@ -281,71 +352,53 @@
   <section>
     <h2><small>01</small>The series</h2>
     <div class="body">
-      <figure class="shot "><img src="assets/posters/final.jpg" alt="Final series: What shoots shatters, What shames silences, What leaks lingers" loading="lazy"><figcaption>Final series: What shoots shatters, What shames silences, What leaks lingers</figcaption></figure>
-      <ol class="pcards">
-        <li><b>What shoots shatters</b><span>Gun violence</span><p>A gun becomes the profile of a child. 46 school shootings in just one year.</p></li>
-        <li><b>What shames silences</b><span>Online violence</span><p>A thumbs-up from a phone becomes a hand over a woman's mouth. 1.1M abusive tweets in one year.</p></li>
-        <li><b>What leaks lingers</b><span>Corporate accountability</span><p>Oil pouring from a barrel becomes an oil-covered bird. 550 oil spills in one year.</p></li>
-      </ol>
-      <figure class="shot "><img src="assets/posters/mockup.jpg" alt="The series in context" loading="lazy"><figcaption>The series in context</figcaption></figure>
+      <div class="finals" id="finals"></div>
+      <p class="ptip">Tap a poster to see the thought behind it.</p>
+      <figure class="shot"><img src="assets/posters/mockup.jpg" alt="The series in context" loading="lazy"><figcaption>The series in context</figcaption></figure>
     </div>
   </section>
 
   <section>
-    <h2><small>02</small>The question</h2>
+    <h2><small>02</small>Progress of thoughts</h2>
     <div class="body">
-      <p>I started by comparing two kinds of posters: one that lets the viewer make the connection, and one that says exactly what to think. That became my question: <b>should a poster be read in a second, or leave room to interpret?</b></p>
-      <p>Starting from the word "control", I sketched eleven directions across Amnesty's causes, from typography-only statements to symbols cut in half.</p>
-      <figure class="shot "><img src="assets/posters/sketches.jpg" alt="Eleven early directions" loading="lazy"><figcaption>Eleven early directions</figcaption></figure>
-      <p>Words running across a symbol felt closest, but critique flagged legibility and the victim's missing voice. I kept the symbols and kept iterating.</p>
-      <figure class="shot narrow"><img src="assets/posters/paper-sketches.jpg" alt="Narrowing down: words across a symbol, then new ideas" loading="lazy"><figcaption>Narrowing down: words across a symbol, then new ideas</figcaption></figure>
+      <p>Each round started with a question. What I tried, and what I heard back, led to the next one.</p>
+      <div class="tp" id="tp">
+        <ol class="tp-rail" id="tpRail"></ol>
+        <div class="tp-card">
+          <div class="tp-media"><img id="tpImg" alt=""><div class="tp-thumbs" id="tpThumbs"></div></div>
+          <div class="tp-text">
+            <div class="tp-n" id="tpN"></div>
+            <h3 id="tpQ"></h3>
+            <dl id="tpDl"></dl>
+            <div class="tp-nav"><button id="tpPrev" aria-label="Previous thought">←</button><span id="tpCount"></span><button id="tpNext" aria-label="Next thought">Next thought →</button></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section>
-    <h2><small>03</small>The turning point</h2>
+    <h2><small>03</small>Watch a poster evolve</h2>
     <div class="body">
-      <p>My first concept shaped each keyword into its object: SPILL, SHOOT, MONITOR. It was clear, but flat. In critique, viewers recognized the topics but missed the context, the hierarchy, and what to do next.</p>
-      <div class="pair">
-        <figure class="shot "><img src="assets/posters/first-digital.jpg" alt="First concept: word as object" loading="lazy"><figcaption>First concept: word as object</figcaption></figure>
-        <figure class="shot "><img src="assets/posters/critique-wall.jpg" alt="First critique, alongside classmates’ work" loading="lazy"><figcaption>First critique, alongside classmates’ work</figcaption></figure>
+      <p>Drag through every version I saved. Each one changed one thing: the crop, the hierarchy, then the color.</p>
+      <div class="evo" id="evo">
+        <div class="evo-tabs"><button data-k="shames" class="on">What shames silences</button><button data-k="shoots">What shoots shatters</button></div>
+        <div class="evo-stage">
+          <img id="evoImg" alt="">
+          <div class="evo-side">
+            <b id="evoV"></b>
+            <span id="evoPhase"></span>
+            <div class="evo-phases" id="evoPhases"></div>
+            <button id="evoPlay">▶ Play</button>
+          </div>
+        </div>
+        <input type="range" id="evoRange" min="0" value="0" aria-label="Version">
       </div>
-      <p>Mapping the critique on the whiteboard showed what was missing: a reading order. Each poster needed to grab attention with an image, lead into one clear stat, summarize the issue, and end with an action.</p>
-      <figure class="shot "><img src="assets/posters/whiteboard.jpg" alt="Critique notes, entry point and flow, word associations" loading="lazy"><figcaption>Critique notes, entry point and flow, word associations</figcaption></figure>
-      <p>So I flipped the idea: <b>the thing that causes harm turns into the one it harms.</b> I also switched surveillance to online violence against women, and focused gun violence on children.</p>
-      <div class="order"><span>Image</span><span>Consequence</span><span>Evidence</span><span>Amnesty's position</span><span>Take part</span></div>
     </div>
   </section>
 
   <section>
-    <h2><small>04</small>Refining the system</h2>
-    <div class="body">
-      <p>I tested each poster in black and white first, then explored color until the three worked as one series.</p>
-      <div class="pair">
-        <figure class="shot tall"><img src="assets/posters/iter-shames.jpg" alt="What shames silences, from sketch to color" loading="lazy"><figcaption>What shames silences, from sketch to color</figcaption></figure>
-        <figure class="shot "><img src="assets/posters/iter-shoots.jpg" alt="What shoots shatters, from sketch to color" loading="lazy"><figcaption>What shoots shatters, from sketch to color</figcaption></figure>
-      </div>
-      <figure class="shot "><img src="assets/posters/color-study.jpg" alt="Color study" loading="lazy"><figcaption>Color study</figcaption></figure>
-      <div class="pair">
-        <figure class="shot "><img src="assets/posters/color-round-1.jpg" alt="Color round 1" loading="lazy"><figcaption>Color round 1</figcaption></figure>
-        <figure class="shot "><img src="assets/posters/color-round-2.jpg" alt="Color round 2" loading="lazy"><figcaption>Color round 2</figcaption></figure>
-      </div>
-      <p>Peer critique said everything had equal weight, so nothing stood out. The fixes:</p>
-      <figure class="shot "><img src="assets/posters/critique-notes.jpg" alt="Where hierarchy broke down" loading="lazy"><figcaption>Where hierarchy broke down</figcaption></figure>
-      <ul class="fixes">
-        <li>One color per poster, one type system across the series</li>
-        <li>Heavier title type and natural line breaks</li>
-        <li>Statistics tied to one argument each</li>
-        <li>A visible "Take Part" call to action</li>
-        <li>The same stroke weight in every illustration</li>
-        <li>A bigger logo and URL, no drop shadows</li>
-      </ul>
-      <figure class="shot narrow"><img src="assets/posters/print-test.jpg" alt="Print test before the final round" loading="lazy"><figcaption>Print test before the final round</figcaption></figure>
-    </div>
-  </section>
-
-  <section>
-    <h2><small>05</small>What I learned</h2>
+    <h2><small>04</small>What I learned</h2>
     <div class="body">
       <div class="lessons">
         <div><h3>Consistency is a system</h3><p>Posters can differ in color and composition and still belong together through shared logic.</p></div>
@@ -360,13 +413,127 @@
 </main>
 
 <script>
-// click any image to view it larger
 (() => {
+  const $ = id => document.getElementById(id), P = 'assets/posters/';
+
+  // ---------- 01 finals: tap to reveal the thought ----------
+  const FIN = [
+    ['final-1', 'What shoots shatters', 'Gun violence', 'A gun becomes the profile of a child.', '46 school shootings in just one year.'],
+    ['final-2', 'What shames silences', 'Online violence', 'A thumbs-up from a phone becomes a hand over a woman\'s mouth.', '1.1M abusive tweets in just one year.'],
+    ['final-3', 'What leaks lingers', 'Corporate accountability', 'Oil pouring from a barrel becomes an oil-covered bird.', '550 oil spills in just one year.'],
+  ];
+  $('finals').innerHTML = FIN.map(f => `<figure class="fin" tabindex="0" role="button" aria-label="${f[1]}: show the thought">
+      <img src="${P + f[0]}.jpg" alt="${f[1]} poster"><div class="fin-o"><b>${f[2]}</b><p class="eq">${f[3]}</p><p>${f[4]}</p></div>
+      <figcaption>${f[1]}</figcaption></figure>`).join('');
+  $('finals').querySelectorAll('.fin').forEach(el => {
+    const t = () => el.classList.toggle('show');
+    el.addEventListener('click', t); el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); t(); } });
+  });
+
+  // ---------- 02 progress of thoughts ----------
+  const T = [
+    { q:'What makes someone stop and look?', imgs:[['sketches','Eleven early directions']],
+      tried:'Eleven directions across Amnesty\'s causes, from typography-only statements to symbols cut in half.',
+      found:'Words running across a symbol held attention best.',
+      next:'Narrow the causes, starting from the word "control".' },
+    { q:'Can the word become the object?', lab:'Noticed', imgs:[['paper-sketches','Words across a symbol, then new ideas'],['first-digital','SPILL, SHOOT, MONITOR']],
+      tried:'SPILL, SHOOT and MONITOR shaped into a nozzle, a gun and a camera.',
+      found:'My own notes: vertical words may not be legible, and the victim had no voice.',
+      next:'Put it on the wall and see how people read it.' },
+    { q:'Does it land on a wall?', lab:'Heard', imgs:[['critique-wall','First critique, next to classmates\' work']],
+      tried:'A first critique with people seeing the posters cold.',
+      found:'They recognized the topics, but missed the context, the hierarchy and what to do next. The stats felt disconnected.',
+      next:'Decide what the eye should do first.' },
+    { q:'What should the eye do first?', imgs:[['whiteboard','Entry point, flow and word associations']],
+      tried:'Mapping the critique on a whiteboard: entry point, flow, and the feeling each word carries.',
+      found:'A reading order: grab attention with an image, lead into one clear stat, summarize, then take action.',
+      next:'Make the image itself carry the consequence.', order:true },
+    { q:'What if the harm becomes the harmed?', imgs:[['iter-shoots','What shoots shatters, every version'],['iter-shames','What shames silences, every version']],
+      tried:'Flipping the idea: a gun becomes a child, a phone\'s thumbs-up becomes a hand over a mouth, oil becomes a bird. Tested in black and white first.',
+      found:'The image now told the story. Surveillance became online violence against women, and gun violence focused on children.',
+      next:'Make three posters feel like one series.' },
+    { q:'Do three posters read as one?', lab:'Heard', imgs:[['color-study','Color study'],['color-round-1','Color round 1'],['color-round-2','Color round 2'],['critique-notes','Where hierarchy broke down']],
+      tried:'Paint chips and color rounds until each poster had its own color but shared one system.',
+      found:'Peers said everything had equal weight, so nothing stood out.',
+      next:'Heavier titles, one stat per argument, the same stroke weight, a visible "Take Part", no drop shadows.' },
+    { q:'Does it work in print?', lab:'Heard', imgs:[['print-test','Print test'],['final','Final series']],
+      tried:'Printing the series at full size for a final critique.',
+      found:'Spelling, capitalization and print color still needed fixing.',
+      next:'The final series: lighter tints, white headlines, one consistent layout.' },
+  ];
+  const rail = $('tpRail');
+  rail.innerHTML = T.map((t, k) => `<li><button data-k="${k}"><i>${k + 1}</i><span>${t.q}</span></button></li>`).join('');
+  let cur = 0, img = 0;
   const lb = document.createElement('div'); lb.className = 'lb'; lb.innerHTML = '<img alt=""><p></p>'; document.body.appendChild(lb);
-  document.querySelectorAll('.shot img').forEach(im => im.addEventListener('click', () => {
-    lb.querySelector('img').src = im.src; lb.querySelector('p').textContent = im.alt; lb.classList.add('on');
-  }));
+  const zoom = (src, alt) => { lb.querySelector('img').src = src; lb.querySelector('p').textContent = alt; lb.classList.add('on'); };
   lb.addEventListener('click', () => lb.classList.remove('on'));
+  function showImg(k){
+    img = k; const [f, cap] = T[cur].imgs[k];
+    const el = $('tpImg'); el.classList.remove('in'); void el.offsetWidth; el.src = P + f + '.jpg'; el.alt = cap; el.classList.add('in');
+    $('tpThumbs').querySelectorAll('button').forEach((b, i) => b.classList.toggle('on', i === k));
+  }
+  function go(k){
+    cur = Math.max(0, Math.min(T.length - 1, k)); const t = T[cur];
+    rail.querySelectorAll('button').forEach((b, i) => { b.classList.toggle('on', i === cur); b.classList.toggle('done', i < cur); });
+    rail.style.setProperty('--p', (cur / (T.length - 1)));
+    $('tpN').textContent = 'Thought ' + (cur + 1) + ' of ' + T.length;
+    $('tpQ').textContent = t.q;
+    $('tpDl').innerHTML = `<div><dt>Tried</dt><dd>${t.tried}</dd></div><div><dt>${t.lab || 'Learned'}</dt><dd>${t.found}</dd></div>` +
+      (t.order ? '<div class="ord"><span>Image</span><span>Stat</span><span>Summary</span><span>Take part</span></div>' : '') +
+      `<div class="nx"><dt>So next</dt><dd>${t.next}</dd></div>`;
+    $('tpThumbs').innerHTML = t.imgs.length > 1 ? t.imgs.map((m, i) => `<button aria-label="${m[1]}"><img src="${P + m[0]}.jpg" alt=""></button>`).join('') : '';
+    $('tpThumbs').querySelectorAll('button').forEach((b, i) => b.onclick = () => showImg(i));
+    $('tpPrev').disabled = cur === 0; $('tpNext').textContent = cur === T.length - 1 ? 'Start over ↺' : 'Next thought →';
+    $('tpCount').textContent = (cur + 1) + ' / ' + T.length;
+    showImg(0);
+  }
+  rail.querySelectorAll('button').forEach(b => b.onclick = () => go(+b.dataset.k));
+  $('tpPrev').onclick = () => go(cur - 1);
+  $('tpNext').onclick = () => go(cur === T.length - 1 ? 0 : cur + 1);
+  $('tpImg').onclick = () => zoom($('tpImg').src, $('tpImg').alt);
+  $('tp').addEventListener('keydown', e => { if(e.key === 'ArrowRight') go(cur + 1); if(e.key === 'ArrowLeft') go(cur - 1); });
+  $('tp').tabIndex = 0;
+  let sx = 0; $('tp').addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive:true });
+  $('tp').addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 60 && e.target.closest('.tp-media')) go(cur + (dx < 0 ? 1 : -1)); });
+  go(0);
+
+  // ---------- 03 version scrubber ----------
+  const V = {
+    shames:{ n:['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22'],
+      ph:[[0,1,'Sketch'],[2,4,'Silhouette in black and white'],[5,13,'Type and hierarchy'],[14,21,'Color']] },
+    shoots:{ n:['01','02','03','04','05','07','08','09','10','11','12','13','14','15','16','17','18','19'],
+      ph:[[0,0,'Sketch'],[1,7,'Type and hierarchy'],[8,17,'Color']] }
+  };
+  let vk = 'shames', vi = 0, timer = null;
+  const R = $('evoRange');
+  function vset(i){
+    const v = V[vk]; vi = Math.max(0, Math.min(v.n.length - 1, i)); R.value = vi;
+    $('evoImg').src = P + 'iter/' + vk + '-' + v.n[vi] + '.jpg'; $('evoImg').alt = 'Version ' + v.n[vi];
+    $('evoV').textContent = 'Version ' + v.n[vi];
+    const ph = v.ph.find(p => vi >= p[0] && vi <= p[1]); $('evoPhase').textContent = ph ? ph[2] : '';
+    $('evoPhases').querySelectorAll('i').forEach((x, k) => x.classList.toggle('on', v.ph[k] === ph));
+    R.style.setProperty('--fill', (vi / (v.n.length - 1) * 100) + '%');
+  }
+  function vload(k){
+    vk = k; const v = V[k]; R.max = v.n.length - 1;
+    $('evoPhases').innerHTML = v.ph.map(p => `<i style="flex:${p[1] - p[0] + 1}">${p[2]}</i>`).join('');
+    $('evo').querySelectorAll('.evo-tabs button').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+    v.n.forEach(n => { const im = new Image(); im.src = P + 'iter/' + k + '-' + n + '.jpg'; });
+    stop(); vset(0);
+  }
+  function stop(){ clearInterval(timer); timer = null; $('evoPlay').textContent = '▶ Play'; }
+  $('evoPlay').onclick = () => {
+    if(timer){ stop(); return; }
+    if(vi >= V[vk].n.length - 1) vset(0);
+    $('evoPlay').textContent = '❚❚ Pause';
+    timer = setInterval(() => { if(vi >= V[vk].n.length - 1) stop(); else vset(vi + 1); }, 420);
+  };
+  R.addEventListener('input', () => { stop(); vset(+R.value); });
+  $('evo').querySelectorAll('.evo-tabs button').forEach(b => b.onclick = () => vload(b.dataset.k));
+  $('evoImg').onclick = () => zoom($('evoImg').src, $('evoImg').alt);
+  vload('shames');
+
+  document.querySelectorAll('.shot img').forEach(im => im.addEventListener('click', () => zoom(im.src, im.alt)));
   document.addEventListener('keydown', e => { if(e.key === 'Escape') lb.classList.remove('on'); });
 })();
 </script>
