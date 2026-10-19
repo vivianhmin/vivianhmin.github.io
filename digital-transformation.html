@@ -163,6 +163,12 @@
   .lb{position:fixed;inset:0;z-index:2000;background:rgba(15,15,15,.92);display:none;align-items:center;justify-content:center;padding:24px}
   .lb.on{display:flex}
 
+  .ctx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin:0 0 22px}
+  .ctx > div{padding:16px 20px 16px 0}
+  .ctx > div+div{padding-left:20px;border-left:1px solid var(--soft)}
+  .ctx h3{font-size:16px;font-weight:700;margin:0 0 6px}
+  .ctx p{font-size:15.5px!important;line-height:1.55!important;margin:0;color:#3a3835}
+  @media (max-width:860px){ .ctx{grid-template-columns:1fr} .ctx > div+div{padding-left:0;border-left:0;border-top:1px solid var(--soft)} }
   /* the skeptic's question */
   .skeptic{background:#fff;border:1px solid var(--soft);padding:22px 24px;margin:16px 0 6px;position:relative}
   .skeptic::before{content:"“";position:absolute;left:14px;top:-8px;font:700 64px/1 Georgia,serif;color:#d6d1c9}
@@ -281,8 +287,12 @@
   </div>
 
   <section>
-    <h2><small>01</small>The real obstacle</h2>
+    <h2><small>01</small>Context</h2>
     <div class="body">
+      <div class="ctx">
+        <div><h3>What is Panopto</h3><p>A video platform that companies and universities use to record, store, search and share video, such as training sessions, meetings and presentations, in one secure library.</p></div>
+        <div><h3>Why it seemed unnecessary</h3><p>SKT adopted Panopto during COVID to keep training running remotely. When employees returned to the office and in-person training resumed, viewing dropped, and leadership saw the platform as a content archive tied to remote work rather than a tool with ongoing business value.</p></div>
+      </div>
       <p>Product satisfaction was not the issue. The account lacked a business case for continued investment after remote work ended. The deck was structured to answer the central executive question:</p>
       <div class="skeptic"><p>Why should we keep paying for a COVID tool now that people are back in the office?</p><small>Central question from leadership</small></div>
     </div>
