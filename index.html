@@ -6,8 +6,11 @@
 <title>Vivian Min — Design Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  @font-face{font-family:'Bodoni Moda';src:url(assets/fonts/bodoni-moda.woff) format('woff');font-weight:400 900;font-display:swap}
+  @font-face{font-family:'Bodoni Moda';src:url(assets/fonts/bodoni-moda-italic.woff) format('woff');font-weight:400 900;font-style:italic;font-display:swap}
+  @font-face{font-family:'Pinyon Script';src:url(assets/fonts/pinyon-script.woff) format('woff');font-display:swap}
   :root{
     --bg:#f4f1ee; --paper:#fbfaf7; --edge:#d9d6cf; --ink:#1b1b1b;
     --text:#1d1c1a; --muted:#8b8781; --line:#d8d3cc; --laser:#ff2b2b; --green:#24463a;
@@ -116,9 +119,6 @@
   .tk-top{display:flex;justify-content:space-between;align-items:center}
   .star{font-size:18px;color:var(--tk);line-height:1}
   .star.sm{position:absolute;right:16px;top:14px;font-size:14px}
-  .tk-title{margin:10px 0 8px;line-height:.9;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .tk-title em{font:italic 500 64px/0.95 'Playfair Display',Georgia,serif;letter-spacing:-.01em}
-  .tk-title span{font:500 21px 'Playfair Display',Georgia,serif;letter-spacing:.02em}
   .tk-lines{list-style:none;font-size:13.5px;line-height:1.35;color:#29466f;border-top:1px solid rgba(23,52,95,.35)}
   .tk-lines li{padding:4px 0;border-bottom:1px solid rgba(23,52,95,.14)}
   .front .showing{margin-top:auto;padding-top:12px;display:flex;align-items:center;gap:12px}
@@ -130,25 +130,24 @@
   .tk-stub .code{font-size:11.5px;letter-spacing:.1em;color:var(--tk);font-weight:600}
   .back .tk-main{justify-content:space-between;padding:26px 30px 22px}
   .back .note-label{margin-bottom:12px}
-  .back .note{font:italic 400 21px/1.45 'Playfair Display',Georgia,serif;color:var(--tk)}
+  .back .note{font:400 19px/1.55 'Manrope',sans-serif;color:var(--tk)}
   .back .barcode{height:38px;margin-top:16px;opacity:.85;
     background:repeating-linear-gradient(90deg,var(--tk) 0 2px,transparent 2px 5px,var(--tk) 5px 9px,transparent 9px 11px,var(--tk) 11px 12px,transparent 12px 17px)}
   .stub-mark{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tk)}
-  .stub-mark em{font:italic 500 70px/1 'Playfair Display',Georgia,serif}
+  .stub-mark em{font:400 84px/1 'Pinyon Script',cursive}
   .stub-mark span{font:600 11px 'Manrope',sans-serif;letter-spacing:.3em}
   .face::before{opacity:.18}
 
 
-  /* title set like the reference: swash script M, serif caps, italic "tic" + caps "KET" */
-  .tk-title{display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;justify-content:start;column-gap:2px;margin:6px 0 6px;line-height:1}
-  .tk-title .sw{grid-row:1 / span 2;font:400 112px/0.8 'Pinyon Script',cursive;margin-right:-6px;padding-top:6px}
-  .tk-title .cap{align-self:end;font:400 46px/0.9 'Playfair Display',Georgia,serif;letter-spacing:.02em}
-  .tk-title .tk2{font:400 42px/1 'Playfair Display',Georgia,serif;letter-spacing:.01em;padding-left:58px}
-  .tk-title .tk2 i{font-style:italic}
+  /* title set like the reference: script M, italic u, Bodoni caps; italic "tic" + caps "KET" */
+  .tk-title{display:block;margin:30px 0 10px;font-family:'Bodoni Moda',Georgia,serif;font-weight:500;color:var(--tk);line-height:1}
+  .tk-title .l1{font-size:54px;letter-spacing:.01em;white-space:nowrap}
+  .tk-title .sw{font:400 118px/0 'Pinyon Script',cursive;margin-right:-6px;position:relative;top:12px}
+  .tk-title i{font-style:italic;font-size:.95em;margin-right:1px}
+  .tk-title .l2{font-size:50px;margin:-4px 0 0 86px;white-space:nowrap}
   .front .showing{margin:4px 0 10px;padding:0;display:flex;align-items:center;gap:10px}
-  .front .showing strong{font:500 19px/1.1 'Playfair Display',Georgia,serif;letter-spacing:0;white-space:nowrap}
+  .front .showing strong{font:700 18px/1.1 'Manrope',sans-serif;letter-spacing:-.01em;white-space:nowrap}
   .pill{white-space:nowrap}
-  .front .showing strong em{font-style:italic}
   .front .foot{margin-top:auto;padding-top:10px}
 
   /* ---------- HANDHELD SCANNER (appears only when scanning) ---------- */
@@ -360,8 +359,8 @@
         <div class="face front">
           <div class="tk-main">
             <div class="tk-top"><span class="pill">General Access - All Visitors</span><span class="star">✦</span></div>
-            <div class="tk-title"><span class="sw">M</span><span class="cap">USEUM</span><span class="tk2"><i>tic</i>KET</span></div>
-            <div class="showing"><small class="pill o">Now Showing</small><strong>Design Portfolio <em>of</em> Vivian Min</strong></div>
+            <div class="tk-title" aria-label="Museum Ticket"><div class="l1"><span class="sw">M</span><i>u</i>SEUM</div><div class="l2"><i>tic</i>KET</div></div>
+            <div class="showing"><small class="pill o">Now Showing</small><strong>Design Portfolio of Vivian Min</strong></div>
             <ul class="tk-lines">
               <li>Collections: People, Needs, Systems</li>
               <li>Est. in Hospitality, Travel &amp; Tech</li>
