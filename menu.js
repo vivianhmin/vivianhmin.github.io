@@ -10,7 +10,7 @@
       { t: 'FAQ Chatbot', href: 'faq-chatbot.html' },
       { t: 'Beat, Meet, Lose', href: 'beat-meet-lose.html' },
       { t: 'Digital Transformation', href: 'digital-transformation.html' }, { t: 'Brochure Design', href: 'brochure-design.html' } ] },
-    { n: 2, label: 'Academic', items: [ { t: 'Attention, Please!', href: 'attention-please.html' }, { t: 'Moxy LES', href: 'moxy-les.html' }, { t: 'Beyond the Screen' } ] },
+    { n: 2, label: 'Academic', items: [ { t: 'Attention, Please!', href: 'attention-please.html' }, { t: 'Moxy LES', href: 'moxy-les.html' }, { t: 'Beyond the Screen', href: 'beyond-the-screen.html' } ] },
     { n: 1, label: 'Personal', items: [ { t: 'POOM Identity Design', href: 'poom.html' } ] },
   ];
 

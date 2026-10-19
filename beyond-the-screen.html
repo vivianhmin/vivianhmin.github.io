@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+<title>Beyond the Screen — Vivian Min</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--head:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--body:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit}
+
+  .bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:16px clamp(16px,4vw,48px);background:rgba(244,241,238,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--soft);font-family:var(--body);font-size:15px}
+  .bar a{text-decoration:none}
+  .bar a:hover{color:var(--red)}
+  .bar .where{color:var(--muted)}
+
+  main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 100px}
+
+  .hero{padding:clamp(48px,8vw,96px) 0 40px}
+  .kicker{font-family:var(--body);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--body);font-weight:700;font-size:clamp(40px,7vw,84px);letter-spacing:-.04em;line-height:.98;margin:14px 0 24px}
+  .lede{font-size:clamp(18px,2vw,22px);line-height:1.6;max-width:780px;color:#33312e}
+  .story{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;background:#fff;box-shadow:0 10px 24px rgba(40,30,20,.06)}
+  .story li{padding:24px 26px 26px;position:relative}
+  .story li+li{border-left:1px solid var(--soft)}
+  .story .step{display:block;font-family:var(--body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .story li:first-child .step{color:var(--red)}
+  .story li:last-child .step{color:var(--green)}
+  .story p{font-size:16.5px;line-height:1.5}
+  .facts{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1.5px solid var(--line)}
+  .facts > div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--soft);align-items:baseline}
+  .facts > div:not(.wide):first-child{padding-right:24px}
+  .facts .wide{grid-column:1 / -1}
+  .facts dt{font-family:var(--body);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .facts dd{font-size:16.5px}
+  .facts dd b{font-weight:600}
+  .dim{color:var(--muted)}
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chips li{font-size:14px;padding:5px 12px;border:1px solid var(--ink);border-radius:999px}
+  .chips.light{margin-top:0}
+  .chips.light li{border-color:var(--soft);background:#fff}
+
+  .outcomes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .outcomes div{background:#fff;padding:22px 24px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .outcomes strong{display:block;font-family:var(--body);font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .outcomes p{font-size:15.5px;color:#4a4742;margin-top:10px;line-height:1.45}
+  .lessons{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .lessons h3{margin-top:0!important}
+  .lessons p{font-size:16.5px!important}
+  .next-list{list-style:none;counter-reset:n;max-width:760px;margin:0!important}
+  .next-list li{counter-increment:n;display:grid;grid-template-columns:44px 1fr;font-size:17px;padding:14px 0;border-bottom:1px solid var(--soft);margin:0!important}
+  .next-list li::before{content:counter(n,decimal-leading-zero);font-family:var(--body);font-size:13px;color:var(--muted);padding-top:3px}
+  .next-list b{font-weight:600}
+  .reflect{margin-top:28px;padding:4px 0 4px 22px;border-left:3px solid var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;max-width:760px}
+
+  section{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--soft)}
+  section > h2{font-family:var(--body);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  section > h2 small{display:block;font-family:var(--body);font-weight:400;font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
+  .body p{font-size:17.5px;max-width:740px}
+  .body p+p{margin-top:14px}
+  .body h3{font-family:var(--body);font-size:20px;font-weight:600;margin:28px 0 8px}
+  .body ul{margin:12px 0 0 22px;max-width:740px}
+  .body li{font-size:17px;margin-top:8px}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .stat{background:#fff;padding:22px 22px 20px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .stat strong{display:block;font-family:var(--body);font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .stat span{display:block;font-size:14.5px;color:#4a4742;margin-top:8px;line-height:1.4}
+  .bars{margin-top:22px;max-width:620px}
+  .bars div{display:grid;grid-template-columns:150px 1fr 44px;align-items:center;gap:12px;font-size:15px;margin-top:10px}
+  .bars i{display:block;height:10px;background:var(--ink)}
+  .bars b{font-family:var(--body);font-weight:500;font-size:14px}
+
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .feature{background:#fff;padding:22px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .feature .n{font-family:var(--body);font-size:12px;color:var(--muted)}
+  .feature b{display:block;font-family:var(--body);font-size:19px;margin:6px 0 8px;line-height:1.25}
+  .feature p{font-size:15px;line-height:1.5}
+  .feature .tag{display:inline-block;margin-top:12px;font-family:var(--body);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line)}
+  .feature .tag.off{color:var(--muted);border-color:var(--soft)}
+
+  .timeline{margin-top:16px;border-left:1.5px solid var(--line)}
+  .timeline div{position:relative;padding:0 0 16px 22px;font-size:16.5px}
+  .timeline div::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line)}
+  .timeline b{font-family:var(--body);font-weight:600;margin-right:8px}
+
+  .next{padding-top:56px;font-family:var(--body)}
+  .next a{font-size:20px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+  .next a:hover{color:var(--red);border-color:var(--red)}
+  footer{margin-top:60px;font-size:13px;color:var(--muted)}
+
+  /* ================= editorial pass ================= */
+  body{font-weight:400;letter-spacing:.005em;color:#1d1c1a}
+  .kicker{font-size:12px;letter-spacing:.22em;font-weight:500}
+  h1{font-weight:500;letter-spacing:-.015em;line-height:1.02;font-size:clamp(40px,6.4vw,78px);max-width:16ch}
+  .lede{font-size:clamp(19px,2vw,23px);line-height:1.55;font-weight:400;max-width:34em}
+
+  .story{background:none;box-shadow:none;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--soft);margin-top:44px}
+  .story li{padding:20px 28px 24px 0}
+  .story li+li{border-left:none;padding-left:28px;border-left:1px solid var(--soft)}
+  .story .step{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .story p{font-size:17px}
+
+  .facts{border-top:none;margin-top:28px}
+  .facts > div{grid-template-columns:110px 1fr}
+  .facts dt{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .facts dd{font-size:17px}
+  .chips,.chips.light{display:block;margin-top:2px}
+  .chips li,.chips.light li{display:inline;border:none;background:none;padding:0;border-radius:0;font-size:17px}
+  .chips li+li::before{content:" / ";color:var(--muted)}
+  .facts dd b{font-weight:500;display:block;margin-bottom:2px}
+
+  section{grid-template-columns:220px 1fr;padding:56px 0;border-bottom:none;border-top:1px solid var(--soft)}
+  section > h2{font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;line-height:1.5;color:var(--ink);padding-top:4px}
+  section > h2 small{display:inline;font-size:13px;letter-spacing:.2em;color:var(--muted);margin:0 10px 0 0}
+  .body p,.body li{font-size:18px;line-height:1.6}
+  .body h3{font-weight:500;font-size:22px;letter-spacing:-.005em;margin:36px 0 10px}
+
+  .features{gap:0;border-top:1.5px solid var(--ink)}
+  .feature{background:none;box-shadow:none;padding:18px 24px 6px 0}
+  .feature+.feature{padding-left:24px;border-left:1px solid var(--soft)}
+  .feature b{font-weight:500;font-size:20px}
+  .feature .tag{border:none;padding:0;font-size:11px;letter-spacing:.18em;color:var(--green)}
+  .feature .tag.off{color:var(--amber)}
+
+  .stats,.outcomes{gap:0;border-top:1.5px solid var(--ink)}
+  .stat,.outcomes div{background:none;box-shadow:none;padding:20px 24px 22px 0}
+  .stat+.stat{padding-left:24px;border-left:1px solid var(--soft)}
+  .stat strong,.outcomes strong{font-weight:500;font-size:52px;letter-spacing:-.02em}
+  .stat span,.outcomes p{font-size:15.5px}
+  .outcomes div{border-bottom:1px solid var(--soft)}
+  .outcomes div:nth-child(even){padding-left:24px;border-left:1px solid var(--soft)}
+  .bars i{height:6px}
+  .bars b{font-weight:500}
+
+  .lessons h3{font-size:20px}
+  .next-list li{font-size:18px}
+  .next-list li::before{font-size:13px;letter-spacing:.1em}
+  .next-list b{font-weight:500}
+  .reflect{font-weight:400;font-size:22px;border-left-width:2px}
+  .timeline b{font-weight:500}
+
+  /* ================= type: Manrope throughout ================= */
+  body{font-family:var(--body);letter-spacing:0}
+  h1,h2,h3,.demo-title,section > h2,.kicker,.story .step,.facts dt,.side-label,.winsize b,
+  .stat strong,.outcomes strong,.feature b,.feature .n,.feature .tag,.status,.next-list li::before,
+  .tabs button,.bar,.next a,.facts dd b{font-family:var(--head)}
+  h1{font-weight:600;letter-spacing:-.03em}
+  .demo-title,.stat strong,.outcomes strong{letter-spacing:-.025em}
+  .body p,.body li,.lede,.story p,.facts dd,.note p,.reflect{letter-spacing:-.003em}
+  .lede{font-size:clamp(18px,1.9vw,22px);line-height:1.6}
+  .body p,.body li{font-size:17.5px;line-height:1.65}
+  .reflect{font-size:20px;line-height:1.55}
+
+  section > .body{min-width:0}
+  .wins{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin-top:10px}
+  .wins div{padding:18px 18px 18px 0}
+  .wins div+div{padding-left:18px;border-left:1px solid var(--soft)}
+  .wins b{display:block;font-size:30px;letter-spacing:-.03em;line-height:1.05;margin-bottom:6px}
+  .wins p{font-size:15px!important;margin:0;color:#3a3835}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px}
+  .tabs button{font:500 14px var(--head);border:1px solid var(--soft);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;color:var(--ink)}
+  .tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .pdf-link{display:inline-block;margin-top:10px;font-size:14px;color:var(--ink)}
+  @media (max-width:860px){ .wins{grid-template-columns:1fr} .wins div+div{padding-left:0;border-left:0;border-top:1px solid var(--soft)} }
+
+  .deck{margin-top:6px;background:#111;border-radius:6px;overflow:hidden;position:relative;aspect-ratio:792/612;outline:none}
+  .deck img{display:block;width:100%;height:100%;object-fit:contain;cursor:pointer}
+  .dk-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.88);font-size:18px;cursor:pointer;opacity:0;transition:opacity .2s;display:grid;place-items:center;padding:0;margin:0}
+  .deck:hover .dk-nav,.deck:focus .dk-nav{opacity:1}
+  .dk-p{left:12px}.dk-n{right:12px}
+  .dk-nav:disabled{opacity:0!important;pointer-events:none}
+  .dk-count{position:absolute;right:12px;bottom:10px;font:600 12px var(--head);color:#fff;background:rgba(0,0,0,.55);padding:4px 9px;border-radius:999px}
+  .dk-strip{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px}
+  .dk-strip button{all:unset;cursor:pointer;flex:0 0 80px;aspect-ratio:792/612;opacity:.45;outline:2px solid transparent;outline-offset:1px;transition:opacity .2s}
+  .dk-strip button.on{opacity:1;outline-color:var(--ink)}
+  .dk-strip img{width:100%;height:100%;object-fit:cover;display:block}
+  .gap3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin-top:12px}
+  .gap3 div{padding:16px 16px 16px 0}
+  .gap3 div+div{padding-left:16px;border-left:1px solid var(--soft)}
+  .gap3 h4{font-size:16px;margin-bottom:6px}
+  .gap3 p{font-size:15px!important;margin:0;color:#3a3835}
+  .gap3 .us h4{color:#a3195b}
+  .stack{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px;margin-top:14px;align-items:start}
+  .floors{display:flex;flex-direction:column;gap:4px}
+  .floors button{all:unset;cursor:pointer;display:grid;grid-template-columns:44px 1fr;align-items:center;background:#fff;border:1px solid var(--soft);padding:10px 12px;font-size:14.5px;transition:all .2s}
+  .floors button b{font-size:20px}
+  .floors button.on{background:#a3195b;border-color:#a3195b;color:#fff}
+  .floors button.ug{margin-top:10px;border-style:dashed}
+  .floors button.ug.on{border-style:solid}
+  .fl-card{background:#fff;border:1px solid var(--soft);padding:20px 22px;animation:pop .3s ease}
+  .fl-card .k{font:600 11.5px var(--head);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .fl-card h3{font-size:24px;margin:6px 0 10px;letter-spacing:-.015em}
+  .fl-card ul{margin:0!important;padding-left:18px}
+  .fl-card li{font-size:15.5px!important;margin:4px 0!important}
+  .fl-card .go{all:unset;cursor:pointer;display:inline-block;margin-top:12px;font-size:13.5px;font-weight:600;border-bottom:1px solid var(--ink)}
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin-top:12px}
+  .kpis div{padding:16px 14px 16px 0}
+  .kpis div+div{padding-left:14px;border-left:1px solid var(--soft)}
+  .kpis b{display:block;font-size:28px;letter-spacing:-.03em}
+  .kpis span{font-size:13.5px;color:var(--muted);line-height:1.4;display:block;margin-top:4px}
+  .rev{margin-top:20px}
+  .rev .row{display:grid;grid-template-columns:60px 1fr 70px;gap:12px;align-items:center;margin-top:8px;font-size:14px}
+  .rev i{display:block;height:14px;background:#a3195b;transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.3,.7,.2,1)}
+  .rev.on i{transform:scaleX(1)}
+  .rev b{font-weight:600;text-align:right}
+  .note{font-size:13px!important;color:var(--muted);margin-top:10px}
+  @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media (max-width:860px){ .dk-nav{opacity:1} .gap3,.stack{grid-template-columns:1fr} .gap3 div+div{padding-left:0;border-left:0;border-top:1px solid var(--soft)} .kpis{grid-template-columns:1fr 1fr} .kpis div:nth-child(3){padding-left:0;border-left:0} }
+  /* phones: single column (these rules were missing on this page) */
+  @media (max-width:860px){
+    .story li,.story li+li{padding:18px 0;border-left:none}
+    .feature,.feature+.feature,.stat,.stat+.stat,.outcomes div,.outcomes div:nth-child(even){padding-left:0;border-left:none;border-bottom:1px solid var(--soft)}
+    section{grid-template-columns:minmax(0,1fr);gap:18px;padding:40px 0}
+    .story{grid-template-columns:1fr}
+    .story li+li{border-top:1px solid var(--soft)}
+    .facts{grid-template-columns:1fr}
+    .facts > div{grid-template-columns:1fr;gap:6px}
+    .outcomes,.lessons{grid-template-columns:1fr}
+    .stats,.features{grid-template-columns:1fr}
+    .bar .where{display:none}
+    .trend .row{grid-template-columns:80px 1fr 40px}
+    .tally strong{font-size:36px}
+    .log td:last-child{white-space:normal}
+  }
+  .journey{margin-top:14px}
+  .jr{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;position:relative}
+  .jr button{all:unset;cursor:pointer;text-align:center;padding:10px 4px;border-top:4px solid var(--soft);font-size:13px;font-weight:600;color:var(--muted);transition:all .2s}
+  .jr button i{display:block;font-style:normal;font-size:11px;letter-spacing:.1em;margin-bottom:4px}
+  .jr button.fit{border-top-color:#c0392b55}
+  .jr button.on{color:var(--ink);border-top-color:#c0392b}
+  .jr-card{margin-top:14px;background:#fff;border:1px solid var(--soft);padding:18px 20px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;animation:pop .3s ease}
+  .jr-card dt{font:700 11px var(--head);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .jr-card dd{margin:0;font-size:15.5px;line-height:1.5}
+  .jr-card .f dt{color:#c0392b}
+  .swot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px;align-items:start}
+  .swot button{all:unset;cursor:pointer;background:#fff;border:1px solid var(--soft);padding:16px 18px;transition:all .2s}
+  .swot button b{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+  .swot button span{display:block;font-size:15px;line-height:1.45;color:#3a3835}
+  .swot button small{display:none;font-size:14px;color:var(--muted);margin-top:8px;line-height:1.5}
+  .swot button.on small{display:block}
+  .swot .s b{color:#17703c}.swot .w b{color:#a1271d}.swot .o b{color:#1d4ea1}.swot .t b{color:#8a5a00}
+  .swot button.on{border-color:var(--ink);box-shadow:0 8px 20px rgba(40,30,20,.08)}
+  .steps4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-top:12px}
+  .steps4 div{background:#fff;border:1px solid var(--soft);padding:12px 14px;font-size:14px;line-height:1.45}
+  .steps4 b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .markets{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .markets span{font-size:13.5px;background:#fff;border:1px solid var(--soft);border-radius:999px;padding:5px 12px}
+  @media (max-width:860px){ .jr{grid-template-columns:repeat(4,minmax(0,1fr))} .jr-card,.swot,.steps4{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a href="index.html#guide">← Back to the floor guide</a>
+  <span class="where">Museum of Vivian Min · Floor 2 · Academic</span>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="kicker">2.3 · Beyond the Screen · NYU Independent Study</div>
+    <h1>Beyond the Screen: Film Tourism for Seoul</h1>
+    <p class="lede">In 2016, Seoul was appearing in Korean dramas and films watched across Asia and beyond, but there was no official way for visitors to find the places they had seen on screen. This independent study proposed a government-backed film tourism program for Seoul, with a five-year marketing strategy and an official website and app for filming locations.</p>
+    <ol class="story">
+      <li><span class="step">The problem</span><p>Strong Korean Wave exposure, but no film tourism infrastructure. Visitors relied on scattered blogs and fan forums.</p></li>
+      <li><span class="step">What I did</span><p>Benchmarked New Zealand and the UK, analyzed Seoul's market, and wrote a five-year strategy and platform concept.</p></li>
+      <li><span class="step">The result</span><p>A full proposal and marketing plan, anticipating the K-content travel boom that followed.</p></li>
+    </ol>
+    <dl class="facts">
+      <div><dt>Timeline</dt><dd>Jan – May 2016</dd></div>
+      <div><dt>Team</dt><dd>Solo, advised by Prof. Sharr Prohaska</dd></div>
+      <div class="wide"><dt>My role</dt><dd><b>Researcher and strategist</b>
+        <ul class="chips"><li>Research</li><li>Benchmarking</li><li>Marketing strategy</li><li>Platform concept</li><li>Deck design</li></ul></dd></div>
+      <div class="wide"><dt>Tools</dt><dd><ul class="chips light"><li>MS Office</li><li>Google Workspace</li></ul></dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <h2><small>01</small>Why film tourism</h2>
+    <div class="body">
+      <p>Film-induced tourism draws visitors to places they first saw on screen. The Lord of the Rings turned New Zealand into a destination, contributing to nearly 10% of its GDP and one in ten jobs. Seoul had the screen time, with visitors to Korea rising from 6.0 million in 2005 to 13.2 million in 2015, but no program to turn that attention into visits.</p>
+      <div class="kpis">
+        <div><b>6.0M</b><span>Visitors to Korea, 2005</span></div>
+        <div><b>13.2M</b><span>Visitors to Korea, 2015</span></div>
+        <div><b>~10%</b><span>Of New Zealand's GDP linked to The Lord of the Rings</span></div>
+        <div><b>None</b><span>Official film tourism program for Seoul</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>02</small>Where film fits in the trip</h2>
+    <div class="body">
+      <p>Select a stage of the traveler's journey. Highlighted stages are where a film or TV show does the work.</p>
+      <div class="journey"><div class="jr" id="jr"></div><div id="jrCard"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>03</small>Seoul's position</h2>
+    <div class="body">
+      <p>Select each quadrant for the detail.</p>
+      <div class="swot" id="swot">
+        <button class="s"><b>Strengths</b><span>Diverse experiences, value for money, an English-friendly city</span><small>From dynastic heritage to a modern, convenient city. Signs and transit announcements in English, and good value for visitors from nearby countries and the US.</small></button>
+        <button class="w"><b>Weaknesses</b><span>No film tourism business, safety perceptions</span><small>Tourists have to research filming locations on their own, and tension with North Korea can deter some visitors.</small></button>
+        <button class="o"><b>Opportunities</b><span>The Korean Wave, combined tourism products</span><small>More people abroad meet Seoul through Korean film and TV, and film tourism can pair with products like medical tourism.</small></button>
+        <button class="t"><b>Threats</b><span>Limited Hallyu packages, competition from Tokyo and Beijing</span><small>Without a developed program, visitor growth could stall, and Tokyo and Beijing offer similar history and city life.</small></button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>04</small>The plan</h2>
+    <div class="body">
+      <p><b>Vision:</b> the city that connects beyond the screen. The program targets millennial travelers, who plan on mobile, share online and look for authentic local experiences, in Seoul's largest origin markets:</p>
+      <div class="markets"><span>China</span><span>Japan</span><span>United States</span><span>Taiwan</span><span>Hong Kong</span><span>Thailand</span><span>Malaysia</span><span>Singapore</span><span>Russia</span><span>Philippines</span></div>
+      <div class="kpis" style="margin-top:20px">
+        <div><b>1M+</b><span>Unique website visitors</span></div>
+        <div><b>70K+</b><span>App downloads</span></div>
+        <div><b>1.5M</b><span>Social engagements</span></div>
+        <div><b>5 yrs</b><span>Roadmap with Visit Seoul and studios</span></div>
+      </div>
+      <p class="note">Five-year targets set in the proposal. The platform would offer a verified map of filming locations, the scene behind each place, and nearby local recommendations, with partners from Visit Seoul to production companies such as CJ Entertainment and Showbox.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>05</small>The marketing plan</h2>
+    <div class="body">
+      <div class="tabs" id="chap"></div>
+      <div class="deck" id="deck" tabindex="0" aria-label="Marketing plan, use arrow keys to move between slides">
+        <img id="dkImg" alt="">
+        <button class="dk-nav dk-p" id="dkPrev" aria-label="Previous slide">←</button>
+        <button class="dk-nav dk-n" id="dkNext" aria-label="Next slide">→</button>
+        <span class="dk-count" id="dkCount"></span>
+      </div>
+      <div class="dk-strip" id="dkStrip"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>06</small>Process</h2>
+    <div class="body">
+      <div class="steps4">
+        <div><b>January</b>Research and framing: scope, questions and literature review</div>
+        <div><b>February</b>Benchmarking New Zealand and the UK, mapping Seoul's gaps</div>
+        <div><b>March – April</b>Five-year strategy and platform concept</div>
+        <div><b>May</b>Final proposal and marketing plan</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>07</small>Lessons learned</h2>
+    <div class="body">
+      <div class="lessons">
+        <div><h3>Read the weak signals</h3><p>Fan-mapped drama locations hinted at demand before any official data did.</p></div>
+        <div><h3>Policy and product together</h3><p>A strategy only works with a tool travelers will actually use.</p></div>
+        <div><h3>Borrow proof</h3><p>International cases made a new idea credible to decision-makers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>08</small>Next time</h2>
+    <div class="body">
+      <ol class="next-list">
+        <li><span><b>Talk to travelers</b> through interviews and surveys to validate the assumptions.</span></li>
+        <li><span><b>Model the economics:</b> visitor spending, jobs and tax revenue.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="next"><a href="index.html#guide">← Back to the floor guide</a></div>
+  <footer>© 2026 Vivian Min · Museum of Vivian Min</footer>
+</main>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const J = [
+    ['Dream','Has a destination on a someday list.','A show plants the place in memory.',true],
+    ['Aware','Learns about the destination.','Most first see Seoul through a movie or TV show.',true],
+    ['Research','Looks into culture, food and language.','Scenes give a reason to look closer.',true],
+    ['Considering','Actively thinks about going soon.','A clear image of the place keeps it on the list.',true],
+    ['Finalizing','Works out flights and land arrangements.','Travelers stick with their plan instead of switching.',true],
+    ['Planning','Plans the details of the itinerary.','The platform turns scenes into a route.',true],
+    ['Purchase','Has already booked.','',false],
+    ['Advocacy','Shares the experience with others.','Fans share the places they found, and the cycle repeats.',true],
+  ];
+  $('jr').innerHTML = J.map((j, k) => `<button class="${j[3] ? 'fit' : ''}" data-k="${k}"><i>0${k + 1}</i>${j[0]}</button>`).join('');
+  const jb = [...$('jr').children];
+  function jr(k){ jb.forEach((b, i) => b.classList.toggle('on', i === k)); const j = J[k];
+    $('jrCard').innerHTML = `<dl class="jr-card"><div><dt>The traveler</dt><dd>${j[1]}</dd></div><div class="f"><dt>Role of film</dt><dd>${j[2] || 'Booking itself is outside film\'s role.'}</dd></div></dl>`; }
+  jb.forEach((b, i) => b.onclick = () => jr(i)); jr(1);
+
+  const sw = [...$('swot').children];
+  sw.forEach(b => b.onclick = () => sw.forEach(x => x.classList.toggle('on', x === b))); sw[0].classList.add('on');
+
+  const N = 18, src = k => 'assets/bts/s-' + String(k + 1).padStart(2, '0') + '.jpg';
+  const CH = [['Vision',0],['Context',3],['SWOT',8],['Strategy',12],['Goals',16]];
+  let di = 0;
+  $('dkStrip').innerHTML = Array.from({length:N}, (_, k) => `<button aria-label="Slide ${k + 1}"><img src="${src(k)}" alt="" loading="lazy"></button>`).join('');
+  const th = [...$('dkStrip').children];
+  $('chap').innerHTML = CH.map(c => `<button data-s="${c[1]}">${c[0]}</button>`).join('');
+  const chb = [...$('chap').children];
+  function dk(k){
+    di = Math.max(0, Math.min(N - 1, k));
+    $('dkImg').src = src(di); $('dkImg').alt = 'Slide ' + (di + 1);
+    $('dkCount').textContent = (di + 1) + ' / ' + N;
+    $('dkPrev').disabled = di === 0; $('dkNext').disabled = di === N - 1;
+    th.forEach((t, i) => t.classList.toggle('on', i === di)); th[di].scrollIntoView({block:'nearest', inline:'nearest'});
+    let c = 0; CH.forEach((x, i) => { if(di >= x[1]) c = i; }); chb.forEach((b, i) => b.classList.toggle('on', i === c));
+  }
+  th.forEach((t, i) => t.onclick = () => dk(i)); chb.forEach(b => b.onclick = () => dk(+b.dataset.s));
+  $('dkPrev').onclick = () => dk(di - 1); $('dkNext').onclick = () => dk(di + 1); $('dkImg').onclick = () => dk(di + 1);
+  $('deck').addEventListener('keydown', e => { if(e.key === 'ArrowRight') dk(di + 1); if(e.key === 'ArrowLeft') dk(di - 1); });
+  let sx = 0; $('deck').addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
+  $('deck').addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 50) dk(di + (dx < 0 ? 1 : -1)); });
+  dk(0);
+})();
+</script>
+<script src="menu.js" defer></script>
+</body>
+</html>
