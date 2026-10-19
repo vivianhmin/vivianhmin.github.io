@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vivian Min — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --paper:#f4f4f1; --ink:#161616;
+    --text:#ededea; --muted:#8f8f8a; --line:#262626; --laser:#ff2b2b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;font-weight:300;
+    -webkit-font-smoothing:antialiased;overflow:hidden}
+
+  /* ---------- 1920 × 1080 STAGE (scaled to fit the window) ---------- */
+  .stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;
+    transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center}
+
+  /* ---------- LOBBY ---------- */
+  .lobby{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:56px;transition:opacity .9s ease}
+  .lobby.leaving{opacity:0;pointer-events:none}
+  .hello{font-weight:300;font-size:56px;letter-spacing:-.02em;opacity:0;animation:rise .9s .1s ease forwards}
+
+  /* ---------- TICKET ---------- */
+  .ticket-wrap{width:760px;opacity:0;animation:rise 1s .35s ease forwards}
+  .ticket{position:relative;display:flex;background:var(--paper);color:var(--ink);border-radius:4px;overflow:hidden;
+    font-family:'IBM Plex Mono',ui-monospace,monospace;cursor:pointer;
+    transform:rotate(-3deg);transition:transform .6s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 40px 80px rgba(0,0,0,.65)}
+  .ticket::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg,rgba(255,255,255,.35),transparent 40%,rgba(0,0,0,.04))}
+  .ticket:hover,.ticket.scanning{transform:rotate(0) scale(1.01)}
+  .ticket.gone{transform:translateY(-1400px) rotate(-10deg);transition:transform 1s cubic-bezier(.6,0,.4,1)}
+
+  .band{flex:0 0 24px;background:#111;position:relative}
+  .band::after{content:"";position:absolute;top:0;bottom:0;right:28%;border-right:1px dashed rgba(255,255,255,.35)}
+
+  .body{flex:1;display:grid;grid-template-columns:1fr auto;gap:28px;padding:36px 36px 22px}
+  .info{font-size:19px;line-height:1.45;letter-spacing:.01em}
+  .info .title{font-size:25px;line-height:1.3;margin-bottom:.7em}
+  .big{font-weight:700;font-size:136px;line-height:.9;margin-top:.12em}
+  .qrbox{display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:4px}
+  .qr{position:relative;width:168px;aspect-ratio:1}
+  .qr svg{width:100%;height:100%;display:block}
+  .code{font-size:15px;letter-spacing:.04em}
+  .foot{grid-column:1 / -1;font-size:14px;line-height:1.5;color:#2c2c2c}
+
+  .laser{position:absolute;left:-16%;width:132%;height:3px;top:0;opacity:0;background:var(--laser);
+    box-shadow:0 0 8px 2px var(--laser),0 0 26px 8px rgba(255,43,43,.5);border-radius:2px}
+  .glow{position:absolute;inset:-8%;background:transparent;transition:background .4s;mix-blend-mode:multiply}
+  .scanning .laser{animation:scan .8s ease-in-out 3 alternate}
+  .scanned .glow{background:rgba(255,43,43,.16)}
+
+  .stamp{position:absolute;left:46%;top:52%;transform:translate(-50%,-50%) rotate(-12deg) scale(2.4);opacity:0;
+    border:4px solid var(--laser);color:var(--laser);padding:.1em .55em;border-radius:6px;
+    font-family:'IBM Plex Mono',monospace;font-weight:700;letter-spacing:.18em;font-size:46px;
+    text-transform:uppercase;pointer-events:none;mix-blend-mode:multiply}
+  .scanned .stamp{animation:stamp .35s cubic-bezier(.3,1.6,.5,1) forwards}
+
+  /* ---------- TEXT ---------- */
+  .statement{max-width:760px;text-align:center;color:var(--muted);font-size:21px;line-height:1.75;
+    opacity:0;animation:rise 1s .7s ease forwards}
+  .enter{background:none;border:none;color:var(--text);cursor:pointer;font-family:Inter,sans-serif;font-weight:400;
+    text-transform:uppercase;letter-spacing:.32em;font-size:30px;padding:12px 4px;position:relative;
+    opacity:0;animation:rise 1s 1s ease forwards}
+  .enter::after{content:"";position:absolute;left:0;right:.32em;bottom:0;height:2px;background:var(--laser);
+    transform-origin:left;animation:pulse 2.4s 2s ease-in-out infinite}
+  .enter:hover{color:#fff}
+  .enter:focus-visible,.ticket:focus-visible{outline:2px solid var(--laser);outline-offset:10px}
+
+  /* ---------- GALLERY placeholder ---------- */
+  .gallery{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;
+    opacity:0;pointer-events:none;transition:opacity 1s .2s ease}
+  .gallery.open{opacity:1;pointer-events:auto}
+  .gallery .kicker{color:var(--muted);letter-spacing:.3em;text-transform:uppercase;font-size:16px;font-weight:400}
+  .gallery h2{font-weight:300;font-size:64px;letter-spacing:-.02em}
+  .rooms{display:grid;grid-template-columns:repeat(3,300px);gap:24px}
+  .room{aspect-ratio:3/4;border:1px solid var(--line);display:flex;align-items:flex-end;padding:20px;
+    letter-spacing:.2em;text-transform:uppercase;font-size:14px;font-weight:400;color:var(--muted)}
+  .back{background:none;border:1px solid var(--line);color:var(--muted);padding:14px 24px;cursor:pointer;
+    font-family:Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;font-size:14px}
+  .back:hover{color:var(--text);border-color:var(--muted)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes scan{0%{top:0;opacity:1}100%{top:calc(100% - 3px);opacity:1}}
+  @keyframes stamp{to{opacity:.9;transform:translate(-50%,-50%) rotate(-12deg) scale(1)}}
+  @keyframes pulse{0%,100%{transform:scaleX(.15)}50%{transform:scaleX(1)}}
+
+  /* ---------- PHONES: normal scrolling layout instead of the 16:9 stage ---------- */
+  @media (max-width:700px){
+    body{overflow-x:hidden;overflow-y:auto}
+    .stage{position:static;width:auto;height:auto;transform:none}
+    .lobby{position:relative;min-height:100vh;padding:40px 16px;gap:28px}
+    .hello{font-size:28px}
+    .ticket-wrap{width:100%}
+    .ticket{transform:rotate(-2deg)}
+    .band{flex-basis:14px}
+    .body{gap:12px;padding:16px 16px 12px}
+    .info{font-size:10px}.info .title{font-size:13px}
+    .big{font-size:56px}.qr{width:80px}.code{font-size:8px}.foot{font-size:8px}
+    .stamp{font-size:20px;border-width:3px}
+    .statement{font-size:14px}.enter{font-size:16px}
+    .gallery{position:fixed;padding:24px 16px;gap:24px}
+    .gallery h2{font-size:30px}.gallery .kicker{font-size:12px}
+    .rooms{grid-template-columns:1fr 1fr;width:100%;gap:12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01s!important;transition-duration:.01s!important}
+  }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+
+  <section class="lobby" id="lobby">
+    <h2 class="hello">Hi, I'm Vivian.</h2>
+
+    <div class="ticket-wrap">
+      <div class="ticket" id="ticket" role="button" tabindex="0" aria-label="Scan ticket to enter">
+        <div class="band"></div>
+        <div class="body">
+          <div class="info">
+            <div class="title">Museum of Vivian Min<br>Now Showing: Design Portfolio</div>
+            General Access - All Visitors<br>
+            Collections: People, Needs, Systems<br>
+            Est. in Hospitality, Travel &amp; Tech<br>
+            Admission: Your curiosity
+            <div class="big">V</div>
+          </div>
+          <div class="qrbox">
+            <div class="qr">
+              <svg id="qrsvg" viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true"></svg>
+              <div class="glow"></div>
+              <div class="laser"></div>
+            </div>
+            <div class="code">MA-DESIGN-2027</div>
+          </div>
+          <div class="foot">For inquiries please contact vmin@andrew.cmu.edu. Issued by Vivian Min.</div>
+        </div>
+        <div class="stamp">Admitted</div>
+      </div>
+    </div>
+
+    <p class="statement">
+      I approach design as curation, connecting people, needs, and systems into more thoughtful experiences, shaped by my background in hospitality, travel, and technology.
+    </p>
+
+    <button class="enter" id="enter">Click to enter</button>
+  </section>
+
+  <section class="gallery" id="gallery" aria-hidden="true">
+    <div class="kicker">Welcome in</div>
+    <h2>The Exhibitions</h2>
+    <div class="rooms">
+      <div class="room">Gallery I</div>
+      <div class="room">Gallery II</div>
+      <div class="room">Gallery III</div>
+    </div>
+    <button class="back" id="back">← Back to the lobby</button>
+  </section>
+
+</div>
+
+<script>
+  // ----- Fit the 1920×1080 stage to the window -----
+  const stage = document.getElementById('stage');
+  function fit(){
+    const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    stage.style.setProperty('--s', s);
+  }
+  window.addEventListener('resize', fit); fit();
+
+  // ----- QR-style pattern (decorative) -----
+  (function drawQR(){
+    const N = 25, svg = document.getElementById('qrsvg');
+    let seed = 11; const rand = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    const inFinder = (x,y) => (x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);
+    let out = '';
+    const finder = (ox,oy) => {
+      out += `<rect x="${ox}" y="${oy}" width="7" height="7" fill="#161616"/>`+
+             `<rect x="${ox+1}" y="${oy+1}" width="5" height="5" fill="#f4f4f1"/>`+
+             `<rect x="${ox+2}" y="${oy+2}" width="3" height="3" fill="#161616"/>`;
+    };
+    finder(0,0); finder(N-7,0); finder(0,N-7);
+    for(let y=0;y<N;y++) for(let x=0;x<N;x++){
+      if(inFinder(x,y)) continue;
+      if(rand() > 0.52) out += `<rect x="${x}" y="${y}" width="1" height="1" fill="#161616"/>`;
+    }
+    svg.innerHTML = out;
+  })();
+
+  // ----- Scan & enter -----
+  const ticket = document.getElementById('ticket');
+  const lobby = document.getElementById('lobby');
+  const gallery = document.getElementById('gallery');
+  let busy = false;
+
+  function enter(){
+    if(busy) return; busy = true;
+    ticket.classList.add('scanning');
+    setTimeout(() => ticket.classList.add('scanned'), 2400);
+    setTimeout(() => ticket.classList.add('gone'), 3300);
+    setTimeout(() => {
+      lobby.classList.add('leaving');
+      gallery.classList.add('open'); gallery.setAttribute('aria-hidden','false');
+    }, 3700);
+  }
+  function reset(){
+    gallery.classList.remove('open'); gallery.setAttribute('aria-hidden','true');
+    lobby.classList.remove('leaving');
+    ticket.classList.remove('scanning','scanned','gone');
+    busy = false; window.scrollTo(0,0);
+  }
+
+  document.getElementById('enter').addEventListener('click', enter);
+  ticket.addEventListener('click', enter);
+  ticket.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); enter(); } });
+  document.getElementById('back').addEventListener('click', reset);
+</script>
+</body>
+</html>
