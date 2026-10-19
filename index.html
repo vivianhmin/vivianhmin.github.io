@@ -113,9 +113,11 @@
   .brochure.tracking{transition:transform .25s ease-out}
   .bface{position:absolute;inset:0;background:#fdfcf9;color:#151515;backface-visibility:hidden;-webkit-backface-visibility:hidden;
     border-radius:3px;box-shadow:0 40px 60px rgba(60,45,25,.18),0 8px 14px rgba(60,45,25,.12);overflow:hidden}
-  .bface.b-back{transform:rotateY(180deg);pointer-events:none}
-  .brochure.flipped .b-back{pointer-events:auto}
-  .brochure.flipped .b-front{pointer-events:none}
+  .bface.b-back{transform:rotateY(180deg);visibility:hidden}
+  .bface{transition:visibility 0s linear .4s}
+  .brochure.flipped .b-back{visibility:visible}
+  .brochure.flipped .b-front{visibility:hidden}
+  .brochure.instant .bface{transition:none}
   .bface::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>")}
 
@@ -334,7 +336,7 @@
             <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V4.5h6V7M3 12h18"/></svg></div>
             <div><div class="lab">Professional</div>
               <div class="items">
-                <a class="it link" href="https://hm9709.wixsite.com/my-site-5/playercustomization" target="_blank" rel="noopener">Player Redesign<span>Product UX ↗</span></a>
+                <a class="it link" href="player-redesign.html">Player Redesign<span>Product UX →</span></a>
                 <div class="it">FAQ Chatbot<span>Partner support</span></div>
                 <div class="it">Digital Transformation<span>Renewal pitch</span></div>
                 <div class="it">Brochure Design<span>Hotel collateral</span></div>
@@ -634,6 +636,8 @@
     beamGrad.setAttribute('x2', qcx); beamGrad.setAttribute('y2', qcy);
   }
 
+  const tFront = ticket.querySelector('.face.front'), tBack = ticket.querySelector('.face.back');
+  let lastFlipped = null;
   function frame(now){
     const t = (now - t0) / 1000;
     if(noHover && !locked && !dragging){ tY = Math.sin(t * .6) * 10; tX = Math.cos(t * .5) * 4; }
@@ -643,6 +647,7 @@
     const yRot = rY + spinNow;
     ticket.style.transform = `translate3d(0,${float}px,0) rotateX(${rX + 4}deg) rotateY(${yRot}deg) rotateZ(${locked ? 0 : -1.5}deg)`;
     const flipped = (((yRot % 360) + 360) % 360) > 90 && (((yRot % 360) + 360) % 360) < 270;
+    if(flipped !== lastFlipped){ lastFlipped = flipped; tFront.style.visibility = flipped ? 'hidden' : 'visible'; tBack.style.visibility = flipped ? 'visible' : 'hidden'; }
     ticket.style.setProperty('--sx', (50 - (flipped ? -1 : 1) * rY * 3) + '%');
     ticket.style.setProperty('--so', (.12 + Math.abs(rY) / 80).toFixed(3));
     ticket.style.setProperty('--sa', (115 + rY * 3) + 'deg');
@@ -753,6 +758,18 @@
     if(e.key === 'Escape') closeRoom();
   });
   window.addEventListener('resize', () => { room.classList.toggle('portrait', bayW() < 1500); walk.style.transition = 'none'; go(bay); requestAnimationFrame(() => walk.style.transition = ''); });
+  // ----- Coming back from a project page: open straight to the floor guide -----
+  if(location.hash === '#guide'){
+    busy = true; locked = true;
+    lobby.style.transition = lobby2.style.transition = 'none';
+    lobby.classList.add('leaving');
+    lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true;
+    bro.classList.add('instant'); bro.style.transition = 'none'; flipBro();
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      bro.style.transition = ''; bro.classList.remove('instant'); lobby.style.transition = lobby2.style.transition = '';
+    }));
+    history.replaceState(null, '', location.pathname);
+  }
 </script>
 </body>
 </html>
