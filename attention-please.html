@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+<title>Attention, Please! — Vivian Min</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--head:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--body:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit}
+
+  .bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:16px clamp(16px,4vw,48px);background:rgba(244,241,238,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--soft);font-family:var(--body);font-size:15px}
+  .bar a{text-decoration:none}
+  .bar a:hover{color:var(--red)}
+  .bar .where{color:var(--muted)}
+
+  main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 100px}
+
+  .hero{padding:clamp(48px,8vw,96px) 0 40px}
+  .kicker{font-family:var(--body);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--body);font-weight:700;font-size:clamp(40px,7vw,84px);letter-spacing:-.04em;line-height:.98;margin:14px 0 24px}
+  .lede{font-size:clamp(18px,2vw,22px);line-height:1.6;max-width:780px;color:#33312e}
+  .story{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;background:#fff;box-shadow:0 10px 24px rgba(40,30,20,.06)}
+  .story li{padding:24px 26px 26px;position:relative}
+  .story li+li{border-left:1px solid var(--soft)}
+  .story .step{display:block;font-family:var(--body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .story li:first-child .step{color:var(--red)}
+  .story li:last-child .step{color:var(--green)}
+  .story p{font-size:16.5px;line-height:1.5}
+  .facts{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1.5px solid var(--line)}
+  .facts > div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--soft);align-items:baseline}
+  .facts > div:not(.wide):first-child{padding-right:24px}
+  .facts .wide{grid-column:1 / -1}
+  .facts dt{font-family:var(--body);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .facts dd{font-size:16.5px}
+  .facts dd b{font-weight:600}
+  .dim{color:var(--muted)}
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chips li{font-size:14px;padding:5px 12px;border:1px solid var(--ink);border-radius:999px}
+  .chips.light{margin-top:0}
+  .chips.light li{border-color:var(--soft);background:#fff}
+
+  .outcomes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .outcomes div{background:#fff;padding:22px 24px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .outcomes strong{display:block;font-family:var(--body);font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .outcomes p{font-size:15.5px;color:#4a4742;margin-top:10px;line-height:1.45}
+  .lessons{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .lessons h3{margin-top:0!important}
+  .lessons p{font-size:16.5px!important}
+  .next-list{list-style:none;counter-reset:n;max-width:760px;margin:0!important}
+  .next-list li{counter-increment:n;display:grid;grid-template-columns:44px 1fr;font-size:17px;padding:14px 0;border-bottom:1px solid var(--soft);margin:0!important}
+  .next-list li::before{content:counter(n,decimal-leading-zero);font-family:var(--body);font-size:13px;color:var(--muted);padding-top:3px}
+  .next-list b{font-weight:600}
+  .reflect{margin-top:28px;padding:4px 0 4px 22px;border-left:3px solid var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;max-width:760px}
+
+  section{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--soft)}
+  section > h2{font-family:var(--body);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  section > h2 small{display:block;font-family:var(--body);font-weight:400;font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
+  .body p{font-size:17.5px;max-width:740px}
+  .body p+p{margin-top:14px}
+  .body h3{font-family:var(--body);font-size:20px;font-weight:600;margin:28px 0 8px}
+  .body ul{margin:12px 0 0 22px;max-width:740px}
+  .body li{font-size:17px;margin-top:8px}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .stat{background:#fff;padding:22px 22px 20px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .stat strong{display:block;font-family:var(--body);font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .stat span{display:block;font-size:14.5px;color:#4a4742;margin-top:8px;line-height:1.4}
+  .bars{margin-top:22px;max-width:620px}
+  .bars div{display:grid;grid-template-columns:150px 1fr 44px;align-items:center;gap:12px;font-size:15px;margin-top:10px}
+  .bars i{display:block;height:10px;background:var(--ink)}
+  .bars b{font-family:var(--body);font-weight:500;font-size:14px}
+
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .feature{background:#fff;padding:22px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .feature .n{font-family:var(--body);font-size:12px;color:var(--muted)}
+  .feature b{display:block;font-family:var(--body);font-size:19px;margin:6px 0 8px;line-height:1.25}
+  .feature p{font-size:15px;line-height:1.5}
+  .feature .tag{display:inline-block;margin-top:12px;font-family:var(--body);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line)}
+  .feature .tag.off{color:var(--muted);border-color:var(--soft)}
+
+  .timeline{margin-top:16px;border-left:1.5px solid var(--line)}
+  .timeline div{position:relative;padding:0 0 16px 22px;font-size:16.5px}
+  .timeline div::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line)}
+  .timeline b{font-family:var(--body);font-weight:600;margin-right:8px}
+
+  .next{padding-top:56px;font-family:var(--body)}
+  .next a{font-size:20px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+  .next a:hover{color:var(--red);border-color:var(--red)}
+  footer{margin-top:60px;font-size:13px;color:var(--muted)}
+
+  /* ================= editorial pass ================= */
+  body{font-weight:400;letter-spacing:.005em;color:#1d1c1a}
+  .kicker{font-size:12px;letter-spacing:.22em;font-weight:500}
+  h1{font-weight:500;letter-spacing:-.015em;line-height:1.02;font-size:clamp(40px,6.4vw,78px);max-width:16ch}
+  .lede{font-size:clamp(19px,2vw,23px);line-height:1.55;font-weight:400;max-width:34em}
+
+  .story{background:none;box-shadow:none;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--soft);margin-top:44px}
+  .story li{padding:20px 28px 24px 0}
+  .story li+li{border-left:none;padding-left:28px;border-left:1px solid var(--soft)}
+  .story .step{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .story p{font-size:17px}
+
+  .facts{border-top:none;margin-top:28px}
+  .facts > div{grid-template-columns:110px 1fr}
+  .facts dt{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .facts dd{font-size:17px}
+  .chips,.chips.light{display:block;margin-top:2px}
+  .chips li,.chips.light li{display:inline;border:none;background:none;padding:0;border-radius:0;font-size:17px}
+  .chips li+li::before{content:" / ";color:var(--muted)}
+  .facts dd b{font-weight:500;display:block;margin-bottom:2px}
+
+  section{grid-template-columns:220px 1fr;padding:56px 0;border-bottom:none;border-top:1px solid var(--soft)}
+  section > h2{font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;line-height:1.5;color:var(--ink);padding-top:4px}
+  section > h2 small{display:inline;font-size:13px;letter-spacing:.2em;color:var(--muted);margin:0 10px 0 0}
+  .body p,.body li{font-size:18px;line-height:1.6}
+  .body h3{font-weight:500;font-size:22px;letter-spacing:-.005em;margin:36px 0 10px}
+
+  .features{gap:0;border-top:1.5px solid var(--ink)}
+  .feature{background:none;box-shadow:none;padding:18px 24px 6px 0}
+  .feature+.feature{padding-left:24px;border-left:1px solid var(--soft)}
+  .feature b{font-weight:500;font-size:20px}
+  .feature .tag{border:none;padding:0;font-size:11px;letter-spacing:.18em;color:var(--green)}
+  .feature .tag.off{color:var(--amber)}
+
+  .stats,.outcomes{gap:0;border-top:1.5px solid var(--ink)}
+  .stat,.outcomes div{background:none;box-shadow:none;padding:20px 24px 22px 0}
+  .stat+.stat{padding-left:24px;border-left:1px solid var(--soft)}
+  .stat strong,.outcomes strong{font-weight:500;font-size:52px;letter-spacing:-.02em}
+  .stat span,.outcomes p{font-size:15.5px}
+  .outcomes div{border-bottom:1px solid var(--soft)}
+  .outcomes div:nth-child(even){padding-left:24px;border-left:1px solid var(--soft)}
+  .bars i{height:6px}
+  .bars b{font-weight:500}
+
+  .lessons h3{font-size:20px}
+  .next-list li{font-size:18px}
+  .next-list li::before{font-size:13px;letter-spacing:.1em}
+  .next-list b{font-weight:500}
+  .reflect{font-weight:400;font-size:22px;border-left-width:2px}
+  .timeline b{font-weight:500}
+
+  /* ================= type: Manrope throughout ================= */
+  body{font-family:var(--body);letter-spacing:0}
+  h1,h2,h3,.demo-title,section > h2,.kicker,.story .step,.facts dt,.side-label,.winsize b,
+  .stat strong,.outcomes strong,.feature b,.feature .n,.feature .tag,.status,.next-list li::before,
+  .tabs button,.bar,.next a,.facts dd b{font-family:var(--head)}
+  h1{font-weight:600;letter-spacing:-.03em}
+  .demo-title,.stat strong,.outcomes strong{letter-spacing:-.025em}
+  .body p,.body li,.lede,.story p,.facts dd,.note p,.reflect{letter-spacing:-.003em}
+  .lede{font-size:clamp(18px,1.9vw,22px);line-height:1.6}
+  .body p,.body li{font-size:17.5px;line-height:1.65}
+  .reflect{font-size:20px;line-height:1.55}
+
+  /* ================= Attention, Please! ================= */
+  section > .body{min-width:0}
+  .posters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:18px 0 10px}
+  .poster{position:relative;aspect-ratio:2/3;border-radius:4px;overflow:hidden;cursor:pointer;box-shadow:0 18px 34px rgba(40,30,20,.16),0 3px 8px rgba(40,30,20,.1);
+    background:var(--pc);color:#ffd84a;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .poster:hover{transform:translateY(-4px)}
+  .poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .poster .stand{position:absolute;inset:0;padding:9% 9% 8%;display:flex;flex-direction:column}
+  .poster .stand h4{font:800 clamp(26px,3.1vw,44px)/.92 var(--head);letter-spacing:-.02em;text-transform:uppercase}
+  .poster .stand .art{flex:1;display:grid;place-items:center}
+  .poster .stand .art svg{width:78%;height:auto;opacity:.95}
+  .poster .stand small{font:600 11px var(--head);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);display:flex;justify-content:space-between}
+  .poster .flip{position:absolute;inset:0;background:rgba(18,18,18,.86);color:#fff;padding:9%;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;
+    opacity:0;transition:opacity .3s}
+  .poster.show .flip{opacity:1}
+  .poster .flip b{font:700 12px var(--head);letter-spacing:.16em;text-transform:uppercase;color:#ffd84a}
+  .poster .flip p{font-size:15px!important;line-height:1.5!important;margin:0}
+  .poster .flip .eq{font:600 17px/1.35 var(--head);color:#fff}
+  .poster-cap{display:flex;justify-content:space-between;font-size:14px;margin-top:10px;color:var(--muted)}
+  .poster-cap b{color:var(--ink);font-weight:600}
+  .ptip{font-size:14px!important;color:var(--muted);margin-top:4px}
+
+  .shift{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:16px;align-items:stretch;margin:18px 0 8px}
+  .shift > div{border:1px solid var(--soft);background:#fff;padding:18px}
+  .shift h4{font:700 12px var(--head);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+  .shift .was h4{color:#a1271d}.shift .now h4{color:#17703c}
+  .shift .arrow{display:grid;place-items:center;font-size:24px;color:var(--muted);border:none;background:none;padding:0}
+  .words{display:flex;flex-wrap:wrap;gap:8px}
+  .words span{font:800 22px var(--head);letter-spacing:.04em;border:2px solid var(--ink);padding:6px 10px}
+  .shift p{font-size:15px!important;margin-top:12px;color:#3a3835}
+  .trans{list-style:none;margin:0!important;padding:0}
+  .trans li{display:flex;align-items:center;gap:10px;font-size:15.5px!important;padding:7px 0;border-bottom:1px solid #efece7}
+  .trans li:last-child{border:none}
+  .trans i{width:12px;height:12px;border-radius:50%;flex:0 0 auto}
+  .trans em{font-style:normal;color:var(--muted)}
+
+  .order{display:flex;flex-wrap:wrap;gap:0;margin:16px 0 4px;counter-reset:o}
+  .order span{position:relative;font-size:14.5px;background:#fff;border:1px solid var(--soft);padding:9px 14px 9px 12px;margin-right:22px;margin-bottom:8px;counter-increment:o}
+  .order span::before{content:counter(o);font-weight:700;margin-right:8px;color:var(--muted);font-size:12px}
+  .order span:not(:last-child)::after{content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);color:var(--muted)}
+
+  .fixes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px;list-style:none;margin-top:10px!important;padding:0}
+  .fixes li{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--soft);font-size:16px!important;line-height:1.45!important}
+  .fixes li::before{content:"✓";color:#17703c;font-weight:700}
+  @media (max-width:860px){
+    .posters{grid-template-columns:1fr;max-width:420px}
+    .shift{grid-template-columns:1fr}
+    .shift .arrow{transform:rotate(90deg);height:24px}
+    .fixes{grid-template-columns:1fr}
+  }
+  /* phones: single column (these rules were missing on this page) */
+  @media (max-width:860px){
+    .story li,.story li+li{padding:18px 0;border-left:none}
+    .feature,.feature+.feature,.stat,.stat+.stat,.outcomes div,.outcomes div:nth-child(even){padding-left:0;border-left:none;border-bottom:1px solid var(--soft)}
+    section{grid-template-columns:minmax(0,1fr);gap:18px;padding:40px 0}
+    .story{grid-template-columns:1fr}
+    .story li+li{border-top:1px solid var(--soft)}
+    .facts{grid-template-columns:1fr}
+    .facts > div{grid-template-columns:1fr;gap:6px}
+    .outcomes,.lessons{grid-template-columns:1fr}
+    .stats,.features{grid-template-columns:1fr}
+    .bar .where{display:none}
+    .trend .row{grid-template-columns:80px 1fr 40px}
+    .tally strong{font-size:36px}
+    .log td:last-child{white-space:normal}
+  }</style>
+</head>
+<body>
+
+<header class="bar">
+  <a href="index.html#guide">← Back to the floor guide</a>
+  <span class="where">Museum of Vivian Min · Floor 2 · Academic</span>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="kicker">2.1 · Attention, Please! · CMU School of Design</div>
+    <h1>Attention, Please!: A Poster Series for Amnesty International</h1>
+    <p class="lede">What makes someone stop, think, and carry an idea away from a piece of paper they only walked past? I designed three posters for Amnesty International, each built on one image: the thing that causes harm turns into the one it harms.</p>
+
+    <ol class="story">
+      <li><span class="step">The challenge</span><p>Make a static poster support a cause without over-explaining it, and still lead people to act.</p></li>
+      <li><span class="step">What I did</span><p>Narrowed Amnesty's 20+ causes to three, tested concepts with viewers, and rebuilt the series around cause and consequence.</p></li>
+      <li><span class="step">The result</span><p>A consistent three-poster series with a clear reading order and a visible call to action.</p></li>
+    </ol>
+
+    <dl class="facts">
+      <div><dt>Context</dt><dd>M.A. Design, Carnegie Mellon University</dd></div>
+      <div><dt>Client brief</dt><dd>Amnesty International</dd></div>
+      <div class="wide"><dt>My role</dt><dd><b>Designer</b>
+        <ul class="chips"><li>Concept</li><li>Illustration</li><li>Typography</li><li>User testing</li></ul></dd></div>
+      <div class="wide"><dt>Tools</dt><dd><ul class="chips light"><li>Adobe Illustrator</li></ul></dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <h2><small>01</small>The series</h2>
+    <div class="body">
+      <div class="posters" id="posters"></div>
+      <p class="ptip">Tap a poster to see the idea behind it.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>02</small>The question</h2>
+    <div class="body">
+      <p>I started by comparing two kinds of posters: one that lets the viewer make the connection, and one that says exactly what to think. That became my question: <b>should a poster be read in a second, or leave room to interpret?</b></p>
+      <p>Starting from the word "control", I narrowed Amnesty's causes to three: corporate accountability, gun violence, and technology.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>03</small>The turning point</h2>
+    <div class="body">
+      <div class="shift">
+        <div class="was"><h4>First concept · Word as object</h4>
+          <div class="words"><span>SPILL</span><span>SHOOT</span><span>MONITOR</span></div>
+          <p>Clear, but flat. Viewers recognized the topics but missed the context, the hierarchy, and what to do next.</p></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="now"><h4>Final concept · Cause becomes consequence</h4>
+          <ul class="trans">
+            <li><i style="background:#e8742a"></i>Oil spill <em>becomes</em> an oil-covered bird</li>
+            <li><i style="background:#6b3fa0"></i>A gun <em>becomes</em> a child's profile</li>
+            <li><i style="background:#e0558f"></i>Phone light <em>becomes</em> a hand over a woman's mouth</li>
+          </ul></div>
+      </div>
+      <p>Each poster now leads the eye in the same order:</p>
+      <div class="order"><span>Image</span><span>Consequence</span><span>Evidence</span><span>Amnesty's position</span><span>Take part</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>04</small>Refining the system</h2>
+    <div class="body">
+      <p>Peer critique said everything had equal weight, so nothing stood out. I tested in black and white first, then made these changes:</p>
+      <ul class="fixes">
+        <li>One warm color per poster, yellow type across the series</li>
+        <li>Heavier title type and natural line breaks</li>
+        <li>Statistics tied to one argument each</li>
+        <li>A visible "Take Part" call to action</li>
+        <li>The same stroke weight in every illustration</li>
+        <li>A bigger logo and URL, no drop shadows</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>05</small>What I learned</h2>
+    <div class="body">
+      <div class="lessons">
+        <div><h3>Consistency is a system</h3><p>Posters can differ in color and composition and still belong together through shared logic.</p></div>
+        <div><h3>Hierarchy is a decision</h3><p>When everything is emphasized, nothing is. Small shifts in weight guide how people read.</p></div>
+        <div><h3>Clarity comes from removal</h3><p>What I left out mattered as much as what I kept.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="next"><a href="index.html#guide">← Back to the floor guide</a></div>
+  <footer>© 2026 Vivian Min · Museum of Vivian Min</footer>
+</main>
+
+<script>
+(() => {
+  // Drop the real poster files into assets/posters/ with these names and they replace the stand-ins automatically.
+  const P = [
+    { file:'leaks.jpg', title:'What leaks lingers', color:'#e8742a', cause:'Corporate accountability', eq:'Oil from a container becomes an oil-covered bird.',
+      note:'Oil spills don\'t end when the cleanup does. The harm stays in the wildlife long after the headlines.',
+      art:'<svg viewBox="0 0 100 100" fill="none" stroke="#ffd84a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="34" y="6" width="26" height="20" rx="3"/><path d="M47 26c0 10-4 14-4 22"/><path d="M28 70c6-14 22-22 36-18 8 2 12 8 10 14l10 4-12 2c-6 10-22 14-34 8-6-3-10-6-10-10z"/><circle cx="68" cy="60" r="1.5" fill="#ffd84a"/></svg>' },
+    { file:'shoots.jpg', title:'What shoots shatters', color:'#6b3fa0', cause:'Gun violence · Children', eq:'A gun becomes intertwined with the profile of a child.',
+      note:'Gun violence takes more than lives. It breaks childhoods and the communities around them.',
+      art:'<svg viewBox="0 0 100 100" fill="none" stroke="#ffd84a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34h50v10H40l-4 18H26l2-18H14z"/><path d="M64 36c8-6 20-2 22 10 1 6-2 10-2 14l4 6-6 2c0 6-4 10-10 10"/><path d="M72 48h.5"/></svg>' },
+    { file:'shames.jpg', title:'What shames silences', color:'#e0558f', cause:'Technology · Online violence', eq:'Light from a phone becomes a hand covering a woman\'s mouth.',
+      note:'Online abuse pushes women out of public conversation. Shaming is a way of silencing.',
+      art:'<svg viewBox="0 0 100 100" fill="none" stroke="#ffd84a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="40" width="22" height="40" rx="4"/><path d="M32 52l20-10M32 60l26-4M32 68l20 4"/><path d="M62 18c14 0 24 12 22 28-1 8-6 12-6 18 0 10-8 16-16 16"/><path d="M52 50c6-2 16-2 22 2"/></svg>' },
+  ];
+  const box = document.getElementById('posters');
+  box.innerHTML = P.map((p, k) => `
+    <figure style="margin:0">
+      <div class="poster" style="--pc:${p.color}" tabindex="0" role="button" aria-label="${p.title}: show concept">
+        <div class="stand"><h4>${p.title.replace(/ /g,'<br>')}</h4><div class="art">${p.art}</div><small><span>Amnesty International</span><span>Take part →</span></small></div>
+        <img src="assets/posters/${p.file}" alt="${p.title} poster" onerror="this.remove()">
+        <div class="flip"><b>${p.cause}</b><div class="eq">${p.eq}</div><p>${p.note}</p></div>
+      </div>
+      <figcaption class="poster-cap"><b>${p.title}</b><span>0${k + 1}</span></figcaption>
+    </figure>`).join('');
+  box.querySelectorAll('.poster').forEach(el => {
+    const t = () => el.classList.toggle('show');
+    el.addEventListener('click', t);
+    el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); t(); } });
+  });
+})();
+</script>
+<script src="menu.js" defer></script>
+</body>
+</html>
