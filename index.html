@@ -113,7 +113,9 @@
   .brochure.tracking{transition:transform .25s ease-out}
   .bface{position:absolute;inset:0;background:#fdfcf9;color:#151515;backface-visibility:hidden;-webkit-backface-visibility:hidden;
     border-radius:3px;box-shadow:0 40px 60px rgba(60,45,25,.18),0 8px 14px rgba(60,45,25,.12);overflow:hidden}
-  .bface.b-back{transform:rotateY(180deg)}
+  .bface.b-back{transform:rotateY(180deg);pointer-events:none}
+  .brochure.flipped .b-back{pointer-events:auto}
+  .brochure.flipped .b-front{pointer-events:none}
   .bface::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>")}
 
@@ -153,6 +155,7 @@
 
   /* ---------- FLOOR 4 GALLERY ROOM ---------- */
   .it.link{cursor:pointer}
+  a.it{display:block;color:inherit;text-decoration:none}
   .it.link span{color:#151515;text-decoration:underline;text-underline-offset:2px}
   .room{position:absolute;inset:0;z-index:40;overflow:hidden;background:#f6f5f2;opacity:0;pointer-events:none;transition:opacity .8s ease;
     --ceil:110px;--floor:250px}
@@ -331,7 +334,7 @@
             <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V4.5h6V7M3 12h18"/></svg></div>
             <div><div class="lab">Professional</div>
               <div class="items">
-                <div class="it">Player Redesign<span>Product UX</span></div>
+                <a class="it link" href="https://hm9709.wixsite.com/my-site-5/playercustomization" target="_blank" rel="noopener">Player Redesign<span>Product UX ↗</span></a>
                 <div class="it">FAQ Chatbot<span>Partner support</span></div>
                 <div class="it">Digital Transformation<span>Renewal pitch</span></div>
                 <div class="it">Brochure Design<span>Hotel collateral</span></div>
@@ -694,7 +697,7 @@
 
   // brochure: click to flip between poster and floor guide
   let broFlipped = false;
-  function flipBro(){ broFlipped = !broFlipped; bro.classList.remove('tracking'); bro.style.setProperty('--bflip', broFlipped ? '180deg' : '0deg'); }
+  function flipBro(){ broFlipped = !broFlipped; bro.classList.toggle('flipped', broFlipped); bro.classList.remove('tracking'); bro.style.setProperty('--bflip', broFlipped ? '180deg' : '0deg'); }
   bro.addEventListener('click', e => { if(!e.target.closest('.it')) flipBro(); });
   bro.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); flipBro(); } });
 
