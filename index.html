@@ -16,6 +16,7 @@
   html,body{height:100%}
   body{background:var(--bg);color:var(--text);font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;font-weight:300;
     -webkit-font-smoothing:antialiased;overflow:hidden;user-select:none}
+  @media (hover:none){ body::after{display:none} }
   body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.05;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 
@@ -555,7 +556,10 @@
     stage.style.setProperty('--s', S);
     document.getElementById('beam').setAttribute('viewBox', `0 0 ${W} ${H}`);
   }
-  window.addEventListener('resize', fit); fit();
+  // only refit when the layout size really changes (pinch-zoom fires resize too)
+  let lastWH = '';
+  window.addEventListener('resize', () => { const k = document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight; if(k !== lastWH){ lastWH = k; fit(); } });
+  lastWH = document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight; fit();
 
   // ----- Paper thickness -----
   const ticket = document.getElementById('ticket');
@@ -641,7 +645,9 @@
   const tFront = ticket.querySelector('.face.front'), tBack = ticket.querySelector('.face.back');
   let lastFlipped = null;
   let introDone = false;
+  const zoomed = () => window.visualViewport && visualViewport.scale > 1.02;
   function frame(now){
+    if(zoomed() || document.hidden){ requestAnimationFrame(frame); return; }   // pause the 3D ticket while pinch-zoomed
     const t = (now - t0) / 1000;
     if(noHover && !locked && !dragging){ tY = Math.sin(t * .6) * 10; tX = Math.cos(t * .5) * 4; }
     rX += (tX - rX) * .07; rY += (tY - rY) * .07;
@@ -764,7 +770,7 @@
     if(e.key === 'ArrowLeft') go(bay - 1);
     if(e.key === 'Escape') closeRoom();
   });
-  window.addEventListener('resize', () => { room.classList.toggle('portrait', bayW() < 1500); walk.style.transition = 'none'; go(bay); requestAnimationFrame(() => walk.style.transition = ''); });
+  window.addEventListener('resize', () => { if(window.visualViewport && visualViewport.scale > 1.02) return; room.classList.toggle('portrait', bayW() < 1500); walk.style.transition = 'none'; go(bay); requestAnimationFrame(() => walk.style.transition = ''); });
   // ----- Coming back from a project page: open straight to the floor guide -----
   if(location.hash === '#guide'){
     busy = true; locked = true;

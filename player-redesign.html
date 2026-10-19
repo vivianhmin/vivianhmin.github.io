@@ -689,8 +689,12 @@
   window.addEventListener('resize', () => setWin(win));
   setFeature('quality');
 
+  // draw only while the demo is on screen and the page isn't pinch-zoomed
+  let demoVisible = true;
+  new IntersectionObserver(es => { demoVisible = es[0].isIntersecting; }).observe(document.getElementById('demo'));
   function loop(now){
     const dt = Math.max(0, Math.min(.1, (now - last)/1000)); last = now;
+    if(!demoVisible || document.hidden || (window.visualViewport && visualViewport.scale > 1.02)){ requestAnimationFrame(loop); return; }
     if(playing && !scrubber) t = (t + dt) % DUR;
     players.forEach(p => p.render());
     if(feature === 'seek' && !players.some(p => p.hover) && !scrubber){

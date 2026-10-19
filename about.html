@@ -87,12 +87,12 @@
 
   /* ---------- 4.2 chronology ---------- */
   .panel{position:absolute;left:0;right:0;top:var(--ceil);bottom:var(--floor);background:#171716;color:#efece6;box-shadow:inset 0 30px 40px -30px rgba(0,0,0,.6)}
-  .chrono .area{display:flex;align-items:center;gap:90px;color:#efece6}
-  .chrono .vinyl{width:380px;flex:0 0 auto}
+  .chrono .area{display:flex;align-items:center;gap:70px;color:#efece6}
+  .chrono .vinyl{width:340px;flex:0 0 auto}
   .chrono .kick{color:#9fc2b2}
   .chrono .vinyl p{color:#bdb8af}
-  .line{position:relative;flex:1;height:440px}
-  .line::before{content:"";position:absolute;left:0;right:24px;top:50%;height:5px;margin-top:-2.5px;background:#efece6;border-radius:3px;transform-origin:left;transform:scaleX(var(--p,0));transition:transform 1.8s .4s cubic-bezier(.3,.6,.2,1)}
+  .line{position:relative;flex:1;height:520px}
+  .line::before{content:"";position:absolute;left:0;right:0;top:50%;height:5px;margin-top:-2.5px;background:#efece6;border-radius:3px;transform-origin:left;transform:scaleX(var(--p,0));transition:transform 1.8s .4s cubic-bezier(.3,.6,.2,1)}
   .line .end{position:absolute;right:0;top:50%;width:28px;height:28px;margin-top:-14px;border-radius:50%;border:5px solid #efece6;background:#171716;opacity:0;transition:opacity .5s 2s}
   .chrono.on .end{opacity:1}
   .ev{position:absolute;top:50%;width:0;opacity:0;transition:opacity .6s}
@@ -100,26 +100,26 @@
   .chrono.on .ev:nth-child(1){transition-delay:.5s}.chrono.on .ev:nth-child(2){transition-delay:.75s}.chrono.on .ev:nth-child(3){transition-delay:1s}
   .chrono.on .ev:nth-child(4){transition-delay:1.3s}.chrono.on .ev:nth-child(5){transition-delay:1.55s}.chrono.on .ev:nth-child(6){transition-delay:1.85s}
   .ev .dot{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:#efece6;box-shadow:0 0 0 5px #171716}
-  .ev .yr{position:absolute;left:0;transform:translateX(-50%);font-weight:500;font-size:34px;letter-spacing:.02em}
-  .ev .cap{position:absolute;left:-8px;width:240px;font-size:16px;line-height:1.5;color:#c9c5bd}
+  .ev .yr{position:absolute;left:-2px;font-weight:500;font-size:34px;letter-spacing:.02em;line-height:1}
+  .ev .cap{position:absolute;left:-2px;width:240px;font-size:16px;line-height:1.5;color:#c9c5bd}
   .ev .cap b{display:block;font-weight:600;color:#efece6;font-size:18px}
   .ev .cap small{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#7f7b74;margin-bottom:4px}
-  .ev .tick{position:absolute;left:0;width:1px;height:30px;background:#4a4844}
-  .ev.up .yr{bottom:24px}.ev.up .tick{bottom:70px}.ev.up .cap{bottom:110px}
-  .ev.down .yr{top:22px}.ev.down .tick{top:70px}.ev.down .cap{top:110px}
-  .ev:first-child .yr{transform:none;left:-4px}
+  .ev .tick{position:absolute;left:0;width:1px;height:28px;background:#4a4844}
+  .ev.up .yr{bottom:26px}.ev.up .tick{bottom:68px}.ev.up .cap{bottom:106px}
+  .ev.down .yr{top:26px}.ev.down .tick{top:68px}.ev.down .cap{top:106px}
   .ev.now .yr{color:#9fc2b2}
-  .ev.now .cap{left:auto;right:-8px;text-align:right}
+  .ev.now .dot{left:-12px;top:-12px;width:24px;height:24px;background:#171716;border:5px solid #efece6;box-shadow:none}
+  .ev.now .yr{left:auto;right:-2px}
+  .ev.now .cap{left:auto;right:-2px;text-align:right}
   /* portrait: the line runs down the wall */
   .portrait .chrono .area{flex-direction:column;align-items:stretch;gap:50px}
   .portrait .chrono .vinyl{width:100%}
   .portrait .line{flex:1;height:auto;width:100%}
-  .portrait .line::before{left:50%;right:auto;top:0;bottom:30px;width:5px;height:auto;margin:0 0 0 -2.5px;transform:scaleY(var(--p,0));transform-origin:top}
-  .portrait .line .end{left:50%;right:auto;top:auto;bottom:0;margin:0 0 0 -14px}
+  .portrait .line::before{left:50%;right:auto;top:0;bottom:7%;width:5px;height:auto;margin:0 0 0 -2.5px;transform:scaleY(var(--p,0));transform-origin:top}
   .portrait .ev{left:50%!important;top:var(--t)}
-  .portrait .ev .yr,.portrait .ev:first-child .yr{top:-24px;bottom:auto;left:auto;right:30px;transform:none}
+  .portrait .ev .yr,.portrait .ev.now .yr{top:-17px;bottom:auto;left:auto;right:30px}
   .portrait .ev .tick{display:none}
-  .portrait .ev .cap,.portrait .ev.now .cap{top:-22px;bottom:auto;left:30px;right:auto;width:400px;text-align:left}
+  .portrait .ev .cap,.portrait .ev.now .cap{top:-22px;bottom:auto;left:30px;right:auto;width:420px;text-align:left}
 
   /* ---------- galleries ---------- */
   .gal .area{display:flex;gap:70px;align-items:center}
@@ -205,19 +205,18 @@
           <p>Fifteen years, three cities, one thread.</p>
         </div>
         <div class="line" id="line">
-          <div class="ev up" style="left:0%;--t:4%"><div class="dot"></div><div class="yr">2011</div><div class="tick"></div>
-            <div class="cap"><small>New York</small><b>New York University</b>Studies how a hotel stay becomes a story guests retell.</div></div>
-          <div class="ev down" style="left:19%;--t:21%"><div class="dot"></div><div class="yr">2016</div><div class="tick"></div>
-            <div class="cap"><small>New York</small><b>The William Vale Hotel</b>Sells a new Brooklyn hotel, one group booking and VIP arrival at a time.</div></div>
-          <div class="ev up" style="left:38%;--t:38%"><div class="dot"></div><div class="yr">2017</div><div class="tick"></div>
-            <div class="cap"><small>Seoul</small><b>Expedia Group</b>Moves hotel partners onto the messaging app Korea already lives in.</div></div>
-          <div class="ev down" style="left:57%;--t:55%"><div class="dot"></div><div class="yr">2021</div><div class="tick"></div>
-            <div class="cap"><small>Seoul</small><b>data.ai</b>Translates app-market data into moves customers can act on.</div></div>
-          <div class="ev up" style="left:75%;--t:72%"><div class="dot"></div><div class="yr">2022</div><div class="tick"></div>
-            <div class="cap"><small>Seoul</small><b>Panopto</b>Turns mobile viewers' frustrations into product changes that keep a key account.</div></div>
-          <div class="ev down now" style="left:93%;--t:89%"><div class="dot"></div><div class="yr">2026</div><div class="tick"></div>
-            <div class="cap"><small>Pittsburgh</small><b>Carnegie Mellon University</b>Steps behind the curtain to design the experiences she once delivered.</div></div>
-          <div class="end"></div>
+          <div class="ev up" style="left:0%;--t:3%"><div class="dot"></div><div class="yr">2011</div><div class="tick"></div>
+            <div class="cap"><small>New York</small><b>New York University</b>Studied hospitality management, with a focus on marketing, revenue management, and guest experience.</div></div>
+          <div class="ev down" style="left:20%;--t:21%"><div class="dot"></div><div class="yr">2016</div><div class="tick"></div>
+            <div class="cap"><small>New York</small><b>The William Vale Hotel</b>Coordinated group sales and developed processes to deliver more personalized guest experiences.</div></div>
+          <div class="ev up" style="left:40%;--t:39%"><div class="dot"></div><div class="yr">2017</div><div class="tick"></div>
+            <div class="cap"><small>Seoul</small><b>Expedia Group</b>Managed lodging partnerships and improved partner onboarding, communication, and support processes.</div></div>
+          <div class="ev down" style="left:60%;--t:57%"><div class="dot"></div><div class="yr">2021</div><div class="tick"></div>
+            <div class="cap"><small>Seoul</small><b>data.ai</b>Analyzed product usage and adapted customer engagement programs for regional markets.</div></div>
+          <div class="ev up" style="left:80%;--t:75%"><div class="dot"></div><div class="yr">2022</div><div class="tick"></div>
+            <div class="cap"><small>Seoul</small><b>Panopto</b>Worked across Product, Engineering, and customer teams to address usability issues and improve enterprise services.</div></div>
+          <div class="ev down now" style="left:100%;--t:93%"><div class="dot"></div><div class="yr">2026</div><div class="tick"></div>
+            <div class="cap"><small>Pittsburgh</small><b>Carnegie Mellon University</b>Pursuing an M.A. in Design, focusing on interaction, research, and systems design.</div></div>
         </div>
       </div>
     </section>
@@ -360,9 +359,11 @@ addEventListener('wheel', e => {
   if(Math.abs(acc) > 40){ go(idx + (acc > 0 ? 1 : -1)); lock = now; acc = 0; }
 }, { passive:false });
 let tx = null, ty = null;
-addEventListener('touchstart', e => { if(e.touches.length === 1){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; } else tx = null; }, { passive:true });
+const zoomed = () => window.visualViewport && visualViewport.scale > 1.02;
+addEventListener('touchstart', e => { if(e.touches.length === 1 && !zoomed()){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; } else tx = null; }, { passive:true });
+addEventListener('touchmove', e => { if(e.touches.length > 1) tx = null; }, { passive:true });
 addEventListener('touchend', e => {
-  if(tx === null || lb.classList.contains('open')) return;
+  if(tx === null || zoomed() || lb.classList.contains('open')) return;
   const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
   if(Math.max(Math.abs(dx), Math.abs(dy)) > 50) go(idx + ((Math.abs(dx) > Math.abs(dy) ? dx : dy) < 0 ? 1 : -1));
 });
@@ -383,7 +384,9 @@ addEventListener('keydown', e => {
   if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); go(idx - 1); }
 });
 
-addEventListener('resize', fit);
+let lastWH = '';
+addEventListener('resize', () => { const k = document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight; if(k !== lastWH){ lastWH = k; fit(); } });
+lastWH = document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight;
 fit();
 go(location.hash === '#timeline' ? 1 : 0, true);
 </script>
