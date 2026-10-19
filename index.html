@@ -352,6 +352,43 @@
   .skip:hover{color:var(--text);border-color:var(--line)}
   .stage.portrait .skip{font-size:24px}
   .lobby.leaving > .skip{animation:fadeout .35s ease forwards}
+
+  /* ---------- TRI-FOLD: cover | floor guide | museum information ---------- */
+  .brochure{width:1200px}
+  .bface.b-back{border-radius:0}
+  .bface.b-info-p{position:absolute;top:0;bottom:0;left:800px;width:400px;background:#fdfcf9;color:#151515;border-radius:0 3px 3px 0;
+    box-shadow:0 40px 60px rgba(60,45,25,.18),0 8px 14px rgba(60,45,25,.12);overflow:hidden;padding:22px 24px 16px;
+    font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;display:flex;flex-direction:column;
+    backface-visibility:hidden;-webkit-backface-visibility:hidden}
+  .bface.b-info-p::before{content:"";position:absolute;top:0;bottom:0;left:0;width:20px;pointer-events:none;background:linear-gradient(90deg,rgba(60,45,25,.10),transparent)}
+  .bface.b-back::after{content:"";position:absolute;top:0;bottom:0;right:0;width:20px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(60,45,25,.08))}
+  .b-back .fl{padding:18px 0 18px;flex:1 1 0;min-height:0;align-content:start}
+  .b-back{justify-content:flex-start}
+  .mi-lab{font-size:11px;color:#6a665f;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
+  .mi-block{padding:16px 0;border-bottom:1.5px solid #151515;font-size:13px;line-height:1.5}
+  .mi-block p+p{margin-top:8px}
+  .mi-lead{font-size:17px;line-height:1.4;font-weight:600;letter-spacing:-.01em}
+  .mi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 0;border-bottom:1.5px solid #151515;font-size:13px;line-height:1.45;font-weight:600}
+  .mi-visit{display:grid;grid-template-columns:100px 1fr;gap:16px;padding-top:16px;font-size:12.5px;line-height:1.45;align-items:start}
+  .mi-visit .mini-qr{margin-top:0}
+  .mi-visit b{display:block;font-weight:600}
+  /* unfold: the two flaps open out from the middle panel */
+  .bface.b-front{transform-origin:100% 50%;transition:transform 1.1s cubic-bezier(.3,.8,.25,1) .25s}
+  .bface.b-info-p{transform-origin:0 50%;transition:transform 1.1s cubic-bezier(.3,.8,.25,1) .55s}
+  .lobby2:not(.open) .bface.b-front{transform:rotateY(178deg)}
+  .lobby2:not(.open) .bface.b-info-p{transform:rotateY(-178deg)}
+  .bro-scene{perspective:2600px}
+  /* phones: one panel at a time, tabs below */
+  .stage.portrait .brochure{width:400px}
+  .stage.portrait .bface.b-front,.stage.portrait .bface.b-back,.stage.portrait .bface.b-info-p{left:0;width:400px;border-radius:3px;transform:none;transition:opacity .35s;display:flex}
+  .stage.portrait .brochure .bface{opacity:0;pointer-events:none}
+  .stage.portrait .brochure[data-p="0"] .b-front,.stage.portrait .brochure[data-p="1"] .b-back,.stage.portrait .brochure[data-p="2"] .b-info-p{opacity:1;pointer-events:auto}
+  .ptabs{display:none;gap:8px}
+  .stage.portrait .ptabs{display:flex}
+  .ptabs button{font:500 26px 'Manrope',sans-serif;background:none;border:1px solid var(--line);border-radius:999px;padding:8px 22px;color:var(--muted);cursor:pointer}
+  .ptabs button.on{background:#1b1b1b;color:#fff;border-color:#1b1b1b}
+  .stage.portrait .b-hint{flex-direction:column;gap:22px}
+  .stage.portrait .b-hint > span{display:none}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes scan{0%{top:0;opacity:1}100%{top:calc(100% - 2px);opacity:1}}
   @keyframes flicker{50%{opacity:.7}}
@@ -420,7 +457,7 @@
   <!-- ================= BROCHURE ================= -->
   <section class="lobby2" id="lobby2" aria-hidden="true">
     <div class="bro-scene">
-      <div class="brochure" id="brochure" tabindex="0" role="button" aria-label="Flip brochure">
+      <div class="brochure" id="brochure" data-p="1" tabindex="0" role="button" aria-label="Flip brochure">
 
         <div class="bface b-front">
           <div class="top">Design Portfolio</div>
@@ -475,25 +512,35 @@
               </div></div>
           </div>
 
-          <div class="b-info">
-            <div>
-              <b>Museum of Vivian Min</b>
-              School of Design<br>Carnegie Mellon University
-              <p><b>About Your Visit</b>Scan the code to take my résumé home.</p>
-              <svg class="mini-qr qrsvg" viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true"></svg>
-            </div>
-            <div>
-              <b>About Us</b>
-              Vivian H. Min is a designer with a decade of experience across tech, e-commerce, and hospitality, combining design, data, and strategy. From hotel sales to enterprise software and customer success across APAC, her work connects individual moments with the systems behind them.
-              <p>She is currently pursuing an M.A. in Design at Carnegie Mellon University, Class of 2027.</p>
-            </div>
+
+        </div>
+
+        <div class="bface b-info-p">
+          <div class="b-head"><span>Museum Information</span><span>Pittsburgh, PA</span></div>
+          <div class="mi-block">
+            <div class="mi-lab">About the Museum</div>
+            <p class="mi-lead">The Museum of Vivian Min brings together work that seems unrelated, from hotel sales and pricing data to video platforms and posters, and curates it into one story about people, needs and systems.</p>
           </div>
-          <div class="credit">On reverse: Vivian Min, portrait, line drawing. Museum of Vivian Min, Pittsburgh. © 2026 Vivian Min.</div>
+          <div class="mi-row">
+            <div><div class="mi-lab">Collections</div>People<br>Needs<br>Systems</div>
+            <div><div class="mi-lab">Hours</div>Open daily<br>Always on view</div>
+            <div><div class="mi-lab">Admission</div>Your curiosity</div>
+          </div>
+          <div class="mi-block">
+            <div class="mi-lab">About the Curator</div>
+            <p>Vivian H. Min is a designer with a decade of experience across tech, e-commerce and hospitality, combining design, data and strategy. From hotel sales to enterprise software and customer success across APAC, her work connects individual moments with the systems behind them.</p>
+            <p>She is pursuing an M.A. in Design at Carnegie Mellon University, Class of 2027.</p>
+          </div>
+          <div class="mi-visit">
+            <svg class="mini-qr qrsvg" viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true"></svg>
+            <div><div class="mi-lab">About Your Visit</div>Scan the code to take the résumé home.<br><br><b>Contact</b>vmin@andrew.cmu.edu</div>
+          </div>
+          <div class="credit">Cover: Vivian Min, portrait, line drawing. Museum of Vivian Min, School of Design, Carnegie Mellon University. © 2026 Vivian Min.</div>
         </div>
 
       </div>
     </div>
-    <div class="b-hint"><span>Pick a floor to visit</span><button id="backBtn">← Back to the lobby</button></div>
+    <div class="b-hint"><div class="ptabs" id="ptabs"><button data-p="0">Cover</button><button data-p="1" class="on">Floor guide</button><button data-p="2">Museum</button></div><span>Pick a floor to visit</span><button id="backBtn">← Back to the lobby</button></div>
   </section>
 
   <!-- ================= FLOOR 4: ABOUT ME GALLERY ================= -->
@@ -862,6 +909,9 @@
     broFlipped = true; flipBro(); busy = false; locked = false;
   });
   document.getElementById('enter').addEventListener('click', enter);
+  document.querySelectorAll('#ptabs button').forEach(b => b.onclick = () => {
+    bro.dataset.p = b.dataset.p; document.querySelectorAll('#ptabs button').forEach(x => x.classList.toggle('on', x === b)); paperSound();
+  });
   document.getElementById('skipBtn').addEventListener('click', () => {
     if(busy) return; busy = true; locked = true; audio(); whooshSound();
     lobby2.classList.add('ready'); lobby.classList.add('leaving');
