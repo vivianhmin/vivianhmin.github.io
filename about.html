@@ -113,7 +113,7 @@
   .chrono .vinyl{width:340px;flex:0 0 auto}
   .chrono .kick{color:#9fc2b2}
   .chrono .vinyl p{color:#bdb8af}
-  .line{position:relative;flex:1;height:520px}
+  .line{position:relative;flex:1;height:520px;margin-right:240px}
   .line::before{content:"";position:absolute;left:0;right:0;top:50%;height:5px;margin-top:-2.5px;background:#efece6;border-radius:3px;transform-origin:left;transform:scaleX(var(--p,0));transition:transform 1.8s .4s cubic-bezier(.3,.6,.2,1)}
   .line .end{position:absolute;right:0;top:50%;width:28px;height:28px;margin-top:-14px;border-radius:50%;border:5px solid #efece6;background:#171716;opacity:0;transition:opacity .5s 2s}
   .chrono.on .end{opacity:1}
@@ -131,12 +131,10 @@
   .ev.down .yr{top:26px}.ev.down .tick{top:68px}.ev.down .cap{top:106px}
   .ev.now .yr{color:#9fc2b2}
   .ev.now .dot{left:-12px;top:-12px;width:24px;height:24px;background:#171716;border:5px solid #efece6;box-shadow:none}
-  .ev.now .yr{left:auto;right:-2px}
-  .ev.now .cap{left:auto;right:-2px;text-align:right}
   /* portrait: the line runs down the wall */
   .portrait .chrono .area{flex-direction:column;align-items:stretch;gap:50px}
   .portrait .chrono .vinyl{width:100%}
-  .portrait .line{flex:1;height:auto;width:100%}
+  .portrait .line{flex:1;height:auto;width:100%;margin-right:0}
   .portrait .line::before{left:50%;right:auto;top:0;bottom:20%;width:5px;height:auto;margin:0 0 0 -2.5px;transform:scaleY(var(--p,0));transform-origin:top}
   .portrait .ev{left:50%!important;top:calc(var(--t) * .86)}
   .portrait .ev .yr,.portrait .ev.now .yr{top:-17px;bottom:auto;left:auto;right:30px}
