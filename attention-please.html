@@ -208,6 +208,18 @@
     .shift .arrow{transform:rotate(90deg);height:24px}
     .fixes{grid-template-columns:1fr}
   }
+  .cover{margin:14px 0 22px;background:#fff;border:1px solid var(--soft)}
+  .cover img{display:block;width:100%;height:auto}
+  .posters{display:none}
+  .posters.on{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:0 0 22px}
+  .posters img{width:100%;height:auto;display:block;box-shadow:0 14px 28px rgba(40,30,20,.14)}
+  .pcards{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:0!important;padding:0}
+  .pcards li{border-top:2px solid var(--ink);padding-top:10px;font-size:15px!important}
+  .pcards b{display:block;font-size:17px;font-weight:700}
+  .pcards span{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:2px 0 6px}
+  .pcards p{font-size:15px!important;line-height:1.5!important;margin:0;color:#3a3835}
+  .wlist{font-weight:600}
+  @media (max-width:860px){ .pcards,.posters.on{grid-template-columns:1fr} }
   /* phones: single column (these rules were missing on this page) */
   @media (max-width:860px){
     .story li,.story li+li{padding:18px 0;border-left:none}
@@ -256,8 +268,13 @@
   <section>
     <h2><small>01</small>The series</h2>
     <div class="body">
+      <figure class="cover"><img src="https://miro.medium.com/v2/resize:fit:1600/1*FPsXofFG1JYsos803o4bNQ.png" alt="Attention, Please! poster series for Amnesty International"></figure>
       <div class="posters" id="posters"></div>
-      <p class="ptip">Tap a poster to see the idea behind it.</p>
+      <ol class="pcards">
+        <li><b>What leaks lingers</b><span>Corporate accountability</span><p>Oil from a container becomes an oil-covered bird.</p></li>
+        <li><b>What shoots shatters</b><span>Gun violence · Children</span><p>A gun becomes intertwined with the profile of a child.</p></li>
+        <li><b>What shames silences</b><span>Technology · Online violence</span><p>Light from a phone becomes a hand covering a woman's mouth.</p></li>
+      </ol>
     </div>
   </section>
 
@@ -274,14 +291,14 @@
     <div class="body">
       <div class="shift">
         <div class="was"><h4>First concept · Word as object</h4>
-          <div class="words"><span>SPILL</span><span>SHOOT</span><span>MONITOR</span></div>
+          <p class="wlist">SPILL, SHOOT, MONITOR: each keyword shaped into an object.</p>
           <p>Clear, but flat. Viewers recognized the topics but missed the context, the hierarchy, and what to do next.</p></div>
         <div class="arrow" aria-hidden="true">→</div>
         <div class="now"><h4>Final concept · Cause becomes consequence</h4>
           <ul class="trans">
-            <li><i style="background:#e8742a"></i>Oil spill <em>becomes</em> an oil-covered bird</li>
-            <li><i style="background:#6b3fa0"></i>A gun <em>becomes</em> a child's profile</li>
-            <li><i style="background:#e0558f"></i>Phone light <em>becomes</em> a hand over a woman's mouth</li>
+            <li>Oil spill <em>becomes</em> an oil-covered bird</li>
+            <li>A gun <em>becomes</em> a child's profile</li>
+            <li>Phone light <em>becomes</em> a hand over a woman's mouth</li>
           </ul></div>
       </div>
       <p>Each poster now leads the eye in the same order:</p>
@@ -320,34 +337,12 @@
 </main>
 
 <script>
+// Optional: put the original poster files in assets/posters/ (leaks.jpg, shoots.jpg, shames.jpg) to show them one by one.
 (() => {
-  // Drop the real poster files into assets/posters/ with these names and they replace the stand-ins automatically.
-  const P = [
-    { file:'leaks.jpg', title:'What leaks lingers', color:'#e8742a', cause:'Corporate accountability', eq:'Oil from a container becomes an oil-covered bird.',
-      note:'Oil spills don\'t end when the cleanup does. The harm stays in the wildlife long after the headlines.',
-      art:'<svg viewBox="0 0 100 100" fill="none" stroke="#ffd84a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="34" y="6" width="26" height="20" rx="3"/><path d="M47 26c0 10-4 14-4 22"/><path d="M28 70c6-14 22-22 36-18 8 2 12 8 10 14l10 4-12 2c-6 10-22 14-34 8-6-3-10-6-10-10z"/><circle cx="68" cy="60" r="1.5" fill="#ffd84a"/></svg>' },
-    { file:'shoots.jpg', title:'What shoots shatters', color:'#6b3fa0', cause:'Gun violence · Children', eq:'A gun becomes intertwined with the profile of a child.',
-      note:'Gun violence takes more than lives. It breaks childhoods and the communities around them.',
-      art:'<svg viewBox="0 0 100 100" fill="none" stroke="#ffd84a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34h50v10H40l-4 18H26l2-18H14z"/><path d="M64 36c8-6 20-2 22 10 1 6-2 10-2 14l4 6-6 2c0 6-4 10-10 10"/><path d="M72 48h.5"/></svg>' },
-    { file:'shames.jpg', title:'What shames silences', color:'#e0558f', cause:'Technology · Online violence', eq:'Light from a phone becomes a hand covering a woman\'s mouth.',
-      note:'Online abuse pushes women out of public conversation. Shaming is a way of silencing.',
-      art:'<svg viewBox="0 0 100 100" fill="none" stroke="#ffd84a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="40" width="22" height="40" rx="4"/><path d="M32 52l20-10M32 60l26-4M32 68l20 4"/><path d="M62 18c14 0 24 12 22 28-1 8-6 12-6 18 0 10-8 16-16 16"/><path d="M52 50c6-2 16-2 22 2"/></svg>' },
-  ];
+  const files = [['leaks.jpg','What leaks lingers'],['shoots.jpg','What shoots shatters'],['shames.jpg','What shames silences']];
   const box = document.getElementById('posters');
-  box.innerHTML = P.map((p, k) => `
-    <figure style="margin:0">
-      <div class="poster" style="--pc:${p.color}" tabindex="0" role="button" aria-label="${p.title}: show concept">
-        <div class="stand"><h4>${p.title.replace(/ /g,'<br>')}</h4><div class="art">${p.art}</div><small><span>Amnesty International</span><span>Take part →</span></small></div>
-        <img src="assets/posters/${p.file}" alt="${p.title} poster" onerror="this.remove()">
-        <div class="flip"><b>${p.cause}</b><div class="eq">${p.eq}</div><p>${p.note}</p></div>
-      </div>
-      <figcaption class="poster-cap"><b>${p.title}</b><span>0${k + 1}</span></figcaption>
-    </figure>`).join('');
-  box.querySelectorAll('.poster').forEach(el => {
-    const t = () => el.classList.toggle('show');
-    el.addEventListener('click', t);
-    el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); t(); } });
-  });
+  let n = 0;
+  files.forEach(([f, t]) => { const im = new Image(); im.alt = t + ' poster'; im.onload = () => { box.appendChild(im); box.classList.add('on'); n++; }; im.src = 'assets/posters/' + f; });
 })();
 </script>
 <script src="menu.js" defer></script>
