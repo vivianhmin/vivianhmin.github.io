@@ -266,9 +266,10 @@
   /* ---------- STACK: brochure waits behind the ticket ---------- */
   .lobby{z-index:2}
   .lobby2{z-index:1;opacity:1;transition:none}
-  .lobby2:not(.open) .bro-scene{transform:translate(350px,-4px) scale(.46) rotate(7deg)}
-  .stage.portrait .lobby2:not(.open) .bro-scene{transform:translate(140px,-14px) scale(.27) rotate(6deg)}
+  .lobby2:not(.open) .bro-scene{transform:translateY(-10px) scale(.3)}
+  .stage.portrait .lobby2:not(.open) .bro-scene{transform:translateY(-14px) scale(.2)}
   .lobby2 .bro-scene{transition:transform 1.25s cubic-bezier(.22,.9,.25,1)}
+  .lobby2:not(.ready) .bro-scene{visibility:hidden}
   .lobby2 .brochure{transition:transform .9s cubic-bezier(.2,.8,.2,1),filter 1s}
   .lobby2:not(.open) .brochure{filter:brightness(.96) saturate(.9)}
   .b-hint{transition:opacity .6s .9s}
@@ -746,7 +747,7 @@
       beam.classList.remove('on'); scanner.classList.remove('fire'); ticket.classList.remove('scanning');
       scanner.classList.add('ok'); setScreen('ADMITTED', '1 Visitor · Welcome'); beepSound();
     }, 1750);
-    setTimeout(() => { scanMode = 'exit'; lobby.classList.add('leaving'); }, 2550);
+    setTimeout(() => { scanMode = 'exit'; lobby2.classList.add('ready'); lobby.classList.add('leaving'); }, 2550);
     setTimeout(() => { lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true; }, 2950);
     setTimeout(() => { scanMode = 'hidden'; scanner.style.transform = 'translate(4000px,0)'; }, 4000);
   }
@@ -760,6 +761,7 @@
   document.getElementById('backBtn').addEventListener('click', () => {
     lobby2.classList.remove('open'); lobby2.setAttribute('aria-hidden','true'); broOpen = false;
     lobby.classList.remove('leaving'); ticket.classList.remove('scanned'); scanner.classList.remove('ok');
+    setTimeout(() => { if(!broOpen) lobby2.classList.remove('ready'); }, 1300);
     broFlipped = true; flipBro(); busy = false; locked = false;
   });
   document.getElementById('enter').addEventListener('click', enter);
@@ -814,7 +816,7 @@
     busy = true; locked = true;
     lobby.style.transition = lobby2.style.transition = 'none';
     lobby.classList.add('leaving');
-    lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true;
+    lobby2.classList.add('ready'); lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true;
     bro.classList.add('instant'); bro.style.transition = 'none'; flipBro();
     requestAnimationFrame(() => requestAnimationFrame(() => {
       bro.style.transition = ''; bro.classList.remove('instant'); lobby.style.transition = lobby2.style.transition = '';
