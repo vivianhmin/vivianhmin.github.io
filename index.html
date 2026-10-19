@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
 <title>Vivian Min — Design Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
     background:radial-gradient(ellipse at center,rgba(70,55,35,.28),transparent 70%);filter:blur(8px)}
 
   /* ---------- 3D TICKET ---------- */
-  .ticket3d{position:relative;width:760px;transform-style:preserve-3d;cursor:grab;will-change:transform;touch-action:none}
+  .ticket3d{position:relative;width:760px;transform-style:preserve-3d;cursor:grab;will-change:transform;touch-action:pan-y pinch-zoom}
   .ticket3d.drag{cursor:grabbing}
   .face{border-radius:8px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--paper);
     color:var(--ink);font-family:'IBM Plex Mono',ui-monospace,monospace}
@@ -547,10 +547,11 @@
   const stage = document.getElementById('stage');
   let S = 1;
   function fit(){
-    const portrait = window.innerWidth < window.innerHeight;
-    const W = portrait ? 1000 : 1920, H = portrait ? Math.max(1500, 1000 * window.innerHeight / window.innerWidth) : 1080;
+    const vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight;
+    const portrait = vw < vh;
+    const W = portrait ? 1000 : 1920, H = portrait ? Math.max(1500, 1000 * vh / vw) : 1080;
     stage.style.setProperty('--w', W + 'px'); stage.style.setProperty('--h', H + 'px');
-    S = Math.min(window.innerWidth / W, window.innerHeight / H);
+    S = Math.min(vw / W, vh / H);
     stage.style.setProperty('--s', S);
     document.getElementById('beam').setAttribute('viewBox', `0 0 ${W} ${H}`);
   }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
 <title>Player Redesign — Vivian Min</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,7 +96,7 @@
   .ctrl button{background:none;border:none;color:#fff;cursor:pointer;font:inherit;padding:.5cqh .8cqw;border-radius:4px;line-height:1}
   .ctrl button:hover{background:rgba(255,255,255,.15)}
   .time{font-family:'IBM Plex Mono',monospace;font-size:max(8px,3cqh);white-space:nowrap}
-  .prog{position:relative;flex:1;height:5cqh;display:flex;align-items:center;cursor:pointer;touch-action:none}
+  .prog{position:relative;flex:1;height:5cqh;display:flex;align-items:center;cursor:pointer;touch-action:pan-y pinch-zoom}
   .prog::before{content:"";position:absolute;left:0;right:0;height:max(3px,1cqh);background:rgba(255,255,255,.3);border-radius:3px}
   .fill{position:absolute;left:0;height:max(3px,1cqh);background:#fff;border-radius:3px;width:0}
   .knob{position:absolute;width:max(8px,2.8cqh);height:max(8px,2.8cqh);border-radius:50%;background:#fff;transform:translateX(-50%);left:0}
