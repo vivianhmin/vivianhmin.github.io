@@ -223,7 +223,7 @@
 
   .funnel{margin-top:22px;max-width:680px}
   .funnel .row{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:16px;margin-top:10px;font-size:15px}
-  .funnel .row i{display:block;height:34px;background:var(--ink);color:#fff;font-style:normal;font-weight:600;font-size:14px;display:flex;align-items:center;padding-left:12px;transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.3,.7,.2,1)}
+  .funnel .row i{display:block;min-height:34px;box-sizing:border-box;padding:6px 12px;min-width:max-content;white-space:nowrap;background:var(--ink);color:#fff;font-style:normal;font-weight:600;font-size:14px;display:flex;align-items:center;padding-left:12px;transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.3,.7,.2,1)}
   .funnel.on .row i{transform:scaleX(1)}
 
   .compare{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);margin-top:20px}
@@ -234,6 +234,47 @@
   .compare .ba s{font-size:22px;color:var(--muted);text-decoration-thickness:1.5px}
   .compare .ba strong{font-size:46px;font-weight:500;letter-spacing:-.02em;line-height:1}
   .compare .up{font-size:13px;color:var(--green);font-weight:600;margin-top:6px}
+
+  /* thought-process map */
+  .tmap{margin:24px 0 40px;position:relative}
+  .tm-head,.tm-row{display:grid;grid-template-columns:1fr 1.25fr 1.25fr;gap:34px}
+  .tm-head span{font:600 12px var(--head);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-bottom:10px}
+  .tm-row{position:relative;margin-bottom:22px}
+  .tm-row:not(:last-child)::after{content:"";position:absolute;left:calc((100% - 68px) / 3.5 / 2);bottom:-22px;height:22px;border-left:2px dashed #bdb7ad}
+  .tm{position:relative;padding:14px 16px;border-radius:8px;font-size:15px;line-height:1.45;opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}
+  .tmap.on .tm{opacity:1;transform:none}
+  .tm.q{background:var(--ink);color:#fff;font-weight:600;font-size:16px}
+  .tm.q i{display:block;font-style:normal;font-size:11px;letter-spacing:.16em;color:#a9a49b;margin-bottom:4px;font-weight:500}
+  .tm.f{background:#fff;border:1px solid var(--soft);color:#3a3835}
+  .tm.d{background:#e9f5ee;border:1px solid #bfe0cb;color:#1d3b2a}
+  .tm.d b{display:block;margin-top:8px;font-size:13px;letter-spacing:.06em;color:var(--green);font-weight:700}
+  .tm.q::after,.tm.f::after{content:"";position:absolute;right:-30px;top:50%;width:26px;height:2px;background:#bdb7ad}
+  .tm.q::before,.tm.f::before{content:"";position:absolute;right:-31px;top:calc(50% - 4px);border:5px solid transparent;border-left:7px solid #bdb7ad;transform:translateX(7px)}
+  .tm-row:nth-child(3) .tm{transition-delay:.15s}.tm-row:nth-child(4) .tm{transition-delay:.3s}.tm-row:nth-child(5) .tm{transition-delay:.45s}
+
+  /* workflow lanes */
+  .wf{display:grid;gap:16px;margin:16px 0 40px}
+  .wf-lane{display:grid;grid-template-columns:80px 1fr;gap:16px;align-items:start;padding:18px;border-radius:10px}
+  .wf-lane.before{background:#f6eceb}
+  .wf-lane.after{background:#e9f5ee}
+  .wf-tag{font:700 12px var(--head);letter-spacing:.18em;text-transform:uppercase;padding-top:12px}
+  .before .wf-tag{color:#a1271d}.after .wf-tag{color:#17703c}
+  .wf-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+  .wf-n{position:relative;background:#fff;border-radius:8px;padding:12px;font-size:14px;line-height:1.4;box-shadow:0 2px 6px rgba(40,30,20,.06)}
+  .wf-n b{font-weight:700}
+  .wf-n:not(:last-child)::after{content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);color:#8a857e;font-weight:600}
+  .wf-pain,.wf-loop{grid-column:2;display:flex;flex-wrap:wrap;gap:8px;font-size:13.5px}
+  .wf-pain span{background:#fff;color:#a1271d;border:1px solid #e6c2bd;border-radius:999px;padding:5px 11px}
+  .wf-loop{color:#1d3b2a;border-top:1px dashed #9fcdb0;padding-top:10px}
+  @media (max-width:860px){
+    .tm-head{display:none}
+    .tm-row{grid-template-columns:1fr;gap:10px;margin-bottom:26px}
+    .tm.q::after,.tm.f::after,.tm.q::before,.tm.f::before,.tm-row::after{display:none}
+    .wf-lane{grid-template-columns:1fr}
+    .wf-steps{grid-template-columns:1fr;gap:18px}
+    .wf-n:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-18px;transform:translateX(-50%)}
+    .wf-pain,.wf-loop{grid-column:1}
+  }
 
   @keyframes shake{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
   @media (max-width:860px){
@@ -246,7 +287,8 @@
     .lessons,.features,.board,.bml,.compare{grid-template-columns:1fr}
     .feature,.feature+.feature,.bml div,.bml div+div,.compare > div,.compare > div+div{padding-left:0;border-left:none;border-bottom:1px solid var(--soft)}
     .bar .where{display:none}
-    .funnel .row{grid-template-columns:100px 1fr}
+    .funnel .row{grid-template-columns:84px minmax(0,1fr);gap:10px;font-size:13.5px}
+    .funnel .row i{font-size:12.5px;padding:6px 10px}
   }
 </style>
 </head>
@@ -345,9 +387,59 @@
   </div>
 
   <section>
-    <h2><small>04</small>From cases to codes</h2>
+    <h2><small>04</small>Thought process</h2>
     <div class="body">
-      <p>Instead of email, the whole team logged every issue in one shared sheet. Patterns appeared fast, and the categories were sharpened twice before they became the playbook.</p>
+      <p>I worked backwards from one question: why do we keep losing on price? Each answer led to the next question, and each decision came from evidence the team collected together.</p>
+
+      <div class="tmap" id="tmap">
+        <div class="tm-head"><span>Question</span><span>What we found</span><span>Decision</span></div>
+        <div class="tm-row">
+          <div class="tm q"><i>01</i>Why do we lose on price?</div>
+          <div class="tm f">Nobody could say. Reasons lived in emails and people's heads, and each case started from zero.</div>
+          <div class="tm d">Log every case in one shared sheet instead of email.<b>480 cases in 5 weeks</b></div>
+        </div>
+        <div class="tm-row">
+          <div class="tm q"><i>02</i>Do the reasons repeat?</div>
+          <div class="tm f">Yes. A handful of causes explained most losses, and the same ones showed up for every associate.</div>
+          <div class="tm d">Name the 13 most common issues with keyword labels, then keep logging.<b>+210 cases in 2 weeks</b></div>
+        </div>
+        <div class="tm-row">
+          <div class="tm q"><i>03</i>Can every case be solved the same way?</div>
+          <div class="tm f">The same issue had the same best fix, and the same owner: associate or account manager.</div>
+          <div class="tm d">Group into categories with codes, and write a playbook entry for each.<b>12 categories · 14 subcategories</b></div>
+        </div>
+        <div class="tm-row">
+          <div class="tm q"><i>04</i>Is this only a Korea problem?</div>
+          <div class="tm f">Japan, Taiwan, Singapore and Australia saw the same gaps, especially from local OTAs.</div>
+          <div class="tm d">Pilot across APAC, refine the codes, and hand the framework to Global.<b>Official BML dashboard, Sep 2019</b></div>
+        </div>
+      </div>
+
+      <h3>How the workflow changed</h3>
+      <div class="wf">
+        <div class="wf-lane before">
+          <div class="wf-tag">Before</div>
+          <div class="wf-steps">
+            <div class="wf-n">Dashboard shows a <b>LOSE</b></div>
+            <div class="wf-n">Associate checks every live site by hand</div>
+            <div class="wf-n">Emails findings to the account manager</div>
+            <div class="wf-n">Account manager calls the hotel</div>
+          </div>
+          <div class="wf-pain"><span>No pattern to follow</span><span>No shared record</span><span>~5 escalated a day, 3 solved</span></div>
+        </div>
+        <div class="wf-lane after">
+          <div class="wf-tag">After</div>
+          <div class="wf-steps">
+            <div class="wf-n">Dashboard shows a <b>LOSE</b>, including local OTAs</div>
+            <div class="wf-n">Associate assigns an <b>issue code</b></div>
+            <div class="wf-n">Playbook gives the fix and the owner</div>
+            <div class="wf-n">Fixed and logged to the shared sheet</div>
+          </div>
+          <div class="wf-loop">Weekly report on recurring issues, resolution time and what worked feeds back into the playbook ↺</div>
+        </div>
+      </div>
+
+      <h3>From cases to codes</h3>
       <div class="funnel" id="funnel">
         <div class="row"><span>Weeks 3–7</span><i style="width:70%">480 cases logged</i></div>
         <div class="row"><span>Weeks 8–9</span><i style="width:100%">+210 cases · 13 common issues</i></div>
@@ -489,6 +581,8 @@
   const _load = load; load = k => { reset3(); _load(k); };
   load(0);
 
+  const tmap = $('tmap');
+  new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) tmap.classList.add('on'); }), { threshold:.2 }).observe(tmap);
   const funnel = $('funnel');
   new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) funnel.classList.add('on'); }), { threshold:.4 }).observe(funnel);
 })();
