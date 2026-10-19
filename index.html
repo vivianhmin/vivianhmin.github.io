@@ -6,7 +6,7 @@
 <title>Vivian Min — Design Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#f4f1ee; --paper:#fbfaf7; --edge:#d9d6cf; --ink:#1b1b1b;
@@ -137,6 +137,19 @@
   .stub-mark em{font:italic 500 70px/1 'Playfair Display',Georgia,serif}
   .stub-mark span{font:600 11px 'Manrope',sans-serif;letter-spacing:.3em}
   .face::before{opacity:.18}
+
+
+  /* title set like the reference: swash script M, serif caps, italic "tic" + caps "KET" */
+  .tk-title{display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;justify-content:start;column-gap:2px;margin:6px 0 6px;line-height:1}
+  .tk-title .sw{grid-row:1 / span 2;font:400 112px/0.8 'Pinyon Script',cursive;margin-right:-6px;padding-top:6px}
+  .tk-title .cap{align-self:end;font:400 46px/0.9 'Playfair Display',Georgia,serif;letter-spacing:.02em}
+  .tk-title .tk2{font:400 42px/1 'Playfair Display',Georgia,serif;letter-spacing:.01em;padding-left:58px}
+  .tk-title .tk2 i{font-style:italic}
+  .front .showing{margin:4px 0 10px;padding:0;display:flex;align-items:center;gap:10px}
+  .front .showing strong{font:500 19px/1.1 'Playfair Display',Georgia,serif;letter-spacing:0;white-space:nowrap}
+  .pill{white-space:nowrap}
+  .front .showing strong em{font-style:italic}
+  .front .foot{margin-top:auto;padding-top:10px}
 
   /* ---------- HANDHELD SCANNER (appears only when scanning) ---------- */
   .scanner{position:absolute;left:0;top:0;width:362px;height:431px;z-index:20;pointer-events:none;transform:translate(4000px,0);
@@ -347,19 +360,19 @@
         <div class="face front">
           <div class="tk-main">
             <div class="tk-top"><span class="pill">General Access - All Visitors</span><span class="star">✦</span></div>
-            <div class="tk-title"><em>Museum</em><span>of Vivian Min</span></div>
+            <div class="tk-title"><span class="sw">M</span><span class="cap">USEUM</span><span class="tk2"><i>tic</i>KET</span></div>
+            <div class="showing"><small class="pill o">Now Showing</small><strong>Design Portfolio <em>of</em> Vivian Min</strong></div>
             <ul class="tk-lines">
               <li>Collections: People, Needs, Systems</li>
               <li>Est. in Hospitality, Travel &amp; Tech</li>
               <li>Admission: Your curiosity</li>
             </ul>
-            <div class="showing"><small class="pill o">Now Showing</small><strong>Design Portfolio</strong></div>
             <div class="foot">For inquiries please contact vmin@andrew.cmu.edu. Issued by Vivian Min.</div>
           </div>
           <div class="tk-stub">
             <div class="qrbox">
               <div class="qr"><svg class="qrsvg" viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true"></svg><div class="laser"></div></div>
-              <div class="code">MA-DESIGN-2027</div>
+              <div class="code">CMU DESIGN</div>
             </div>
             <span class="star sm">✦</span>
           </div>
