@@ -23,6 +23,23 @@
   /* ---------- STAGE (16:9 desktop, portrait on phones) ---------- */
   .stage{position:absolute;left:50%;top:50%;width:var(--w,1920px);height:var(--h,1080px);overflow:hidden;
     transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center}
+  /* phones: lay the stage out at its real on-screen size with CSS zoom instead of a scale transform.
+     A scaled-down transform makes iOS rasterize huge layers, which crashes Safari when you pinch-zoom. */
+  .stage.z{left:0;top:0;transform:none}
+  .stage.portrait .bro-scene{zoom:1.85}
+  .stage.portrait .scene{zoom:1.22}
+  .stage.portrait .hello{font-size:88px}
+  .stage.portrait .hint{font-size:26px}
+  .stage.portrait .enter{font-size:40px}
+  .stage.portrait .b-hint{font-size:30px;gap:40px}
+  .stage.portrait .lobby2{gap:44px}
+  .room:not(.open){display:none}
+  @media (hover:none){
+    .face::before,.bface::after,.sheen{display:none}
+    .ticket3d{will-change:auto}
+    .scanner{filter:none}
+  }
+
 
   /* ---------- LOBBY ---------- */
   .lobby{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -554,6 +571,9 @@
     stage.style.setProperty('--w', W + 'px'); stage.style.setProperty('--h', H + 'px');
     S = Math.min(vw / W, vh / H);
     stage.style.setProperty('--s', S);
+    stage.classList.toggle('portrait', portrait);
+    const z = portrait || window.matchMedia('(hover: none)').matches;
+    stage.classList.toggle('z', z); stage.style.zoom = z ? S : '';
     document.getElementById('beam').setAttribute('viewBox', `0 0 ${W} ${H}`);
   }
   // only refit when the layout size really changes (pinch-zoom fires resize too)
@@ -618,14 +638,15 @@
   let scanMode = 'hidden', nX = 3000, nY = 400, rot = -20;
 
   function drawScanner(){
-    const sr = stage.getBoundingClientRect(), q = qrEl.getBoundingClientRect();
-    const qL = (q.left - sr.left) / S, qR = (q.right - sr.left) / S;
-    const qT = (q.top - sr.top) / S,  qB = (q.bottom - sr.top) / S;
+    const sr = stage.getBoundingClientRect(), q = qrEl.getBoundingClientRect(), vk = sr.width / stage.offsetWidth || 1;
+    const qL = (q.left - sr.left) / vk, qR = (q.right - sr.left) / vk;
+    const qT = (q.top - sr.top) / vk,  qB = (q.bottom - sr.top) / vk;
     const qcx = (qL + qR) / 2, qcy = (qT + qB) / 2;
     // device art is pre-angled: its scan edge faces up-left (about -115°). Nose = middle of that edge.
     const NX = 94.66, NY = 29.63, E1 = [41.16, 54.63], E2 = [148.16, 4.63], BASE = -115;
     let tx, ty, k = .08;
-    if(scanMode === 'aim'){ tx = qR + 40; ty = qB + 115; k = .1; }
+    const port = stage.classList.contains('portrait');
+    if(scanMode === 'aim'){ tx = port ? qcx + 30 : qR + 40; ty = port ? qB + 150 : qB + 115; k = .1; }
     else { tx = qR + 900; ty = qB + 800; k = scanMode === 'exit' ? .05 : 1; }
     nX += (tx - nX) * k; nY += (ty - nY) * k;
     let a = Math.atan2(qcy - nY, qcx - nX) * 180 / Math.PI - BASE;

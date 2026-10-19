@@ -22,6 +22,9 @@
   .stage{position:absolute;left:50%;top:50%;width:var(--w,1920px);height:var(--h,1080px);overflow:hidden;
     transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center;--ceil:100px;--floor:210px;--i:0}
   .stage.portrait{--floor:300px}
+  /* phones: real-size layout via CSS zoom (a scaled-down transform crashes iOS Safari on pinch-zoom) */
+  .stage.z{left:0;top:0;transform:none}
+  @media (hover:none){ .ph:hover{transform:none} }
 
   /* the room */
   .ceil{position:absolute;left:0;right:0;top:0;height:var(--ceil);background:linear-gradient(#e2e0dc,#ebe9e5);box-shadow:inset 0 -14px 22px rgba(0,0,0,.04);z-index:3}
@@ -88,7 +91,21 @@
   .portrait .intro .area{flex-direction:column;justify-content:flex-start;gap:60px}
   .portrait .intro .text{width:100%}
   .portrait .intro h1{font-size:88px}
-  .portrait .trio{width:100%;--k:.86}
+  .portrait .trio{width:100%;--k:1.02}
+  .portrait .kick{font-size:22px}
+  .portrait .intro h1{font-size:104px;margin-bottom:36px}
+  .portrait .intro .lead{font-size:38px}
+  .portrait .intro p{font-size:30px}
+  .portrait .vinyl h2{font-size:84px}
+  .portrait .vinyl p{font-size:30px}
+  .portrait .ev .yr{font-size:46px}
+  .portrait .ev .cap,.portrait .ev.now .cap{font-size:24px;width:600px}
+  .portrait .ev .cap b{font-size:28px}
+  .portrait .ev .cap small{font-size:17px}
+  .portrait .ev .yr,.portrait .ev.now .yr{top:-24px;right:36px}
+  .portrait .ev .cap,.portrait .ev.now .cap{left:36px}
+  .portrait .exit h2{font-size:96px}
+  .portrait .exit .links a{font-size:24px}
 
   /* ---------- 4.2 chronology ---------- */
   .panel{position:absolute;left:0;right:0;top:var(--ceil);bottom:var(--floor);background:#171716;color:#efece6;box-shadow:inset 0 30px 40px -30px rgba(0,0,0,.6)}
@@ -120,8 +137,8 @@
   .portrait .chrono .area{flex-direction:column;align-items:stretch;gap:50px}
   .portrait .chrono .vinyl{width:100%}
   .portrait .line{flex:1;height:auto;width:100%}
-  .portrait .line::before{left:50%;right:auto;top:0;bottom:7%;width:5px;height:auto;margin:0 0 0 -2.5px;transform:scaleY(var(--p,0));transform-origin:top}
-  .portrait .ev{left:50%!important;top:var(--t)}
+  .portrait .line::before{left:50%;right:auto;top:0;bottom:20%;width:5px;height:auto;margin:0 0 0 -2.5px;transform:scaleY(var(--p,0));transform-origin:top}
+  .portrait .ev{left:50%!important;top:calc(var(--t) * .86)}
   .portrait .ev .yr,.portrait .ev.now .yr{top:-17px;bottom:auto;left:auto;right:30px}
   .portrait .ev .tick{display:none}
   .portrait .ev .cap,.portrait .ev.now .cap{top:-22px;bottom:auto;left:30px;right:auto;width:420px;text-align:left}
@@ -337,10 +354,12 @@ function lamps(){
 function fit(){
   const vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight;
   const portrait = vw < vh * .9;
-  W = portrait ? 1080 : 1920; H = portrait ? 1920 : 1080;
+  W = portrait ? 1080 : 1920; H = portrait ? Math.max(1920, Math.round(1080 * vh / vw)) : 1080;
   stage.classList.toggle('portrait', portrait);
+  const z = portrait || window.matchMedia('(hover: none)').matches, S = Math.min(vw / W, vh / H);
+  stage.classList.toggle('z', z);
   stage.style.setProperty('--w', W + 'px'); stage.style.setProperty('--h', H + 'px');
-  stage.style.setProperty('--s', Math.min(vw / W, vh / H));
+  stage.style.setProperty('--s', S); stage.style.zoom = z ? S : '';
   lamps();
   hang(document.getElementById('salonP'), PHOTOS, 'photo', 0);
   hang(document.getElementById('salonD'), DRAWINGS, 'drawing', PHOTOS.length);
