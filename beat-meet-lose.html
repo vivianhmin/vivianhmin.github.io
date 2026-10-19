@@ -276,6 +276,70 @@
     .wf-pain,.wf-loop{grid-column:1}
   }
 
+  /* drafting process */
+  .drafts{list-style:none;margin:14px 0 26px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;counter-reset:d}
+  .drafts li{position:relative;border-top:3px solid var(--ink);padding-top:12px;font-size:14.5px;line-height:1.45;color:#3a3835}
+  .drafts li:not(:last-child)::after{content:"→";position:absolute;right:-17px;top:12px;color:#8a857e}
+  .drafts i{display:block;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .drafts b{display:block;font-size:17px;color:var(--ink);margin:2px 0 4px}
+  .sheet{border:1px solid var(--soft);border-radius:10px;background:#fff;overflow:hidden;margin-bottom:28px}
+  .sheet-cap,.fw-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid var(--soft)}
+  .sheet-cap b,.fw-top b{display:block;font-size:15px}
+  .sheet-cap span,.fw-top span{font-size:13px;color:var(--muted)}
+  .sheet-scroll{overflow-x:auto}
+  .sheet table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px}
+  .sheet th{background:#ececea;text-align:left;font-weight:600;padding:7px 10px;border-right:1px solid #dcdad5;white-space:nowrap}
+  .sheet th:nth-child(3){background:#d8eedd}
+  .sheet td{padding:7px 10px;border-top:1px solid #ecebe8;border-right:1px solid #f0efec;vertical-align:top}
+  .sheet td:first-child{white-space:nowrap;color:var(--muted)}
+  .sheet code{font:500 12px ui-monospace,Menlo,monospace;background:#f3f2ef;padding:2px 6px;border-radius:4px;white-space:nowrap}
+  .sheet code.blank{color:#b9b4ab;font-style:italic;background:none}
+  .sheet s{text-decoration:none;font-size:12px;padding:2px 8px;border-radius:4px;white-space:nowrap}
+  .sheet s.ok{background:#d8eedd;color:#17703c}.sheet s.esc{background:#fbeccb;color:#8a5a00}
+  .sheet-note{margin:0;max-width:none;padding:12px 18px;font-size:14px;background:#faf9f7;border-top:1px solid var(--soft)}
+  .fw{border:1px solid var(--soft);border-radius:10px;background:#fff;margin-bottom:34px;overflow:hidden}
+  .fw-tog{display:flex;background:#f0efec;border-radius:999px;padding:3px}
+  .fw-tog button{font:600 13px var(--head);border:0;background:none;padding:6px 14px;border-radius:999px;cursor:pointer;color:var(--muted)}
+  .fw-tog button.on{background:#1d2a74;color:#fff}
+  .fw-grid{display:grid;grid-template-columns:110px 92px minmax(0,1fr) 112px;grid-template-rows:auto auto auto;gap:8px;padding:16px}
+  .fw-cat{grid-column:1;background:#1d2a74;color:#fff;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:4px;padding:8px}
+  .fw-cat.c1{grid-row:1/3}.fw-cat.c2{grid-row:3}
+  .fw-sub{grid-column:2;border:2px solid #1d2a74;color:#1d2a74;font-weight:600;font-size:13.5px;display:flex;align-items:center;justify-content:center;border-radius:4px}
+  .r1{grid-row:1}.r2{grid-row:2}.r3{grid-row:3}
+  .fw-chips{grid-column:3;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .fw-chips button{font:600 13px var(--head);border:0;border-radius:4px;background:#5aa9e6;color:#fff;padding:9px 6px;cursor:pointer;line-height:1.2;min-height:40px;transition:transform .15s,box-shadow .15s}
+  .fw-chips button.new{background:#6fcca8}
+  .fw-chips button:hover{transform:translateY(-1px)}
+  .fw-chips button.sel{box-shadow:0 0 0 3px #1d2a74}
+  .fw.code .fw-chips button{font-family:ui-monospace,Menlo,monospace;font-size:11px;font-weight:500;overflow-wrap:anywhere}
+  .fw-comp{grid-column:4;grid-row:1/4;background:#f0c35a;border-radius:4px;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:12px 8px;text-align:center;color:#fff;font-weight:700;font-size:15px}
+  .fw-comp small{display:block;font-size:10.5px;font-weight:500;opacity:.9}
+  .fw.code .fw-comp{font:500 13px ui-monospace,Menlo,monospace}
+  .fw-key{display:flex;flex-wrap:wrap;gap:16px;padding:0 16px 14px;font-size:12.5px;color:var(--muted)}
+  .fw-key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+  .k1{background:#5aa9e6}.k2{background:#6fcca8}.k3{background:#f0c35a}
+  .fw-det{border-top:1px solid var(--soft);background:#faf9f7;padding:16px 18px;font-size:14.5px;min-height:96px}
+  .fw-det h4{margin:0 0 2px;font-size:17px}
+  .fw-det h4 code{font:500 13px ui-monospace,Menlo,monospace;color:#1d2a74;background:#e6e9f7;padding:2px 7px;border-radius:4px;margin-left:8px}
+  .fw-det .path{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .fw-det p{margin:4px 0 10px;max-width:none;font-size:14.5px}
+  .fw-det .olds{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .fw-det .olds em{font-style:normal;font-size:12.5px;color:var(--muted);margin-right:4px}
+  .fw-det .olds span{font-size:12.5px;background:#fff;border:1px solid var(--soft);border-radius:4px;padding:3px 8px}
+  .fw-det .olds span code{font:500 11.5px ui-monospace,Menlo,monospace;color:#8a857e;margin-right:6px;text-decoration:line-through}
+  .fw-det .olds .none{border-color:#bfe0cb;background:#e9f5ee;color:#17703c}
+  @media (max-width:860px){
+    .drafts{grid-template-columns:1fr;gap:16px}
+    .drafts li:not(:last-child)::after{display:none}
+    .fw-grid{grid-template-columns:1fr 1fr;grid-template-rows:none}
+    .fw-grid > *{grid-row:auto!important}
+    .fw-cat{grid-column:1/-1}.fw-chips{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .fw-sub{grid-column:1/-1;padding:6px}
+    .fw-cat.c1{order:1}.fw-sub.r1{order:2}.fw-chips.r1{order:3}.fw-sub.r2{order:4}.fw-chips.r2{order:5}
+    .fw-cat.c2{order:6}.fw-sub.r3{order:7}.fw-chips.r3{order:8}
+    .fw-comp{order:9;grid-column:1/-1;flex-direction:row;flex-wrap:wrap;justify-content:space-around;font-size:13px}
+  }
+
   @keyframes shake{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
   @media (max-width:860px){
     section{grid-template-columns:minmax(0,1fr);gap:18px;padding:40px 0}
@@ -381,7 +445,7 @@
           <div><strong id="tBefore">—</strong><span>to diagnose before: open-ended digging</span></div>
           <div><strong id="tAfter">—</strong><span>with codes and the playbook</span></div>
         </div>
-        <p class="demo-note">Hotels, prices, codes and times are illustrative. The real categories were internal to Expedia.</p>
+        <p class="demo-note">Hotels, prices and times are illustrative. The #codes are the real ones from the BML framework.</p>
       </div>
     </div>
   </div>
@@ -437,6 +501,47 @@
           </div>
           <div class="wf-loop">Weekly report on recurring issues, resolution time and what worked feeds back into the playbook ↺</div>
         </div>
+      </div>
+
+      <h3>How I drafted the codes</h3>
+      <ol class="drafts">
+        <li><i>Draft 1</i><b>Log the cases</b><span>A shared sheet: date, associate, hotel, competitor site, case category, issue, status.</span></li>
+        <li><i>Draft 2</i><b>Review the categories</b><span>Sort every issue by what was lost (rate or availability), whether it was fenced, and who we lost to.</span></li>
+        <li><i>Draft 3</i><b>Create #codes</b><span>One short hashtag per issue, so cases could be tagged, counted and tracked over time.</span></li>
+      </ol>
+
+      <div class="sheet">
+        <div class="sheet-cap"><b>Draft 1 · Case log</b><span>Excerpt from the shared sheet, Sep 2018. Hotel and associate names removed.</span></div>
+        <div class="sheet-scroll"><table>
+          <thead><tr><th>Date</th><th>Comp site</th><th>Case category</th><th>Issue</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>9/19</td><td>Booking</td><td><code>1-OR-NE</code></td><td>Rate difference 9–12% on all room types due to change in hotel contact</td><td><s class="ok">Resolved</s></td></tr>
+            <tr><td>9/20</td><td>Booking</td><td><code>1-OR-AW</code></td><td>Rate difference up to 62% due to promotion setting mistake</td><td><s class="ok">Resolved</s></td></tr>
+            <tr><td>9/21</td><td>Booking</td><td><code>1-EP-UF-TS</code></td><td>Rate difference of 12% in Sep and 25% in Oct</td><td><s class="ok">Resolved</s></td></tr>
+            <tr><td>9/21</td><td>Booking</td><td><code>1-CN</code></td><td>Rate difference 1% due to connectivity issues</td><td><s class="ok">Resolved</s></td></tr>
+            <tr><td>9/21</td><td>Booking</td><td><code class="blank">blank</code></td><td>Rate difference 30% due to different promotion settings</td><td><s class="ok">Resolved</s></td></tr>
+            <tr><td>9/22</td><td>Brand site</td><td><code>1-CN</code></td><td>Availability lose on 10/1, 2, 6</td><td><s class="esc">Escalated</s></td></tr>
+            <tr><td>9/22</td><td>Interpark</td><td><code>EP-UF-LC</code></td><td>Rate difference 11–22%; confirmed inventory, virtual inventory</td><td><s class="esc">Escalated</s></td></tr>
+          </tbody>
+        </table></div>
+        <p class="sheet-note">The log worked, but the old case codes didn't: the same problem got different codes from different people, and many cases had none.</p>
+      </div>
+
+      <div class="fw" id="fw">
+        <div class="fw-top">
+          <div><b>Drafts 2 &amp; 3 · The BML framework</b><span>Tap an issue to see which old codes it replaced.</span></div>
+          <div class="fw-tog" role="group"><button data-v="name" class="on">Issues</button><button data-v="code">#codes</button></div>
+        </div>
+        <div class="fw-grid">
+          <div class="fw-cat c1">All-In Rate</div>
+          <div class="fw-sub r1">Unfenced</div><div class="fw-chips r1" data-g="unf"></div>
+          <div class="fw-sub r2">Fenced</div><div class="fw-chips r2" data-g="fen"></div>
+          <div class="fw-cat c2">Availability</div>
+          <div class="fw-sub r3">Avail</div><div class="fw-chips r3" data-g="av"></div>
+          <div class="fw-comp" data-g="comp"></div>
+        </div>
+        <div class="fw-key"><span><i class="k1"></i>Issue from the case log</span><span><i class="k2"></i>New issue added in review</span><span><i class="k3"></i>Who we lost to</span></div>
+        <div class="fw-det" id="fwDet"></div>
       </div>
 
       <h3>From cases to codes</h3>
@@ -508,24 +613,24 @@
 <script>
 (() => {
   const CODES = [
-    ['RP-01','Rate mismatch'],['INV-02','Room sold out on Expedia'],['PRM-03','Local OTA promotion'],
-    ['MEM-04','Member-only discount'],['TAX-05','Taxes shown differently']
+    ['#rateplansetup','Rate plan set-up issue'],['#allotment','Partner did not match inventory'],['#drrmissing','Missing promotion'],
+    ['#modcoverage','No member rate on Expedia'],['#tax','Tax set-up']
   ];
   const CASES = [
     { name:'Hanok Stay Bukchon', meta:'Seoul · Deluxe Double · Sat', exp:132000,
-      comp:[['Booking.com',132000],['Agoda',131000],['Local OTA (Yanolja)',109000]], code:'PRM-03',
+      comp:[['Booking.com',132000],['Agoda',131000],['Local OTA (Yanolja)',109000]], code:'#drrmissing',
       spot:'Expedia is ₩23,000 above a local OTA, a site the old global dashboard didn\'t track.',
-      play:'<b>PRM-03 · Local OTA promotion.</b> Confirm the promo dates on the local site, then ask the hotel to load a matching Expedia deal for the same dates.',
+      play:'<b>#drrmissing · Missing promotion.</b> The hotel runs a local package on a Korean OTA with no matching deal on Expedia. Confirm the promo dates, then ask the hotel to load the same deal.',
       who:'Owner: Account Manager', fixed:108000, before:'45 min', after:'8 min' },
     { name:'Haeundae Ocean Hotel', meta:'Busan · Ocean View Twin · Fri', exp:null,
-      comp:[['Booking.com',189000],['Agoda',192000],['Local OTA (Goodchoice)',190000]], code:'INV-02',
+      comp:[['Booking.com',189000],['Agoda',192000],['Local OTA (Goodchoice)',190000]], code:'#allotment',
       spot:'No Expedia price at all. Travelers can\'t book us, so it counts as a lose.',
-      play:'<b>INV-02 · Room sold out on Expedia.</b> Check room allocation in the extranet and reopen inventory that was closed by mistake.',
+      play:'<b>#allotment · Partner did not match inventory.</b> Check room allocation in the extranet and ask the hotel to reopen inventory to match other sites.',
       who:'Owner: Market Associate · fix same day', fixed:188000, before:'30 min', after:'5 min' },
     { name:'Jeju Garden Resort', meta:'Jeju · Garden Suite · Sun', exp:254000,
-      comp:[['Booking.com',231000],['Agoda',254000],['Local OTA (Yanolja)',253000]], code:'RP-01',
+      comp:[['Booking.com',231000],['Agoda',254000],['Local OTA (Yanolja)',253000]], code:'#rateplansetup',
       spot:'Expedia is ₩23,000 above Booking.com for the same room and date.',
-      play:'<b>RP-01 · Rate mismatch.</b> The hotel lowered its rate on one site only. Ask it to push the new rate to every channel through its channel manager.',
+      play:'<b>#rateplansetup · Rate plan set-up issue.</b> The hotel updated its rate on one site only. Ask it to push the new rate to every channel through its channel manager.',
       who:'Owner: Account Manager', fixed:231000, before:'60 min', after:'10 min' },
   ];
   const $ = id => document.getElementById(id), won = fmt => '₩' + fmt.toLocaleString('en-US');
@@ -581,6 +686,64 @@
   const _load = load; load = k => { reset3(); _load(k); };
   load(0);
 
+
+  // BML framework
+  const FW = {
+    unf:[
+      ['DRR Missing','drrmissing','Missing promotion: a competitor had a deal Expedia didn\'t.',[['1-IN-INT','Lose due to Bcom international 10% DRR'],['1-IN-MD','Local online merchandising events'],['UN-DRR Expiration','DRR expired'],['IN-Exclusive Deals','Exclusive deals given to one OTA'],['1-IN-TS','Agoda / Booking 48-hour flash sale'],['1-IN-LP','Local package on Interpark']]],
+      ['Rate Plan setup','rateplansetup','Rate plan set-up issue.',[['1-UN-RU','Rate update'],['IN-Hurdle','Hurdle (IHG Holidex)'],['IN-KR Only','Korea-only rates'],['1-SI-NR','NR vs. LAR'],['1-SI-DI','Domestic vs. international hotel contacts']]],
+      ['Coupons','coupon','Coupon or marketing discount on a competitor.',[['2-MC','AGP, AMC'],['1-IN-PC','Interpark margin cut without a coupon'],['1-SI-HB','Rate lose due to hard block']]],
+      ['Connectivity','connectivity','Connectivity issue or delay, e.g. time lag.',[['1-UN-CN','Connectivity']]],
+      ['DRR lose','drrlose','DRR active, but still losing on %.',[['UN-DRR %','Lose on DRR %']]],
+      ['Missing Rate plan','missingrateplan','No matching rate plan on Expedia.',[['UN-Rate Plan Missing','No matching rate plan']]],
+      ['3PI','3pi','Competitor\'s third-party inventory, rate issue.',[['1-IN-3PI','Rate lose due to 3PI']]],
+      ['Tax','tax','Tax set-up.',[['—','Tax issues, no code']]],
+      ['DRR error','drrerror','DRR set up wrong.',[['UN-Wrong Restriction','DRR on wrong room types, blackout dates']]],
+      ['Rate Plan mixing','rateplanmixing','Rate plan mixed with other rate plans, e.g. NR with refundable.',[['1-UN-SD','System difference']]],
+      ['MOD Unfenced','modunfenced','Competitor\'s member deal unfenced to the public.',[['2-NM','Naked MOD']]],
+      ['Rate Violation','rateviolation','Partner closes us out or adjusts our rate after finding a leaked price, causing a lose.',null],
+      ['DRR mixing','drrmixing','Promotion mixed with another DRR.',[['1-UN-SD','System difference']]],
+      ['LOS & BW','losbw','Lose due to length-of-stay, booking-window or cut-off restriction.',[['UN-Wrong Restriction','Wrong set-up']]],
+      ['Bad Data','baddata','Lose due to bad BML data.',[['3-C','Wrong data']]],
+      ['Bcom Early Payment','epb','Booking.com Early Payment Benefit: margin cut for pre-payment.',null]],
+    fen:[
+      ['MOD Rate lose','modratelose','Member deal active, but still losing on %.',[['1-IN-OTA','OTA member rate']]],
+      ['MOD Coverage','modcoverage','No member rate on Expedia while the competitor has one.',[['1-IN-OTA','OTA member rate'],['1-SI-SA','SA member rate']]],
+      ['Project Moonshot','moon','Test on Agoda and Booking.com fenced rates.',null],
+      ['MOD DRR error','moderror','Member deal active, but set up wrong.',[['1-IN-OTA','DRR error']]]],
+    av:[
+      ['Missing room type','missingroomtype','A room type is missing on Expedia.',[['UN-Inventory','Inventory']]],
+      ['Occupancy setup','occupancy','Occupancy set-up issue.',[['UN-Wrong Restriction','Wrong restriction']]],
+      ['Base allocation','allotment','Partner did not match inventory, for allotment reasons.',[['UN-Inventory','Inventory'],['1-SI-HB','Allotment lose due to hard block']]],
+      ['Suspension','suspension','Finance suspension.',[['—','No code']]],
+      ['Connectivity','connectivity','Connectivity issue or delay, e.g. time lag.',[['1-UN-CN','Connectivity']]],
+      ['3PI','3pi','Competitor\'s third-party inventory, availability issue.',[['1-IN-3PI','Availability lose due to 3PI']]],
+      ['LRA','LRA','Partner allocates the last room to a competitor.',[['IN-Last Inventory Allocation','Last inventory allocation']]],
+      ['Bad Data','baddata','Lose due to bad BML data.',[['3-C','Wrong data']]],
+      ['Rate Violation','rateviolation','Partner closes us out after finding a leaked price, causing a lose.',null],
+      ['Restriction','restriction','Lose on BW, LOS, CTA or CTD restrictions and closeouts. Actionable, so we can match competitors.',null]]
+  };
+  const COMP = [['Bcom','bcom','Lose vs Booking'],['Acom','acom','Lose vs Agoda'],['Supplier','supplier','Lose vs brand website'],['Ctrip','ctrip','Lose vs Ctrip'],['Local','local','Lose vs local competitor']];
+  const GN = { unf:'All-In Rate · Unfenced', fen:'All-In Rate · Fenced', av:'Availability · Avail' };
+  const fw = $('fw');
+  Object.keys(FW).forEach(g => {
+    fw.querySelector(`[data-g="${g}"]`).innerHTML = FW[g].map((x, k) => `<button class="${x[3] ? '' : 'new'}" data-g="${g}" data-k="${k}" data-n="${x[0]}" data-c="#${x[1]}">${x[0]}</button>`).join('');
+  });
+  fw.querySelector('[data-g="comp"]').innerHTML = COMP.map(x => `<div data-n="${x[0]}" data-c="#${x[1]}"><span>${x[0]}</span><small>${x[2]}</small></div>`).join('');
+  function fwShow(btn){
+    fw.querySelectorAll('.fw-chips button').forEach(b => b.classList.toggle('sel', b === btn));
+    const [n, c, d, olds] = FW[btn.dataset.g][+btn.dataset.k];
+    $('fwDet').innerHTML = `<div class="path">${GN[btn.dataset.g]}</div><h4>${n}<code>#${c}</code></h4><p>${d}</p><div class="olds"><em>Replaced:</em>` +
+      (olds ? olds.map(o => `<span><code>${o[0]}</code>${o[1]}</span>`).join('') : '<span class="none">New issue, found in the case review. No old code existed.</span>') + '</div>';
+  }
+  fw.querySelectorAll('.fw-chips button').forEach(b => b.onclick = () => fwShow(b));
+  fw.querySelectorAll('.fw-tog button').forEach(t => t.onclick = () => {
+    const v = t.dataset.v; fw.classList.toggle('code', v === 'code');
+    fw.querySelectorAll('.fw-tog button').forEach(x => x.classList.toggle('on', x === t));
+    fw.querySelectorAll('.fw-chips button').forEach(b => b.textContent = v === 'code' ? b.dataset.c : b.dataset.n);
+    fw.querySelectorAll('.fw-comp > div > span').forEach(sp => sp.textContent = v === 'code' ? sp.parentNode.dataset.c : sp.parentNode.dataset.n);
+  });
+  fwShow(fw.querySelector('.fw-chips button'));
   const tmap = $('tmap');
   new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) tmap.classList.add('on'); }), { threshold:.2 }).observe(tmap);
   const funnel = $('funnel');
