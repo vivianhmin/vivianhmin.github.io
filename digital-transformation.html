@@ -200,8 +200,18 @@
   .arc-card .so{margin-top:10px;font-size:14px;color:#17703c;font-weight:600}
 
   /* deck viewer */
-  .deck{margin-top:14px;background:#1a1a1a;border-radius:6px;overflow:hidden;position:relative;aspect-ratio:16/10}
-  .deck iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .deck{margin-top:14px;background:#111;border-radius:6px;overflow:hidden;position:relative;aspect-ratio:1467/825;outline:none}
+  .deck img{display:block;width:100%;height:100%;object-fit:contain}
+  .dk-nav{position:absolute;display:grid;place-items:center;padding:0;margin:0;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.88);font-size:18px;cursor:pointer;opacity:0;transition:opacity .2s}
+  .deck:hover .dk-nav,.deck:focus .dk-nav{opacity:1}
+  .dk-p{left:12px}.dk-n{right:12px}
+  .dk-nav:disabled{opacity:0!important;pointer-events:none}
+  .dk-count{position:absolute;right:12px;bottom:10px;font:600 12px var(--head);color:#fff;background:rgba(0,0,0,.55);padding:4px 9px;border-radius:999px}
+  .dk-strip{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:thin}
+  .dk-strip button{all:unset;cursor:pointer;flex:0 0 96px;aspect-ratio:1467/825;opacity:.45;outline:2px solid transparent;outline-offset:1px;transition:opacity .2s}
+  .dk-strip button.on{opacity:1;outline-color:var(--ink)}
+  .dk-strip img{width:100%;height:100%;object-fit:cover;display:block}
+  .arc-card .jump{all:unset;cursor:pointer;display:inline-block;margin-top:10px;font-size:13.5px;font-weight:600;border-bottom:1px solid var(--ink)}
   .deck-cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
   .deck-cap a{color:var(--ink)}
 
@@ -221,7 +231,7 @@
     .arc-line button{padding-top:0}
     .arc-line span,.arc-line small{display:none}
     .arc-card{grid-template-columns:1fr;gap:10px}
-    .deck{aspect-ratio:4/3}
+    .dk-nav{opacity:1}
     .wins{grid-template-columns:1fr}
     .wins div+div{padding-left:0;border-left:0;border-top:1px solid var(--soft)}
   }
@@ -309,9 +319,15 @@
   <section>
     <h2><small>04</small>The deck</h2>
     <div class="body">
-      <p>Neutral and data-driven, built as an executive report rather than a product brochure.</p>
-      <div class="deck"><iframe src="https://drive.google.com/file/d/1w6BPeHLmgPYNfCt03EyymZ_1UQpvqt8G/preview" title="Panopto and Digital Transformation pitch deck" loading="lazy" allow="autoplay"></iframe></div>
-      <div class="deck-cap"><span>Presented to SKT executives, April 21, 2023</span><a href="https://drive.google.com/file/d/1w6BPeHLmgPYNfCt03EyymZ_1UQpvqt8G/view" target="_blank" rel="noopener">Open full screen ↗</a></div>
+      <p>Neutral and data-driven, built as an executive report rather than a product brochure. Click through all 16 slides.</p>
+      <div class="deck" id="deck" tabindex="0" aria-label="Pitch deck, use arrow keys to move between slides">
+        <img id="dkImg" alt="">
+        <button class="dk-nav dk-p" id="dkPrev" aria-label="Previous slide">←</button>
+        <button class="dk-nav dk-n" id="dkNext" aria-label="Next slide">→</button>
+        <span class="dk-count" id="dkCount"></span>
+      </div>
+      <div class="dk-strip" id="dkStrip"></div>
+      <div class="deck-cap"><span>Presented to SKT executives, April 21, 2023</span><a href="assets/dx/deck.pdf" target="_blank" rel="noopener">Open PDF ↗</a></div>
     </div>
   </section>
 
@@ -368,21 +384,42 @@
 
   // narrative arc
   const A = [
-    { t:'Industry urgency', y:'48px', ask:'Why should we care now?', pts:['Digital transformation spend keeps growing worldwide.','Video adoption is rising in enterprise learning.','Standing still is a competitive risk.'], so:'Inaction becomes the risky option.' },
-    { t:'Historic success', y:'4px', ask:'Did it ever work for us?', pts:['A reminder of SKT\'s own COVID-era results with Panopto.','Remote training kept running when offices closed.'], so:'The value is proven inside the company.' },
-    { t:'New use cases', y:'0px', ask:'What would we use it for now?', pts:['Social learning and knowledge pooling across teams.','Peers like Qualcomm and K.K. Ashisuto already do this.'], so:'There is a post-COVID job for the platform.' },
-    { t:'ROI', y:'10px', ask:'Is it worth the money?', pts:['Cost savings and productivity gains, in numbers.','Framed for the people who approve the budget.'], so:'The budget owner has something to sign off on.' },
-    { t:'The decision', y:'26px', ask:'So what do we do?', pts:['Renewal positioned as a strategic investment.','A clear, simple next step.'], so:'Renew.' },
+    { t:'Industry urgency', sl:[4,5], y:'48px', ask:'Why should we care now?', pts:['Digital transformation spend keeps growing worldwide.','Video adoption is rising in enterprise learning.','Standing still is a competitive risk.'], so:'Inaction becomes the risky option.' },
+    { t:'Historic success', sl:[7], y:'4px', ask:'Did it ever work for us?', pts:['A reminder of SKT\'s own COVID-era results with Panopto.','Remote training kept running when offices closed.'], so:'The value is proven inside the company.' },
+    { t:'New use cases', sl:[10,11,12,13], y:'0px', ask:'What would we use it for now?', pts:['Social learning and knowledge pooling across teams.','Peers like Qualcomm and K.K. Ashisuto already do this.'], so:'There is a post-COVID job for the platform.' },
+    { t:'ROI', sl:[15], y:'10px', ask:'Is it worth the money?', pts:['Cost savings and productivity gains, in numbers.','Framed for the people who approve the budget.'], so:'The budget owner has something to sign off on.' },
+    { t:'The decision', sl:[16], y:'26px', ask:'So what do we do?', pts:['Renewal positioned as a strategic investment.','A clear, simple next step.'], so:'Renew.' },
   ];
   const line = $('arcLine');
   line.insertAdjacentHTML('beforeend', A.map((a, k) => `<button data-k="${k}" style="--y:${a.y}"><i>${k + 1}</i><span>${a.t}</span></button>`).join(''));
   function arc(k){
     line.querySelectorAll('button').forEach((b, i) => b.classList.toggle('on', i === k));
     const a = A[k];
-    $('arcCard').innerHTML = `<div class="arc-card"><div class="ask">Step ${k + 1} · ${a.t}<b>“${a.ask}”</b></div><div><ul>${a.pts.map(p => `<li>${p}</li>`).join('')}</ul><div class="so">→ ${a.so}</div></div></div>`;
+    $('arcCard').innerHTML = `<div class="arc-card"><div class="ask">Step ${k + 1} · ${a.t}<b>“${a.ask}”</b></div><div><ul>${a.pts.map(p => `<li>${p}</li>`).join('')}</ul><div class="so">→ ${a.so}</div><button class="jump" data-s="${a.sl[0]}">See slide${a.sl.length > 1 ? "s " + a.sl[0] + "–" + a.sl[a.sl.length-1] : " " + a.sl[0]} in the deck ↓</button></div></div>`;
+    $("arcCard").querySelector(".jump").onclick = e => { dk(+e.target.dataset.s - 1); $("deck").scrollIntoView({behavior:"smooth", block:"center"}); };
   }
   line.querySelectorAll('button').forEach(b => b.onclick = () => arc(+b.dataset.k));
-  arc(0);
+  // deck viewer
+  const N = 16, src = k => 'assets/dx/s-' + String(k + 1).padStart(2, '0') + '.jpg';
+  let di = 0;
+  $('dkStrip').innerHTML = Array.from({length:N}, (_, k) => `<button aria-label="Slide ${k + 1}"><img src="${src(k)}" alt="" loading="lazy"></button>`).join('');
+  const thumbs = [...$('dkStrip').children];
+  function dk(k){
+    di = Math.max(0, Math.min(N - 1, k));
+    $('dkImg').src = src(di); $('dkImg').alt = 'Slide ' + (di + 1);
+    $('dkCount').textContent = (di + 1) + ' / ' + N;
+    $('dkPrev').disabled = di === 0; $('dkNext').disabled = di === N - 1;
+    thumbs.forEach((t, i) => t.classList.toggle('on', i === di));
+    thumbs[di].scrollIntoView({block:'nearest', inline:'nearest'});
+  }
+  thumbs.forEach((t, i) => t.onclick = () => dk(i));
+  $('dkPrev').onclick = () => dk(di - 1); $('dkNext').onclick = () => dk(di + 1);
+  $('deck').addEventListener('keydown', e => { if(e.key === 'ArrowRight') dk(di + 1); if(e.key === 'ArrowLeft') dk(di - 1); });
+  $('dkImg').onclick = () => dk(di + 1);
+  let sx = 0; $('deck').addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
+  $('deck').addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 50) dk(di + (dx < 0 ? 1 : -1)); });
+  window.dk = dk;
+  arc(0); dk(0);
 })();
 </script>
 <script src="menu.js" defer></script>
