@@ -6,9 +6,9 @@
 <title>Player Redesign — Vivian Min</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--head:Futura,'Futura PT','Jost','Century Gothic',sans-serif;--body:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Inter,'Segoe UI',sans-serif;--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
+  :root{--head:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--body:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
   a{color:inherit}
@@ -297,12 +297,13 @@
     section{grid-template-columns:1fr;padding:40px 0}
     .tabs{gap:20px}
   }
-  /* ================= type: Futura for headings, SF Pro (Apple system) for reading ================= */
+  /* ================= type: Manrope throughout ================= */
   body{font-family:var(--body);letter-spacing:0}
   h1,h2,h3,.demo-title,section > h2,.kicker,.story .step,.facts dt,.side-label,.winsize b,
   .stat strong,.outcomes strong,.feature b,.feature .n,.feature .tag,.status,.next-list li::before,
   .tabs button,.bar,.next a,.facts dd b{font-family:var(--head)}
-  h1{font-weight:500;letter-spacing:-.01em}
+  h1{font-weight:600;letter-spacing:-.03em}
+  .demo-title,.stat strong,.outcomes strong{letter-spacing:-.025em}
   .body p,.body li,.lede,.story p,.facts dd,.note p,.reflect{letter-spacing:-.003em}
   .lede{font-size:clamp(18px,1.9vw,22px);line-height:1.6}
   .body p,.body li{font-size:17.5px;line-height:1.65}
@@ -488,9 +489,9 @@
     c.fillStyle = g; c.fillRect(0, 0, w, h);
     const sx = w*.08, sy = h*.1, sw = w*.56, sh = h*.6;
     c.fillStyle = '#f5f3ef'; c.fillRect(sx, sy, sw, sh);
-    c.fillStyle = '#1b1b1b'; c.font = `700 ${h*.06}px Futura, Jost, sans-serif`; c.textBaseline = 'top';
+    c.fillStyle = '#1b1b1b'; c.font = `700 ${h*.06}px Manrope, sans-serif`; c.textBaseline = 'top';
     c.fillText(ch.name, sx + sw*.06, sy + sh*.08);
-    c.fillStyle = '#8a857e'; c.font = `500 ${h*.03}px Futura, Jost, sans-serif`;
+    c.fillStyle = '#8a857e'; c.font = `500 ${h*.03}px Manrope, sans-serif`;
     c.fillText('Q3 Review · All hands', sx + sw*.06, sy + sh*.22);
     if(ch.name === 'Market overview'){
       [.35,.5,.42,.68,.92].forEach((v,i) => { const bh = sh*.5*v*Math.min(1, k*2 + .2); c.fillStyle = i===4 ? '#ff4b3e' : '#2f6b5c';
@@ -499,7 +500,7 @@
       c.strokeStyle = '#1b1b1b'; c.lineWidth = h*.006; c.beginPath(); c.moveTo(sx+sw*.1, sy+sh*.65); c.lineTo(sx+sw*.9, sy+sh*.65); c.stroke();
       [0,1,2,3].forEach(i => { c.fillStyle = k*4 > i ? '#8a4a2c' : '#d8d2c8'; c.beginPath(); c.arc(sx+sw*(.15+i*.23), sy+sh*.65, h*.025, 0, 7); c.fill(); });
     } else if(ch.name === 'Q&A'){
-      c.fillStyle = '#4f3f73'; c.font = `700 ${h*.16}px Futura, Jost, sans-serif`; c.fillText('?', sx+sw*.42, sy+sh*.42);
+      c.fillStyle = '#4f3f73'; c.font = `700 ${h*.16}px Manrope, sans-serif`; c.fillText('?', sx+sw*.42, sy+sh*.42);
     } else {
       c.fillStyle = '#2f4a7a'; c.fillRect(sx+sw*.06, sy+sh*.5, sw*.5*Math.min(1,k*1.5+.1), h*.012);
     }
@@ -507,7 +508,7 @@
     c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.ellipse(px, h*.9, w*.06, h*.02, 0, 0, 7); c.fill();
     c.fillStyle = '#e9d6c4'; c.beginPath(); c.arc(px, py, h*.07, 0, 7); c.fill();
     c.fillStyle = '#16181d'; c.beginPath(); c.moveTo(px - w*.07, h*.9); c.quadraticCurveTo(px, h*.38, px + w*.07, h*.9); c.fill();
-    c.fillStyle = 'rgba(255,255,255,.55)'; c.font = `500 ${h*.022}px Futura, Jost, sans-serif`;
+    c.fillStyle = 'rgba(255,255,255,.55)'; c.font = `500 ${h*.022}px Manrope, sans-serif`;
     c.fillText('enterprise embed · all hands', w*.08, h*.78);
   }
   const caps = [
@@ -556,8 +557,8 @@
             <div class="tip"><span class="chap"></span><canvas width="256" height="144"></canvas><span class="tt">0:00</span></div></div>
           <div class="crow">
             <button class="pp" aria-label="Play or pause"><span class="ip"><svg class="i f" viewBox="0 0 24 24"><rect x="6.5" y="5" width="3.6" height="14" rx=".6"/><rect x="13.9" y="5" width="3.6" height="14" rx=".6"/></svg></span><span class="iq" hidden><svg class="i f" viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></svg></span></button>
-            <button class="rw" aria-label="Back 10 seconds"><svg class="i" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4 4v4h4"/><text x="12" y="15" font-size="6.5" text-anchor="middle" fill="#fff" stroke="none" font-family="Futura, Jost, sans-serif">10</text></svg></button>
-            <button class="ff" aria-label="Forward 10 seconds"><svg class="i" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M20 4v4h-4"/><text x="12" y="15" font-size="6.5" text-anchor="middle" fill="#fff" stroke="none" font-family="Futura, Jost, sans-serif">10</text></svg></button>
+            <button class="rw" aria-label="Back 10 seconds"><svg class="i" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4 4v4h4"/><text x="12" y="15" font-size="6.5" text-anchor="middle" fill="#fff" stroke="none" font-family="Manrope, sans-serif">10</text></svg></button>
+            <button class="ff" aria-label="Forward 10 seconds"><svg class="i" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M20 4v4h-4"/><text x="12" y="15" font-size="6.5" text-anchor="middle" fill="#fff" stroke="none" font-family="Manrope, sans-serif">10</text></svg></button>
             <button class="vol" aria-label="Volume"><svg class="i" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z" fill="#fff"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></button>
             <span class="time"><b>0:00</b><small>/ 1:00</small></span>
             <span class="sp"></span>
