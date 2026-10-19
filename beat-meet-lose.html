@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+<title>Beat, Meet, Lose — Vivian Min</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--head:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--body:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit}
+
+  .bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:16px clamp(16px,4vw,48px);background:rgba(244,241,238,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--soft);font-family:var(--body);font-size:15px}
+  .bar a{text-decoration:none}
+  .bar a:hover{color:var(--red)}
+  .bar .where{color:var(--muted)}
+
+  main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 100px}
+
+  .hero{padding:clamp(48px,8vw,96px) 0 40px}
+  .kicker{font-family:var(--body);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--body);font-weight:700;font-size:clamp(40px,7vw,84px);letter-spacing:-.04em;line-height:.98;margin:14px 0 24px}
+  .lede{font-size:clamp(18px,2vw,22px);line-height:1.6;max-width:780px;color:#33312e}
+  .story{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;background:#fff;box-shadow:0 10px 24px rgba(40,30,20,.06)}
+  .story li{padding:24px 26px 26px;position:relative}
+  .story li+li{border-left:1px solid var(--soft)}
+  .story .step{display:block;font-family:var(--body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .story li:first-child .step{color:var(--red)}
+  .story li:last-child .step{color:var(--green)}
+  .story p{font-size:16.5px;line-height:1.5}
+  .facts{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1.5px solid var(--line)}
+  .facts > div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--soft);align-items:baseline}
+  .facts > div:not(.wide):first-child{padding-right:24px}
+  .facts .wide{grid-column:1 / -1}
+  .facts dt{font-family:var(--body);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .facts dd{font-size:16.5px}
+  .facts dd b{font-weight:600}
+  .dim{color:var(--muted)}
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chips li{font-size:14px;padding:5px 12px;border:1px solid var(--ink);border-radius:999px}
+  .chips.light{margin-top:0}
+  .chips.light li{border-color:var(--soft);background:#fff}
+
+  .outcomes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .outcomes div{background:#fff;padding:22px 24px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .outcomes strong{display:block;font-family:var(--body);font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .outcomes p{font-size:15.5px;color:#4a4742;margin-top:10px;line-height:1.45}
+  .lessons{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .lessons h3{margin-top:0!important}
+  .lessons p{font-size:16.5px!important}
+  .next-list{list-style:none;counter-reset:n;max-width:760px;margin:0!important}
+  .next-list li{counter-increment:n;display:grid;grid-template-columns:44px 1fr;font-size:17px;padding:14px 0;border-bottom:1px solid var(--soft);margin:0!important}
+  .next-list li::before{content:counter(n,decimal-leading-zero);font-family:var(--body);font-size:13px;color:var(--muted);padding-top:3px}
+  .next-list b{font-weight:600}
+  .reflect{margin-top:28px;padding:4px 0 4px 22px;border-left:3px solid var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;max-width:760px}
+
+  section{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--soft)}
+  section > h2{font-family:var(--body);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  section > h2 small{display:block;font-family:var(--body);font-weight:400;font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
+  .body p{font-size:17.5px;max-width:740px}
+  .body p+p{margin-top:14px}
+  .body h3{font-family:var(--body);font-size:20px;font-weight:600;margin:28px 0 8px}
+  .body ul{margin:12px 0 0 22px;max-width:740px}
+  .body li{font-size:17px;margin-top:8px}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .stat{background:#fff;padding:22px 22px 20px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .stat strong{display:block;font-family:var(--body);font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .stat span{display:block;font-size:14.5px;color:#4a4742;margin-top:8px;line-height:1.4}
+  .bars{margin-top:22px;max-width:620px}
+  .bars div{display:grid;grid-template-columns:150px 1fr 44px;align-items:center;gap:12px;font-size:15px;margin-top:10px}
+  .bars i{display:block;height:10px;background:var(--ink)}
+  .bars b{font-family:var(--body);font-weight:500;font-size:14px}
+
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .feature{background:#fff;padding:22px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
+  .feature .n{font-family:var(--body);font-size:12px;color:var(--muted)}
+  .feature b{display:block;font-family:var(--body);font-size:19px;margin:6px 0 8px;line-height:1.25}
+  .feature p{font-size:15px;line-height:1.5}
+  .feature .tag{display:inline-block;margin-top:12px;font-family:var(--body);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line)}
+  .feature .tag.off{color:var(--muted);border-color:var(--soft)}
+
+  .timeline{margin-top:16px;border-left:1.5px solid var(--line)}
+  .timeline div{position:relative;padding:0 0 16px 22px;font-size:16.5px}
+  .timeline div::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line)}
+  .timeline b{font-family:var(--body);font-weight:600;margin-right:8px}
+
+  .next{padding-top:56px;font-family:var(--body)}
+  .next a{font-size:20px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+  .next a:hover{color:var(--red);border-color:var(--red)}
+  footer{margin-top:60px;font-size:13px;color:var(--muted)}
+
+  /* ================= editorial pass ================= */
+  body{font-weight:400;letter-spacing:.005em;color:#1d1c1a}
+  .kicker{font-size:12px;letter-spacing:.22em;font-weight:500}
+  h1{font-weight:500;letter-spacing:-.015em;line-height:1.02;font-size:clamp(40px,6.4vw,78px);max-width:16ch}
+  .lede{font-size:clamp(19px,2vw,23px);line-height:1.55;font-weight:400;max-width:34em}
+
+  .story{background:none;box-shadow:none;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--soft);margin-top:44px}
+  .story li{padding:20px 28px 24px 0}
+  .story li+li{border-left:none;padding-left:28px;border-left:1px solid var(--soft)}
+  .story .step{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .story p{font-size:17px}
+
+  .facts{border-top:none;margin-top:28px}
+  .facts > div{grid-template-columns:110px 1fr}
+  .facts dt{font-size:11.5px;letter-spacing:.2em;font-weight:500}
+  .facts dd{font-size:17px}
+  .chips,.chips.light{display:block;margin-top:2px}
+  .chips li,.chips.light li{display:inline;border:none;background:none;padding:0;border-radius:0;font-size:17px}
+  .chips li+li::before{content:" / ";color:var(--muted)}
+  .facts dd b{font-weight:500;display:block;margin-bottom:2px}
+
+  section{grid-template-columns:220px 1fr;padding:56px 0;border-bottom:none;border-top:1px solid var(--soft)}
+  section > h2{font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;line-height:1.5;color:var(--ink);padding-top:4px}
+  section > h2 small{display:inline;font-size:13px;letter-spacing:.2em;color:var(--muted);margin:0 10px 0 0}
+  .body p,.body li{font-size:18px;line-height:1.6}
+  .body h3{font-weight:500;font-size:22px;letter-spacing:-.005em;margin:36px 0 10px}
+
+  .features{gap:0;border-top:1.5px solid var(--ink)}
+  .feature{background:none;box-shadow:none;padding:18px 24px 6px 0}
+  .feature+.feature{padding-left:24px;border-left:1px solid var(--soft)}
+  .feature b{font-weight:500;font-size:20px}
+  .feature .tag{border:none;padding:0;font-size:11px;letter-spacing:.18em;color:var(--green)}
+  .feature .tag.off{color:var(--amber)}
+
+  .stats,.outcomes{gap:0;border-top:1.5px solid var(--ink)}
+  .stat,.outcomes div{background:none;box-shadow:none;padding:20px 24px 22px 0}
+  .stat+.stat{padding-left:24px;border-left:1px solid var(--soft)}
+  .stat strong,.outcomes strong{font-weight:500;font-size:52px;letter-spacing:-.02em}
+  .stat span,.outcomes p{font-size:15.5px}
+  .outcomes div{border-bottom:1px solid var(--soft)}
+  .outcomes div:nth-child(even){padding-left:24px;border-left:1px solid var(--soft)}
+  .bars i{height:6px}
+  .bars b{font-weight:500}
+
+  .lessons h3{font-size:20px}
+  .next-list li{font-size:18px}
+  .next-list li::before{font-size:13px;letter-spacing:.1em}
+  .next-list b{font-weight:500}
+  .reflect{font-weight:400;font-size:22px;border-left-width:2px}
+  .timeline b{font-weight:500}
+
+  /* ================= type: Manrope throughout ================= */
+  body{font-family:var(--body);letter-spacing:0}
+  h1,h2,h3,.demo-title,section > h2,.kicker,.story .step,.facts dt,.side-label,.winsize b,
+  .stat strong,.outcomes strong,.feature b,.feature .n,.feature .tag,.status,.next-list li::before,
+  .tabs button,.bar,.next a,.facts dd b{font-family:var(--head)}
+  h1{font-weight:600;letter-spacing:-.03em}
+  .demo-title,.stat strong,.outcomes strong{letter-spacing:-.025em}
+  .body p,.body li,.lede,.story p,.facts dd,.note p,.reflect{letter-spacing:-.003em}
+  .lede{font-size:clamp(18px,1.9vw,22px);line-height:1.6}
+  .body p,.body li{font-size:17.5px;line-height:1.65}
+  .reflect{font-size:20px;line-height:1.55}
+
+  /* ================= BML demo ================= */
+  section > .body{min-width:0}
+  .demo{margin:12px 0 8px;padding:44px 0;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+  .demo-title{font-weight:600;font-size:clamp(28px,3.2vw,38px);letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+  .demo-sub{font-size:17px;color:var(--muted);margin-top:10px;max-width:44em}
+  .cases{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 22px}
+  .cases button{font:500 14px var(--head);border:1px solid var(--soft);background:#fff;padding:9px 14px;border-radius:999px;cursor:pointer;color:var(--ink)}
+  .cases button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .cases button i{font-style:normal;margin-left:6px;font-size:11px;letter-spacing:.12em;padding:2px 6px;border-radius:3px;background:#f3d4d1;color:#a1271d}
+  .cases button.fixed i{background:#d4ecdc;color:#17703c}
+  .cases button.on i{background:rgba(255,255,255,.18);color:#fff}
+
+  .board{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:start}
+  .dash{background:#fff;border:1px solid var(--soft)}
+  .dash-top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--soft)}
+  .dash-top b{font-size:17px;font-weight:600}
+  .dash-top small{display:block;font-size:13px;color:var(--muted)}
+  .badge{font:700 13px var(--head);letter-spacing:.14em;padding:6px 12px;border-radius:4px;transition:background .4s,color .4s}
+  .badge.lose{background:#f3d4d1;color:#a1271d}
+  .badge.meet{background:#ece7d7;color:#7a5d12}
+  .badge.beat{background:#d4ecdc;color:#17703c}
+  .rates{width:100%;border-collapse:collapse;font-size:15px}
+  .rates td{padding:12px 18px;border-bottom:1px solid #efece7}
+  .rates td:nth-child(2){text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+  .rates td:nth-child(3){width:110px;text-align:right;font-size:12px;color:var(--muted);white-space:nowrap}
+  .rates tr.exp td{background:#f7f6f3;font-weight:600}
+  .rates tr.low td:nth-child(2){color:#a1271d}
+  .rates .na{color:var(--muted);font-weight:400}
+  .dash-foot{padding:12px 18px;font-size:13px;color:var(--muted)}
+
+  .steps{list-style:none}
+  .steps > li{border-top:1px solid var(--soft);padding:14px 0}
+  .steps > li:last-child{border-bottom:1px solid var(--soft)}
+  .steps .h{display:flex;gap:10px;align-items:baseline;font-weight:600;font-size:16px}
+  .steps .h i{font-style:normal;font-size:12px;letter-spacing:.14em;color:var(--muted);width:24px}
+  .steps li.done .h i{color:var(--green)}
+  .steps li.lock{opacity:.4}
+  .steps p{font-size:15px;color:#3a3835;margin:6px 0 0 34px;line-height:1.5}
+  .codes{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0 34px}
+  .codes button{font:500 13.5px var(--head);border:1px solid var(--soft);background:#fff;padding:8px 11px;border-radius:6px;cursor:pointer;text-align:left;color:var(--ink)}
+  .codes button b{font-family:ui-monospace,Menlo,monospace;font-size:12px;margin-right:6px;color:var(--muted)}
+  .codes button.right{border-color:var(--green);background:#e9f5ee}
+  .codes button.wrong{border-color:#d39b95;background:#fbecea;animation:shake .3s}
+  .codes button:disabled{cursor:default}
+  .play{margin:12px 0 0 34px;background:#fff;border:1px solid var(--soft);padding:12px 14px;font-size:14.5px;line-height:1.5;display:none}
+  .play.show{display:block}
+  .play b{font-weight:600}
+  .play .who{display:inline-block;margin-top:6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .go{margin:12px 0 0 34px;font:600 14px var(--head);background:var(--ink);color:#fff;border:none;padding:10px 16px;border-radius:6px;cursor:pointer;display:none}
+  .go.show{display:inline-block}
+  .clock{display:grid;grid-template-columns:1fr 1fr;border-top:1.5px solid var(--ink);margin-top:22px}
+  .clock div{padding:14px 16px 14px 0}
+  .clock div+div{padding-left:16px;border-left:1px solid var(--soft)}
+  .clock strong{display:block;font-size:34px;font-weight:500;letter-spacing:-.02em;line-height:1}
+  .clock span{display:block;font-size:13.5px;color:#4a4742;margin-top:6px}
+  .demo-note{margin-top:14px;font-size:13px;color:var(--muted)}
+
+  .bml{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);margin-top:20px}
+  .bml div{padding:18px 20px 18px 0}
+  .bml div+div{padding-left:20px;border-left:1px solid var(--soft)}
+  .bml b{display:inline-block;font:700 13px var(--head);letter-spacing:.14em;padding:5px 10px;border-radius:4px;margin-bottom:10px}
+  .bml p{font-size:15.5px!important}
+
+  .funnel{margin-top:22px;max-width:680px}
+  .funnel .row{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:16px;margin-top:10px;font-size:15px}
+  .funnel .row i{display:block;height:34px;background:var(--ink);color:#fff;font-style:normal;font-weight:600;font-size:14px;display:flex;align-items:center;padding-left:12px;transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.3,.7,.2,1)}
+  .funnel.on .row i{transform:scaleX(1)}
+
+  .compare{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);margin-top:20px}
+  .compare > div{padding:20px 20px 20px 0}
+  .compare > div+div{padding-left:20px;border-left:1px solid var(--soft)}
+  .compare .lbl{font-size:13.5px;color:#4a4742}
+  .compare .ba{display:flex;align-items:baseline;gap:10px;margin-top:8px}
+  .compare .ba s{font-size:22px;color:var(--muted);text-decoration-thickness:1.5px}
+  .compare .ba strong{font-size:46px;font-weight:500;letter-spacing:-.02em;line-height:1}
+  .compare .up{font-size:13px;color:var(--green);font-weight:600;margin-top:6px}
+
+  @keyframes shake{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+  @media (max-width:860px){
+    section{grid-template-columns:minmax(0,1fr);gap:18px;padding:40px 0}
+    .story{grid-template-columns:1fr}
+    .story li,.story li+li{padding:18px 0;border-left:none}
+    .story li+li{border-top:1px solid var(--soft)}
+    .facts{grid-template-columns:1fr}
+    .facts > div{grid-template-columns:1fr;gap:6px}
+    .lessons,.features,.board,.bml,.compare{grid-template-columns:1fr}
+    .feature,.feature+.feature,.bml div,.bml div+div,.compare > div,.compare > div+div{padding-left:0;border-left:none;border-bottom:1px solid var(--soft)}
+    .bar .where{display:none}
+    .funnel .row{grid-template-columns:100px 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a href="index.html#guide">← Back to the floor guide</a>
+  <span class="where">Museum of Vivian Min · Floor 3 · Professional</span>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="kicker">3.5 · Beat, Meet, Lose · Expedia Group</div>
+    <h1>Beat, Meet, Lose: Fixing Why We Lost on Price</h1>
+    <p class="lede">Every day, Expedia compared its hotel prices with Agoda, Booking.com and local Korean travel sites. The dashboard could show that Expedia was more expensive, but not why. Finding the reason was slow, manual detective work. I led a project that gave the team a shared code for every pricing problem and a playbook for fixing each one. It started in Korea and became part of Expedia's global dashboard.</p>
+
+    <ol class="story">
+      <li><span class="step">The problem</span><p>Associates investigated each lost price by hand. About five issues were escalated a day; only three got fixed.</p></li>
+      <li><span class="step">What I did</span><p>Logged ~690 real cases, sorted them into coded categories, and wrote a fix-it playbook for each code.</p></li>
+      <li><span class="step">The result</span><p>More cases solved, a higher success rate, and a framework Expedia rolled into its global BML dashboard.</p></li>
+    </ol>
+
+    <dl class="facts">
+      <div><dt>Timeline</dt><dd>Jul 2018 – Jan 2019 <span class="dim">· 24 weeks</span></dd></div>
+      <div><dt>Team</dt><dd>Me and 4 Korea colleagues, with APAC counterparts and Expedia Global</dd></div>
+      <div class="wide"><dt>My role</dt><dd><b>Project Lead</b>
+        <ul class="chips"><li>Research</li><li>Analysis</li><li>Process design</li><li>Training</li><li>Executive presentations</li></ul></dd></div>
+      <div class="wide"><dt>Tools</dt><dd><ul class="chips light"><li>SQL</li><li>Tableau</li><li>Google Workspace</li><li>MS Office</li></ul></dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <h2><small>01</small>Beat, meet or lose?</h2>
+    <div class="body">
+      <p>For every hotel, Expedia's price for the same room and date was compared with each competitor.</p>
+      <div class="bml">
+        <div><b class="badge beat">BEAT</b><p>Expedia is cheaper than the competitor.</p></div>
+        <div><b class="badge meet">MEET</b><p>Expedia matches the competitor's price.</p></div>
+        <div><b class="badge lose">LOSE</b><p>Expedia is more expensive, and travelers book elsewhere.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>02</small>What this project shows</h2>
+    <div class="body">
+      <ul>
+        <li>Turning scattered, anecdotal reports into structured, measurable insight</li>
+        <li>Combining market research, data analysis, workflow design and stakeholder management</li>
+        <li>Running an 8-month initiative while keeping daily KPIs on track</li>
+        <li>Influence without authority: a local idea adopted by APAC and Global HQ</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>03</small>The problem</h2>
+    <div class="body">
+      <p>Each Market Associate worked with an Account Manager on one region of Korea. Associates watched prices daily and dug into each "lose"; Account Managers negotiated the hard fixes with hotels. The old workflow had three manual steps: check the dashboard, check the live sites to find the cause, then escalate by email.</p>
+      <div class="features">
+        <div class="feature"><div class="n">01</div><b>Slow, manual digging</b><p>Every lost price meant a fresh investigation, with no patterns or next steps to follow.</p></div>
+        <div class="feature"><div class="n">02</div><b>Blind spots</b><p>The global dashboard ignored local OTAs that drove much of APAC's bookings.</p></div>
+        <div class="feature"><div class="n">03</div><b>Nothing shared</b><p>Findings lived on personal drives and in emails, so leadership couldn't see the scale.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTERACTIVE ============ -->
+  <div class="demo" id="demo">
+    <div class="kicker">Try it · Interactive</div>
+    <h2 class="demo-title">Diagnose a lost price</h2>
+    <p class="demo-sub">Work through a case the way an associate did after the project: spot the lose, compare the sites, pick the issue code, and follow the playbook.</p>
+
+    <div class="cases" id="cases"></div>
+
+    <div class="board">
+      <div class="dash">
+        <div class="dash-top"><div><b id="hName"></b><small id="hMeta"></small></div><span class="badge lose" id="badge">LOSE</span></div>
+        <table class="rates" id="rates"></table>
+        <div class="dash-foot" id="foot"></div>
+      </div>
+
+      <div>
+        <ol class="steps" id="steps">
+          <li data-s="1"><div class="h"><i>01</i>Spot the lose</div><p id="s1"></p></li>
+          <li data-s="2"><div class="h"><i>02</i>Pick the issue code</div><p>What explains the gap?</p><div class="codes" id="codes"></div><div class="play" id="play"></div></li>
+          <li data-s="3"><div class="h"><i>03</i>Apply the fix</div><p id="s3">Follow the playbook to close the gap.</p><button class="go" id="go">Apply the fix</button></li>
+        </ol>
+        <div class="clock">
+          <div><strong id="tBefore">—</strong><span>to diagnose before: open-ended digging</span></div>
+          <div><strong id="tAfter">—</strong><span>with codes and the playbook</span></div>
+        </div>
+        <p class="demo-note">Hotels, prices, codes and times are illustrative. The real categories were internal to Expedia.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2><small>04</small>From cases to codes</h2>
+    <div class="body">
+      <p>Instead of email, the whole team logged every issue in one shared sheet. Patterns appeared fast, and the categories were sharpened twice before they became the playbook.</p>
+      <div class="funnel" id="funnel">
+        <div class="row"><span>Weeks 3–7</span><i style="width:70%">480 cases logged</i></div>
+        <div class="row"><span>Weeks 8–9</span><i style="width:100%">+210 cases · 13 common issues</i></div>
+        <div class="row"><span>Weeks 10–11</span><i style="width:44%">12 categories · 14 subcategories</i></div>
+        <div class="row"><span>Week 12</span><i style="width:26%">1 coded playbook</i></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>05</small>Scaling it up</h2>
+    <div class="body">
+      <div class="timeline">
+        <div><b>Wk 1–2</b>Shared the goal, got the team's buy-in, moved from email to a shared sheet</div>
+        <div><b>Wk 3–7</b>Logged issues and findings: 480 cases</div>
+        <div><b>Wk 8–9</b>Found 13 common issues; added 210 more cases</div>
+        <div><b>Wk 10–11</b>Refined to 12 categories and 14 subcategories; built the coded playbook</div>
+        <div><b>Wk 12</b>Measured against pre-project numbers; presented to APAC and Global VPs</div>
+        <div><b>Wk 13–18</b>Validated with Japan, Taiwan, Singapore and Australia</div>
+        <div><b>Wk 19–22</b>Adjusted codes and workflows from the APAC pilot</div>
+        <div><b>Wk 23–24</b>Presented at the APAC all-hands and handed off to Global HQ</div>
+      </div>
+      <p style="margin-top:22px">Global HQ first called it "nice to have." Once APAC-wide data showed the problem was regional, not just Korean, they reversed course. The Korea team won Best Teamwork of the Quarter.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>06</small>Outcomes</h2>
+    <div class="body">
+      <div class="compare">
+        <div><span class="lbl">Cases tackled per week</span><div class="ba"><s>25</s><strong>33</strong></div><div class="up">+32%</div></div>
+        <div><span class="lbl">Success rate</span><div class="ba"><s>56%</s><strong>76%</strong></div><div class="up">+20 points</div></div>
+        <div><span class="lbl">Regional bookings</span><div class="ba"><strong>+20%</strong></div><div class="up">after tracking local OTAs</div></div>
+      </div>
+      <ul style="margin-top:24px">
+        <li>APAC's pricing challenges became visible to global leadership.</li>
+        <li>The categories and codes became the foundation of Expedia's official BML Dashboard, launched globally in September 2019.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>07</small>Lessons learned</h2>
+    <div class="body">
+      <div class="lessons">
+        <div><h3>Data drives influence</h3><p>Hard numbers turned a local efficiency idea into a global priority.</p></div>
+        <div><h3>Validate across regions</h3><p>Testing with four markets reframed the problem as APAC-wide, not Korea-specific.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>08</small>Next time</h2>
+    <div class="body">
+      <ol class="next-list">
+        <li><span><b>Prototype earlier.</b> A clickable dashboard mid-project could have won HQ over sooner.</span></li>
+        <li><span><b>Bring in more markets early,</b> such as India and Southeast Asia, so it never looked Korea-centric.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="next"><a href="index.html#guide">← Back to the floor guide</a></div>
+  <footer>© 2026 Vivian Min · Museum of Vivian Min</footer>
+</main>
+
+<script>
+(() => {
+  const CODES = [
+    ['RP-01','Rate mismatch'],['INV-02','Room sold out on Expedia'],['PRM-03','Local OTA promotion'],
+    ['MEM-04','Member-only discount'],['TAX-05','Taxes shown differently']
+  ];
+  const CASES = [
+    { name:'Hanok Stay Bukchon', meta:'Seoul · Deluxe Double · Sat', exp:132000,
+      comp:[['Booking.com',132000],['Agoda',131000],['Local OTA (Yanolja)',109000]], code:'PRM-03',
+      spot:'Expedia is ₩23,000 above a local OTA, a site the old global dashboard didn\'t track.',
+      play:'<b>PRM-03 · Local OTA promotion.</b> Confirm the promo dates on the local site, then ask the hotel to load a matching Expedia deal for the same dates.',
+      who:'Owner: Account Manager', fixed:108000, before:'45 min', after:'8 min' },
+    { name:'Haeundae Ocean Hotel', meta:'Busan · Ocean View Twin · Fri', exp:null,
+      comp:[['Booking.com',189000],['Agoda',192000],['Local OTA (Goodchoice)',190000]], code:'INV-02',
+      spot:'No Expedia price at all. Travelers can\'t book us, so it counts as a lose.',
+      play:'<b>INV-02 · Room sold out on Expedia.</b> Check room allocation in the extranet and reopen inventory that was closed by mistake.',
+      who:'Owner: Market Associate · fix same day', fixed:188000, before:'30 min', after:'5 min' },
+    { name:'Jeju Garden Resort', meta:'Jeju · Garden Suite · Sun', exp:254000,
+      comp:[['Booking.com',231000],['Agoda',254000],['Local OTA (Yanolja)',253000]], code:'RP-01',
+      spot:'Expedia is ₩23,000 above Booking.com for the same room and date.',
+      play:'<b>RP-01 · Rate mismatch.</b> The hotel lowered its rate on one site only. Ask it to push the new rate to every channel through its channel manager.',
+      who:'Owner: Account Manager', fixed:231000, before:'60 min', after:'10 min' },
+  ];
+  const $ = id => document.getElementById(id), won = fmt => '₩' + fmt.toLocaleString('en-US');
+  const state = CASES.map(() => ({ solved:false }));
+  let cur = 0;
+
+  function status(c, price){
+    if(price == null) return 'lose';
+    const best = Math.min(...c.comp.map(x => x[1]));
+    return price < best ? 'beat' : price === best ? 'meet' : 'lose';
+  }
+  function renderCases(){
+    $('cases').innerHTML = CASES.map((c, k) => `<button data-k="${k}" class="${k === cur ? 'on' : ''} ${state[k].solved ? 'fixed' : ''}">${c.name}<i>${state[k].solved ? 'FIXED' : 'LOSE'}</i></button>`).join('');
+    $('cases').querySelectorAll('button').forEach(b => b.onclick = () => load(+b.dataset.k));
+  }
+  function renderBoard(price){
+    const c = CASES[cur], st = status(c, price), best = Math.min(...c.comp.map(x => x[1]));
+    $('hName').textContent = c.name; $('hMeta').textContent = c.meta;
+    const b = $('badge'); b.className = 'badge ' + st; b.textContent = st.toUpperCase();
+    $('rates').innerHTML = `<tr class="exp"><td>Expedia</td><td>${price == null ? '<span class="na">Not available</span>' : won(price)}</td><td>${price == null ? '' : (price - best > 0 ? '+' + won(price - best) : price === best ? 'equal' : '−' + won(best - price))}</td></tr>` +
+      c.comp.map(([n, p]) => `<tr class="${p === best && st === 'lose' ? 'low' : ''}"><td>${n}</td><td>${won(p)}</td><td>${p === best ? 'lowest' : ''}</td></tr>`).join('');
+    $('foot').textContent = st === 'lose' ? 'Flagged by the daily BML check.' : 'Back in line with the market.';
+  }
+  function setStep(n){ document.querySelectorAll('#steps > li').forEach(li => { const s = +li.dataset.s; li.classList.toggle('done', s < n); li.classList.toggle('lock', s > n); }); }
+
+  function load(k){
+    cur = k; const c = CASES[k];
+    renderCases(); $('s1').textContent = c.spot; $('play').className = 'play'; $('go').className = 'go';
+    $('tBefore').textContent = '—'; $('tAfter').textContent = '—';
+    $('codes').innerHTML = CODES.map(([code, label]) => `<button data-c="${code}"><b>${code}</b>${label}</button>`).join('');
+    $('codes').querySelectorAll('button').forEach(b => b.onclick = () => pick(b));
+    if(state[k].solved){ finish(true); return; }
+    renderBoard(c.exp); setStep(2);
+  }
+  function pick(btn){
+    const c = CASES[cur];
+    if(btn.dataset.c !== c.code){ btn.classList.remove('wrong'); void btn.offsetWidth; btn.classList.add('wrong'); return; }
+    $('codes').querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.toggle('right', b === btn); });
+    $('play').innerHTML = c.play + `<br><span class="who">${c.who}</span>`; $('play').className = 'play show';
+    $('go').className = 'go show'; setStep(3);
+  }
+  function finish(quiet){
+    const c = CASES[cur]; state[cur].solved = true;
+    renderBoard(c.fixed); setStep(4); renderCases(); $('go').className = 'go';
+    $('s3').textContent = 'Fixed. Expedia is back in line with the market.';
+    $('tBefore').textContent = c.before; $('tAfter').textContent = c.after;
+    if(!quiet){ const p = $('play'); if(!p.classList.contains('show')){ p.innerHTML = c.play + `<br><span class="who">${c.who}</span>`; p.className = 'play show'; } }
+    else { $('play').innerHTML = c.play + `<br><span class="who">${c.who}</span>`; $('play').className = 'play show';
+      $('codes').querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.toggle('right', b.dataset.c === c.code); }); }
+  }
+  $('go').onclick = () => finish(false);
+  const reset3 = () => $('s3').textContent = 'Follow the playbook to close the gap.';
+  const _load = load; load = k => { reset3(); _load(k); };
+  load(0);
+
+  const funnel = $('funnel');
+  new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) funnel.classList.add('on'); }), { threshold:.4 }).observe(funnel);
+})();
+</script>
+</body>
+</html>
