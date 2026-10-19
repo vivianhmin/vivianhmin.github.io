@@ -9,7 +9,7 @@
       { t: 'Player Redesign', href: 'player-redesign.html' },
       { t: 'FAQ Chatbot', href: 'faq-chatbot.html' },
       { t: 'Beat, Meet, Lose', href: 'beat-meet-lose.html' },
-      { t: 'Digital Transformation' }, { t: 'Brochure Design' } ] },
+      { t: 'Digital Transformation', href: 'digital-transformation.html' }, { t: 'Brochure Design' } ] },
     { n: 2, label: 'Academic', items: [ { t: 'Attention, Please!', href: 'attention-please.html' }, { t: 'Moxy LES' }, { t: 'Beyond the Screen' } ] },
     { n: 1, label: 'Personal', items: [ { t: 'POOM Identity Design' } ] },
   ];
