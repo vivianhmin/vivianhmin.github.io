@@ -105,7 +105,7 @@
   .screen canvas.vid{width:100%;height:100%;display:block}
   .badge{position:absolute;top:3.5cqh;right:2.5cqw;font:600 max(8px,3.4cqh) 'IBM Plex Mono',monospace;color:#fff;background:rgba(0,0,0,.5);padding:.6cqh 1.4cqw;border-radius:4px}
   .cap{position:absolute;left:50%;transform:translateX(-50%);bottom:16cqh;width:max-content;max-width:90%;text-align:center;
-    font-family:Inter,sans-serif;font-weight:500;color:#fff;line-height:1.28;background:rgba(0,0,0,.75);padding:.2em .5em;border-radius:3px;transition:font-size .25s ease}
+    font-family:Inter,sans-serif;font-weight:500;color:#fff;line-height:1.28;background:rgba(0,0,0,.75);padding:.2em .5em;border-radius:3px}
   .ctrl{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:1.8cqw;padding:2.4cqh 2.6cqw 2.8cqh;
     background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font:500 max(9px,3.6cqh) Inter,sans-serif}
   .ctrl button{background:none;border:none;color:#fff;cursor:pointer;font:inherit;padding:.5cqh .8cqw;border-radius:4px;line-height:1}
@@ -120,8 +120,15 @@
   .tip canvas{width:30cqw;aspect-ratio:16/9;border:2px solid #fff;border-radius:4px;background:#000;display:none}
   .seekprev .tip canvas{display:block}
   .tip .tt{font:500 max(8px,3cqh) 'IBM Plex Mono',monospace;background:rgba(0,0,0,.85);padding:.5cqh 1.2cqw;border-radius:3px;white-space:nowrap}
-  .sz{display:none}
-  .resizable .sz{display:inline-block}
+  .devwrap{position:relative;aspect-ratio:16/9.4;display:flex;align-items:center;justify-content:center}
+  .devwrap .device{width:100%;transform-origin:center}
+  .winsize{display:none;align-items:center;gap:14px;flex-wrap:wrap;margin:-8px 0 22px;padding:14px 16px;background:var(--bg);font:500 14px 'Inter Tight',Inter,sans-serif}
+  .demo.f-captions .winsize{display:flex}
+  .winsize b{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .winsize input{flex:1;min-width:160px;accent-color:var(--ink)}
+  .winsize button{border:1px solid var(--soft);background:#fff;font:inherit;padding:6px 12px;cursor:pointer}
+  .winsize button.on{border-color:var(--ink);background:var(--ink);color:#fff}
+  .winsize .px{font-family:'IBM Plex Mono',monospace;font-size:13px;min-width:92px;text-align:right}
   .menu{position:absolute;right:2.6cqw;bottom:15cqh;min-width:42cqw;background:rgba(20,20,22,.95);color:#fff;border-radius:8px;padding:1cqh 0;display:none;
     font:500 max(9px,3.4cqh) Inter,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.4)}
   .menu.open{display:block}
@@ -212,7 +219,7 @@
         <div class="feature"><div class="n">01</div><b>Manual video quality control</b>
           <p>Quality followed bandwidth only, so heavy mobile data use drove complaints.</p><span class="tag">Shipped</span></div>
         <div class="feature"><div class="n">02</div><b>Captions that scale to the screen</b>
-          <p>Desktop-sized captions covered much of the video on phones.</p><span class="tag">Shipped</span></div>
+          <p>Caption size stayed fixed at desktop scale, so on phones it covered much of the video.</p><span class="tag">Shipped</span></div>
         <div class="feature"><div class="n">03</div><b>Smart Seek with thumbnail previews</b>
           <p>Without previews, scrubbing a long recording was guesswork.</p><span class="tag off">Requested · not shipped</span></div>
       </div>
@@ -234,6 +241,12 @@
       <button data-f="quality" class="on"><span>01</span>Quality control</button>
       <button data-f="captions"><span>02</span>Scaled captions</button>
       <button data-f="seek"><span>03</span>Smart Seek</button>
+    </div>
+    <div class="winsize" id="winsize">
+      <b>Window size</b>
+      <button data-w="100">Desktop</button><button data-w="70">Tablet</button><button data-w="42">Phone</button>
+      <input type="range" id="winRange" min="38" max="100" value="100" aria-label="Window size">
+      <span class="px" id="winPx">Desktop</span>
     </div>
     <div class="compare">
       <div class="side before" id="sideBefore"></div>
@@ -362,8 +375,8 @@
       after: ['Choose your own quality','A quality menu with High, Medium, Low and Auto lets viewers trade sharpness for data.','Switch between High, Medium and Low and watch the bar shrink.','Shipped · Aug 2023'],
     },
     captions: {
-      before:['Captions bury the video','Captions kept their desktop size on phones and covered the slide and the speaker, hurting translated content most.','Just watch. The captions take over the frame.','Pain point'],
-      after: ['Captions that fit the screen','Caption size follows the screen and viewers can adjust it, reaching parity with desktop.','Use A− and A+ to resize.','Shipped · Aug 2023'],
+      before:['Captions stay desktop-sized','Caption size was fixed for desktop. When the window shrank to a phone, the text stayed just as big and covered the slide and the speaker, hurting translated content most.','Drag the window size to Phone. The captions take over the frame.','Pain point'],
+      after: ['Captions scale with the window','Caption font size is now proportional to the screen, so text stays readable on any device without blocking the content.','Drag the window size. The captions shrink and grow with the screen.','Shipped · Aug 2023'],
     },
     seek: {
       before:['Scrubbing blind','Hovering the progress bar showed only a timestamp. In a long recording, viewers had to jump, check and jump again to find a moment.','Hover the progress bar. You only get a time.','Pain point'],
@@ -378,7 +391,7 @@
   function Player(root, view){
     root.innerHTML = `
       <div class="side-label"><i></i><span class="sl"></span> <em class="sle"></em></div>
-      <div class="device"><div class="screen">
+      <div class="devwrap"><div class="device"><div class="screen">
         <canvas class="vid" width="960" height="540"></canvas>
         <div class="badge"></div><div class="mock">REQUESTED · MOCKUP</div><div class="cap"></div><div class="ring"></div><div class="menu"></div>
         <div class="ctrl">
@@ -386,11 +399,9 @@
           <span class="time">0:00 / 1:00</span>
           <div class="prog"><svg class="heat" viewBox="0 0 100 10" preserveAspectRatio="none"><path></path></svg><div class="fill"></div><div class="knob"></div>
             <div class="tip"><span class="chap"></span><canvas width="256" height="144"></canvas><span class="tt">0:00</span></div></div>
-          <button class="sz" data-d="-1" aria-label="Smaller captions">A−</button>
-          <button class="sz" data-d="1" aria-label="Larger captions">A+</button>
           <button class="cc" aria-label="Captions">CC</button>
           <button class="gear" aria-label="Settings">⚙</button>
-        </div></div></div>
+        </div></div></div></div>
       <div class="note"><h3></h3><p></p>
         <div class="meter"><div class="mrow"><span>Data rate</span><b class="rate"></b></div><div class="mbar"><s></s><i></i></div><div class="save"></div>
           <div class="mrow small"><span>10 hours of viewing</span><b class="month"></b></div></div>
@@ -401,9 +412,19 @@
     (() => { let d = 'M0,10', seed = 3; const r = () => (seed = (seed*9301+49297)%233280)/233280;
       const pts = []; for(let i=0;i<=40;i++){ const x = i*2.5, base = 7.2 - 3*Math.exp(-((x-58)**2)/60) - 2.2*Math.exp(-((x-18)**2)/30); pts.push([x, Math.max(1.2, base - r()*1.4)]); }
       pts.forEach(([x,y]) => d += ` L${x},${y.toFixed(2)}`); d += ' L100,10 Z'; q('.heat path').setAttribute('d', d); })();
-    const P = { view, quality: view === 'after' ? 'low' : 'auto', capScale:1, cc:true };
+    const P = { view, quality: view === 'after' ? 'low' : 'auto', cc:true };
 
     const eff = () => (view === 'after' && feature === 'quality' && P.quality !== 'auto') ? P.quality : 'high';
+    P.size = (w) => {
+      const wrap = q('.devwrap'), dev = q('.device'), cap = q('.cap');
+      const k = (feature === 'captions' ? w : 100) / 100;
+      dev.style.transform = `scale(${k})`;           // the whole window shrinks, like a phone screen
+      const fullScreenH = (wrap.clientWidth - 40) * 9 / 16;
+      // 2023: caption keeps its desktop pixel size no matter how small the window gets
+      if(feature === 'captions' && view === 'before'){ cap.style.fontSize = (fullScreenH * .05 / k) + 'px'; cap.style.maxWidth = '96%'; }
+      // redesign: caption is proportional to the screen
+      else { cap.style.fontSize = '5cqh'; cap.style.maxWidth = '96%'; }
+    };
     P.render = () => {
       const qq = Q[eff()], W = Math.round(960*qq.scale), H = Math.round(540*qq.scale);
       if(off.width !== W){ off.width = W; off.height = H; }
@@ -425,10 +446,10 @@
     function ring(){
       const r0 = q('.screen').getBoundingClientRect(), ringEl = q('.ring');
       const el = feature === 'quality' ? (q('.menu').classList.contains('open') ? q('.menu') : q('.gear'))
-             : feature === 'captions' ? (view === 'before' ? q('.cap') : q('.sz[data-d="1"]')) : q('.prog');
+             : feature === 'captions' ? q('.cap') : q('.prog');
       if(!el || el.offsetParent === null){ ringEl.classList.remove('show'); return; }
-      const r = el.getBoundingClientRect(), pad = 4;
-      Object.assign(ringEl.style, { left:(r.left-r0.left-pad)+'px', top:(r.top-r0.top-pad)+'px', width:(r.width+pad*2)+'px', height:(r.height+pad*2)+'px' });
+      const r = el.getBoundingClientRect(), k = r0.width / q('.screen').offsetWidth || 1, pad = 4;
+      Object.assign(ringEl.style, { left:((r.left-r0.left)/k-pad)+'px', top:((r.top-r0.top)/k-pad)+'px', width:(r.width/k+pad*2)+'px', height:(r.height/k+pad*2)+'px' });
       ringEl.classList.add('show');
     }
     P.ring = ring;
@@ -441,7 +462,6 @@
       q('.note h3').textContent = title; q('.note p').textContent = text; q('.try').textContent = tryIt;
       const st = q('.status'); st.textContent = status; st.classList.toggle('deferred', false);
       root.classList.toggle('q', feature === 'quality');
-      root.classList.toggle('resizable', feature === 'captions' && view === 'after');
       root.classList.toggle('seekprev', feature === 'seek' && view === 'after');
       const e = eff(), rate = (view === 'before' || P.quality === 'auto') ? 12 : Q[e].rate;
       q('.badge').textContent = (view === 'after' && feature === 'quality' && P.quality !== 'auto') ? `${e.toUpperCase()} · ${Q[e].label}` : 'AUTO · 1080p';
@@ -450,9 +470,6 @@
       const pct = Math.round((1 - rate/12)*100);
       q('.save').innerHTML = pct > 0 ? `−${pct}% data<small>vs. the 2023 player (dashed)</small>` : `No savings on Auto<small>pick Medium or Low</small>`;
       q('.save').style.color = pct > 0 ? 'var(--green)' : 'var(--muted)';
-      const cap = q('.cap');
-      if(feature === 'captions' && view === 'before'){ cap.style.fontSize = '10.5cqh'; cap.style.maxWidth = '96%'; }
-      else { cap.style.fontSize = (4.6 * (feature === 'captions' ? P.capScale : 1)) + 'cqh'; cap.style.maxWidth = '84%'; }
       menu(); requestAnimationFrame(ring); setTimeout(ring, 320);
     };
     P.reset = () => { q('.menu').classList.remove('open'); if(view === 'after' && feature === 'quality') q('.menu').classList.add('open'); };
@@ -461,7 +478,6 @@
     q('.gear').onclick = e => { e.stopPropagation(); q('.menu').classList.toggle('open'); menu(); requestAnimationFrame(ring); };
     q('.screen').addEventListener('click', e => { if(!e.target.closest('.menu,.gear')){ q('.menu').classList.remove('open'); requestAnimationFrame(ring); } });
     q('.cc').onclick = () => { P.cc = !P.cc; menu(); };
-    root.querySelectorAll('.sz').forEach(b => b.onclick = () => { P.capScale = Math.max(.7, Math.min(1.5, P.capScale + .15*b.dataset.d)); P.update(); });
 
     const prog = q('.prog'), tip = q('.tip');
     const tAt = x => { const r = prog.getBoundingClientRect(); return Math.max(0, Math.min(.999, (x - r.left)/r.width)) * DUR; };
@@ -485,19 +501,36 @@
   }
 
   const players = [Player(document.getElementById('sideBefore'), 'before'), Player(document.getElementById('sideAfter'), 'after')];
+  let win = 100, winAuto = true;
+  const winRange = document.getElementById('winRange'), winPx = document.getElementById('winPx');
+  const winBtns = document.querySelectorAll('#winsize button');
+  function setWin(w){
+    win = w; winRange.value = Math.round(w);
+    winPx.textContent = w > 85 ? 'Desktop' : w > 55 ? 'Tablet' : 'Phone';
+    winBtns.forEach(b => b.classList.toggle('on', winPx.textContent === b.textContent));
+    players.forEach(p => { p.size(w); p.ring(); requestAnimationFrame(p.ring); });
+  }
+  winRange.addEventListener('input', () => { winAuto = false; setWin(+winRange.value); });
+  winBtns.forEach(b => b.onclick = () => { winAuto = false; setWin(+b.dataset.w); });
   function setFeature(f){
     feature = f; players.forEach(p => p.hideTip());
     document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.f === f));
     players.forEach(p => { p.reset(); p.update(); });
+    document.getElementById('demo').classList.toggle('f-captions', f === 'captions');
+    setWin(f === 'captions' ? win : 100);
   }
   document.querySelectorAll('#tabs button').forEach(b => b.onclick = () => setFeature(b.dataset.f));
-  window.addEventListener('resize', () => players.forEach(p => p.ring()));
+  window.addEventListener('resize', () => setWin(win));
   setFeature('quality');
 
   function loop(now){
     const dt = Math.max(0, Math.min(.1, (now - last)/1000)); last = now;
     if(playing && !scrubber) t = (t + dt) % DUR;
     players.forEach(p => p.render());
+    if(feature === 'captions' && winAuto){
+      const ph = (now / 7000) % 1, e = (1 - Math.cos(ph * 2 * Math.PI)) / 2;   // 0 → 1 → 0
+      setWin(100 - 62 * Math.min(1, e * 1.25));
+    }
     if(feature === 'seek' && !players.some(p => p.hover) && !scrubber){
       const ph = (now / 4200) % 1, f = .12 + .76 * (ph < .5 ? ph*2 : 2 - ph*2);
       players.forEach(p => p.showFrac(f));
