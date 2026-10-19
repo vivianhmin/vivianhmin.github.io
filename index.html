@@ -335,6 +335,23 @@
   .lobby.leaving .floor-shadow{opacity:0;transition:opacity .25s}
   @keyframes fadeout{from{opacity:1}to{opacity:0}}
   @keyframes flyup{0%{opacity:1;transform:none}18%{opacity:1;transform:translateY(24px) rotate(1deg)}100%{opacity:1;transform:translateY(-1500px) rotate(-7deg)}}
+
+  /* ---------- OPEN SPREAD: cover + floor guide side by side, no flip ---------- */
+  .brochure{width:800px;transform:rotateX(var(--brx,0deg)) rotateY(var(--bry,0deg));cursor:default}
+  .bface.b-front{left:0;right:auto;width:400px;border-radius:3px 0 0 3px}
+  .bface.b-back{left:400px;right:auto;width:400px;transform:none;visibility:visible;border-radius:0 3px 3px 0}
+  .bface.b-front::after{content:"";position:absolute;top:0;bottom:0;right:0;width:26px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(60,45,25,.10))}
+  .bface.b-back::before{content:"";position:absolute;top:0;bottom:0;left:0;width:20px;pointer-events:none;z-index:2;
+    background:linear-gradient(90deg,rgba(60,45,25,.10),transparent)}
+  .stage.portrait .brochure{width:400px}
+  .stage.portrait .bface.b-front{display:none}
+  .stage.portrait .bface.b-back{left:0;border-radius:3px}
+  .skip{background:none;border:none;font:inherit;font-size:16px;color:var(--muted);cursor:pointer;margin-top:-26px;
+    border-bottom:1px solid transparent;opacity:0;animation:rise 1s 1.1s ease forwards}
+  .skip:hover{color:var(--text);border-color:var(--line)}
+  .stage.portrait .skip{font-size:24px}
+  .lobby.leaving > .skip{animation:fadeout .35s ease forwards}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes scan{0%{top:0;opacity:1}100%{top:calc(100% - 2px);opacity:1}}
   @keyframes flicker{50%{opacity:.7}}
@@ -397,6 +414,7 @@
 
     <div class="hint">Drag sideways to flip · click the ticket to scan</div>
     <button class="enter" id="enter">Click to enter</button>
+    <button class="skip" id="skipBtn">Skip to the floor guide →</button>
   </section>
 
   <!-- ================= BROCHURE ================= -->
@@ -475,7 +493,7 @@
 
       </div>
     </div>
-    <div class="b-hint"><span>Click the brochure to open the floor guide</span><button id="backBtn">← Back to the lobby</button></div>
+    <div class="b-hint"><span>Pick a floor to visit</span><button id="backBtn">← Back to the lobby</button></div>
   </section>
 
   <!-- ================= FLOOR 4: ABOUT ME GALLERY ================= -->
@@ -828,13 +846,12 @@
     }, 1100);
     setTimeout(() => { scanMode = 'exit'; lobby2.classList.add('ready'); lobby.classList.add('leaving'); whooshSound(); }, 1650);
     setTimeout(() => { lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true; }, 1950);
-    setTimeout(() => { if(broOpen && !broFlipped) flipBro(); }, 1950 + 1000);
     setTimeout(() => { scanMode = 'hidden'; scanner.style.transform = 'translate(4000px,0)'; }, 3000);
   }
 
   // brochure: click to flip between poster and floor guide
   let broFlipped = false;
-  function flipBro(){ paperSound(); broFlipped = !broFlipped; bro.classList.toggle('flipped', broFlipped); bro.classList.remove('tracking'); bro.style.setProperty('--bflip', broFlipped ? '180deg' : '0deg'); }
+  function flipBro(){ return; paperSound(); broFlipped = !broFlipped; bro.classList.toggle('flipped', broFlipped); bro.classList.remove('tracking'); bro.style.setProperty('--bflip', broFlipped ? '180deg' : '0deg'); }
   bro.addEventListener('click', e => { if(!e.target.closest('.it')) flipBro(); });
   bro.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); flipBro(); } });
 
@@ -845,6 +862,11 @@
     broFlipped = true; flipBro(); busy = false; locked = false;
   });
   document.getElementById('enter').addEventListener('click', enter);
+  document.getElementById('skipBtn').addEventListener('click', () => {
+    if(busy) return; busy = true; locked = true; audio(); whooshSound();
+    lobby2.classList.add('ready'); lobby.classList.add('leaving');
+    setTimeout(() => { lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true; }, 250);
+  });
   ticket.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); enter(); } });
   // ----- Floor 4 gallery room: walk along the wall -----
   const room = document.getElementById('room'), walk = document.getElementById('walk');
