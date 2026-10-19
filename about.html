@@ -75,15 +75,20 @@
   .intro p{font-size:20px;line-height:1.6;color:var(--text)}
   .intro p+p{margin-top:16px}
   .intro .quote{font-style:italic;color:var(--ink)}
-  .trio{position:relative;flex:1;height:100%}
-  .trio .fr{position:absolute}
-  .trio .t1{left:0;bottom:6%}.trio .t1 img{height:270px;width:auto}
-  .trio .t2{left:50%;top:50%;transform:translate(-50%,-50%)}.trio .t2 img{height:520px;width:auto}
-  .trio .t3{right:0;top:2%}.trio .t3 img{height:220px;width:auto}
+  /* gallery wall: two rows hung on a shared centre line, even 40px spacing, nothing overlaps */
+  .trio{flex:1;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:40px;--k:1}
+  .trio .tr{display:flex;gap:40px;justify-content:center}
+  .trio .tr.top{align-items:flex-end}
+  .trio .tr.bot{align-items:flex-start}
+  .trio img{width:auto}
+  .trio .t-line img{height:calc(190px * var(--k))}
+  .trio .t-travel img{height:calc(212px * var(--k))}
+  .trio .t-ill img{height:calc(250px * var(--k))}
+  .trio .t-pho img{height:calc(300px * var(--k))}
   .portrait .intro .area{flex-direction:column;justify-content:flex-start;gap:60px}
   .portrait .intro .text{width:100%}
   .portrait .intro h1{font-size:88px}
-  .portrait .trio{width:100%}
+  .portrait .trio{width:100%;--k:.86}
 
   /* ---------- 4.2 chronology ---------- */
   .panel{position:absolute;left:0;right:0;top:var(--ceil);bottom:var(--floor);background:#171716;color:#efece6;box-shadow:inset 0 30px 40px -30px rgba(0,0,0,.6)}
@@ -189,9 +194,14 @@
           <p class="quote">“Let your skills make a living, but let your passions build a life.”</p>
         </div>
         <div class="trio">
-          <div class="fr light t1"><span class="mat"><img src="assets/illustration.png" alt="Illustration of Vivian waving hello"></span></div>
-          <div class="fr t2"><span class="mat"><img src="assets/portrait-photo.jpg" alt="Photo of Vivian by the sea"></span></div>
-          <div class="fr t3"><span class="mat"><img src="assets/line-drawing.jpg" alt="Line drawing self-portrait"></span></div>
+          <div class="tr top">
+            <div class="fr t-line"><span class="mat"><img src="assets/line-drawing.jpg" alt="Line drawing self-portrait"></span></div>
+            <div class="fr t-travel"><span class="mat"><img src="assets/travel-photo.jpg" alt="Vivian with her camera above Český Krumlov"></span></div>
+          </div>
+          <div class="tr bot">
+            <div class="fr light t-ill"><span class="mat"><img src="assets/illustration.png" alt="Illustration of Vivian waving hello"></span></div>
+            <div class="fr t-pho"><span class="mat"><img src="assets/portrait-photo.jpg" alt="Photo of Vivian by the sea"></span></div>
+          </div>
         </div>
       </div>
     </section>
