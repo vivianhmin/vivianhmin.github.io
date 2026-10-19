@@ -91,7 +91,7 @@
 
   .laser{position:absolute;left:-14%;width:128%;height:2px;top:0;opacity:0;background:var(--laser);z-index:6;
     box-shadow:0 0 6px 1px var(--laser),0 0 18px 5px rgba(255,43,43,.45);border-radius:2px}
-  .scanning .laser{animation:scan .45s ease-in-out 2 alternate}
+  .scanning .laser{animation:scan .3s ease-in-out 2 alternate}
   .stamp{position:absolute;left:46%;top:46%;transform:translate(-50%,-50%) rotate(-12deg) scale(2.2);opacity:0;z-index:5;
     border:4px solid var(--laser);color:var(--laser);padding:.1em .55em;border-radius:6px;
     font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;font-weight:700;letter-spacing:.18em;font-size:46px;
@@ -821,14 +821,15 @@
     tX = 0; tY = 0; spin = Math.round(spin / 360) * 360;
     scanMode = 'aim'; drawScanner();
     setScreen('READY');
-    setTimeout(() => { scanner.classList.add('fire'); beam.classList.add('on'); ticket.classList.add('scanning'); setScreen('SCANNING'); scanSound(); }, 800);
+    setTimeout(() => { scanner.classList.add('fire'); beam.classList.add('on'); ticket.classList.add('scanning'); setScreen('SCANNING'); scanSound(); }, 450);
     setTimeout(() => {
       beam.classList.remove('on'); scanner.classList.remove('fire'); ticket.classList.remove('scanning');
       scanner.classList.add('ok'); setScreen('ADMITTED', '1 Visitor · Welcome'); beepSound();
-    }, 1750);
-    setTimeout(() => { scanMode = 'exit'; lobby2.classList.add('ready'); lobby.classList.add('leaving'); whooshSound(); }, 2550);
-    setTimeout(() => { lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true; }, 2950);
-    setTimeout(() => { scanMode = 'hidden'; scanner.style.transform = 'translate(4000px,0)'; }, 4000);
+    }, 1100);
+    setTimeout(() => { scanMode = 'exit'; lobby2.classList.add('ready'); lobby.classList.add('leaving'); whooshSound(); }, 1650);
+    setTimeout(() => { lobby2.classList.add('open'); lobby2.setAttribute('aria-hidden','false'); broOpen = true; }, 1950);
+    setTimeout(() => { if(broOpen && !broFlipped) flipBro(); }, 1950 + 1000);
+    setTimeout(() => { scanMode = 'hidden'; scanner.style.transform = 'translate(4000px,0)'; }, 3000);
   }
 
   // brochure: click to flip between poster and floor guide
