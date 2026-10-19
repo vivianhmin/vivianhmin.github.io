@@ -150,7 +150,13 @@
   .mrow b{font-family:'IBM Plex Mono',monospace;font-weight:500}
   .mrow.small{margin-top:6px;color:var(--muted);font-size:13px}
   .mbar{height:6px;background:#ddd8d0;margin-top:8px}
-  .mbar i{display:block;height:100%;width:100%;transition:width .4s ease,background .4s}
+  .mbar{position:relative}
+  .mbar s{position:absolute;inset:0;border:1.5px dashed rgba(232,55,44,.55);display:none}
+  .after .mbar s{display:block}
+  .mbar i{position:relative;display:block;height:100%;width:100%;transition:width .4s ease,background .4s}
+  .save{display:none;margin-top:10px;font:600 22px 'Inter Tight',Inter,sans-serif;letter-spacing:-.01em;color:var(--green)}
+  .save small{font:500 13px Inter,sans-serif;color:var(--muted);margin-left:6px;letter-spacing:0}
+  .after.q .save{display:block}
   .status{display:inline-block;margin-top:14px;font:500 11.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid currentColor}
   .before .status{color:var(--red)} .after .status{color:var(--green)}
   .after .status.deferred{color:var(--muted)}
@@ -353,7 +359,7 @@
   const copy = {
     quality: {
       before:['No way to turn quality down','Quality followed bandwidth only. On Korea’s fast networks that meant the highest bitrate by default, and mobile viewers burned through data.','Open ⚙. Speed and captions only, no quality option.','Pain point'],
-      after: ['Choose your own quality','A quality menu with High, Medium, Low and Auto lets viewers trade sharpness for data.','Open ⚙ and pick Low. Watch the data rate drop.','Shipped · Aug 2023'],
+      after: ['Choose your own quality','A quality menu with High, Medium, Low and Auto lets viewers trade sharpness for data.','Switch between High, Medium and Low and watch the bar shrink.','Shipped · Aug 2023'],
     },
     captions: {
       before:['Captions bury the video','Captions kept their desktop size on phones and covered the slide and the speaker, hurting translated content most.','Just watch. The captions take over the frame.','Pain point'],
@@ -386,7 +392,7 @@
           <button class="gear" aria-label="Settings">⚙</button>
         </div></div></div>
       <div class="note"><h3></h3><p></p>
-        <div class="meter"><div class="mrow"><span>Data rate</span><b class="rate"></b></div><div class="mbar"><i></i></div>
+        <div class="meter"><div class="mrow"><span>Data rate</span><b class="rate"></b></div><div class="mbar"><s></s><i></i></div><div class="save"></div>
           <div class="mrow small"><span>10 hours of viewing</span><b class="month"></b></div></div>
         <div class="try"></div><span class="status"></span></div>`;
     const q = s => root.querySelector(s);
@@ -395,7 +401,7 @@
     (() => { let d = 'M0,10', seed = 3; const r = () => (seed = (seed*9301+49297)%233280)/233280;
       const pts = []; for(let i=0;i<=40;i++){ const x = i*2.5, base = 7.2 - 3*Math.exp(-((x-58)**2)/60) - 2.2*Math.exp(-((x-18)**2)/30); pts.push([x, Math.max(1.2, base - r()*1.4)]); }
       pts.forEach(([x,y]) => d += ` L${x},${y.toFixed(2)}`); d += ' L100,10 Z'; q('.heat path').setAttribute('d', d); })();
-    const P = { view, quality:'auto', capScale:1, cc:true };
+    const P = { view, quality: view === 'after' ? 'low' : 'auto', capScale:1, cc:true };
 
     const eff = () => (view === 'after' && feature === 'quality' && P.quality !== 'auto') ? P.quality : 'high';
     P.render = () => {
@@ -441,6 +447,9 @@
       q('.badge').textContent = (view === 'after' && feature === 'quality' && P.quality !== 'auto') ? `${e.toUpperCase()} · ${Q[e].label}` : 'AUTO · 1080p';
       q('.rate').textContent = `${rate} MB/min`; q('.month').textContent = `≈ ${(rate*.6).toFixed(1)} GB`;
       q('.mbar i').style.width = (rate/12*100) + '%'; q('.mbar i').style.background = rate > 6 ? 'var(--red)' : 'var(--green)';
+      const pct = Math.round((1 - rate/12)*100);
+      q('.save').innerHTML = pct > 0 ? `−${pct}% data<small>vs. the 2023 player (dashed)</small>` : `No savings on Auto<small>pick Medium or Low</small>`;
+      q('.save').style.color = pct > 0 ? 'var(--green)' : 'var(--muted)';
       const cap = q('.cap');
       if(feature === 'captions' && view === 'before'){ cap.style.fontSize = '10.5cqh'; cap.style.maxWidth = '96%'; }
       else { cap.style.fontSize = (4.6 * (feature === 'captions' ? P.capScale : 1)) + 'cqh'; cap.style.maxWidth = '84%'; }
