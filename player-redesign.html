@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55}
+  :root{--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
   a{color:inherit}
@@ -80,6 +80,21 @@
   .side-label i{width:10px;height:10px;border-radius:50%}
   .before .side-label{color:var(--red)} .before .side-label i{background:var(--red)}
   .after .side-label{color:var(--green)} .after .side-label i{background:var(--green)}
+  .side.requested .side-label{color:var(--amber)} .side.requested .side-label i{background:none;border:2px dashed var(--amber);width:12px;height:12px}
+  .side.requested .device{box-shadow:0 24px 40px rgba(0,0,0,.2);outline:3px dashed var(--amber);outline-offset:0}
+  .side.requested .ring{border-color:#f0b43c;animation-name:ringa}
+  @keyframes ringa{50%{box-shadow:0 0 0 5px rgba(240,180,60,.28)}}
+  .requested .status{color:var(--amber)!important}
+  .requested .note .try::before{color:var(--amber)!important}
+  .mock{position:absolute;top:3.5cqh;left:2.5cqw;display:none;font:600 max(8px,3cqh) 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#1b1b1b;background:#f0b43c;padding:.6cqh 1.4cqw;border-radius:4px}
+  .requested .mock{display:block}
+  .heat{position:absolute;left:0;right:0;bottom:3.2cqh;height:6cqh;display:none;pointer-events:none}
+  .requested .heat{display:block}
+  .heat path{fill:rgba(255,255,255,.28);stroke:rgba(255,255,255,.75);stroke-width:1.2}
+  .tip .chap{display:none;font:600 max(8px,3.2cqh) Inter,sans-serif;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8);background:none!important;padding:0!important}
+  .seekprev .tip .chap{display:block}
+  .seekprev .tip canvas{width:38cqw}
+  .seekprev .tip{bottom:9cqh}
   .side-label em{font-style:normal;color:var(--muted);font-weight:400;letter-spacing:.06em;text-transform:none;font-family:Inter,sans-serif;font-size:13px}
 
   .device{background:linear-gradient(145deg,#2a2a2c,#0d0d0e);border-radius:30px;padding:11px 20px;position:relative}
@@ -104,7 +119,7 @@
   .tip.show{display:flex}
   .tip canvas{width:30cqw;aspect-ratio:16/9;border:2px solid #fff;border-radius:4px;background:#000;display:none}
   .seekprev .tip canvas{display:block}
-  .tip span{font:500 max(8px,3cqh) 'IBM Plex Mono',monospace;background:rgba(0,0,0,.85);padding:.5cqh 1.2cqw;border-radius:3px;white-space:nowrap}
+  .tip .tt{font:500 max(8px,3cqh) 'IBM Plex Mono',monospace;background:rgba(0,0,0,.85);padding:.5cqh 1.2cqw;border-radius:3px;white-space:nowrap}
   .sz{display:none}
   .resizable .sz{display:inline-block}
   .menu{position:absolute;right:2.6cqw;bottom:15cqh;min-width:42cqw;background:rgba(20,20,22,.95);color:#fff;border-radius:8px;padding:1cqh 0;display:none;
@@ -193,7 +208,7 @@
         <div class="feature"><div class="n">02</div><b>Captions that scale to the screen</b>
           <p>Desktop-sized captions covered much of the video on phones.</p><span class="tag">Shipped</span></div>
         <div class="feature"><div class="n">03</div><b>Smart Seek with thumbnail previews</b>
-          <p>Without previews, scrubbing a long recording was guesswork.</p><span class="tag off">Deferred</span></div>
+          <p>Without previews, scrubbing a long recording was guesswork.</p><span class="tag off">Requested · not shipped</span></div>
       </div>
       <h3>Why these features mattered</h3>
       <ul>
@@ -345,8 +360,8 @@
       after: ['Captions that fit the screen','Caption size follows the screen and viewers can adjust it, reaching parity with desktop.','Use A− and A+ to resize.','Shipped · Aug 2023'],
     },
     seek: {
-      before:['Scrubbing blind','The progress bar showed only a timestamp, so finding a moment in a long recording meant guessing.','Hover or drag the progress bar.','Pain point'],
-      after: ['See before you jump','Thumbnail previews show exactly where you will land. Deferred for resources and kept on the roadmap.','Hover or drag the progress bar.','Concept · Deferred'],
+      before:['Scrubbing blind','Hovering the progress bar showed only a timestamp. In a long recording, viewers had to jump, check and jump again to find a moment.','Hover the progress bar. You only get a time.','Pain point'],
+      after: ['What SK asked for: Smart Seek','Hover anywhere on the bar and a thumbnail shows what plays at that moment, the way YouTube does. This was requested, not built: it was deferred for resources and kept on the roadmap.','Hover the progress bar to see the requested preview.','Requested · Not shipped'],
     },
   };
 
@@ -356,15 +371,15 @@
   // ---------- one player ----------
   function Player(root, view){
     root.innerHTML = `
-      <div class="side-label"><i></i>${view === 'before' ? 'Before' : 'After'} <em>${view === 'before' ? '2023 player' : 'Redesign'}</em></div>
+      <div class="side-label"><i></i><span class="sl"></span> <em class="sle"></em></div>
       <div class="device"><div class="screen">
         <canvas class="vid" width="960" height="540"></canvas>
-        <div class="badge"></div><div class="cap"></div><div class="ring"></div><div class="menu"></div>
+        <div class="badge"></div><div class="mock">REQUESTED · MOCKUP</div><div class="cap"></div><div class="ring"></div><div class="menu"></div>
         <div class="ctrl">
           <button class="pp" aria-label="Play or pause">❚❚</button>
           <span class="time">0:00 / 1:00</span>
-          <div class="prog"><div class="fill"></div><div class="knob"></div>
-            <div class="tip"><canvas width="192" height="108"></canvas><span>0:00</span></div></div>
+          <div class="prog"><svg class="heat" viewBox="0 0 100 10" preserveAspectRatio="none"><path></path></svg><div class="fill"></div><div class="knob"></div>
+            <div class="tip"><span class="chap"></span><canvas width="256" height="144"></canvas><span class="tt">0:00</span></div></div>
           <button class="sz" data-d="-1" aria-label="Smaller captions">A−</button>
           <button class="sz" data-d="1" aria-label="Larger captions">A+</button>
           <button class="cc" aria-label="Captions">CC</button>
@@ -377,6 +392,9 @@
     const q = s => root.querySelector(s);
     const vid = q('.vid'), vctx = vid.getContext('2d'), off = document.createElement('canvas'), octx = off.getContext('2d');
     const tctx = q('.tip canvas').getContext('2d');
+    (() => { let d = 'M0,10', seed = 3; const r = () => (seed = (seed*9301+49297)%233280)/233280;
+      const pts = []; for(let i=0;i<=40;i++){ const x = i*2.5, base = 7.2 - 3*Math.exp(-((x-58)**2)/60) - 2.2*Math.exp(-((x-18)**2)/30); pts.push([x, Math.max(1.2, base - r()*1.4)]); }
+      pts.forEach(([x,y]) => d += ` L${x},${y.toFixed(2)}`); d += ' L100,10 Z'; q('.heat path').setAttribute('d', d); })();
     const P = { view, quality:'auto', capScale:1, cc:true };
 
     const eff = () => (view === 'after' && feature === 'quality' && P.quality !== 'auto') ? P.quality : 'high';
@@ -410,8 +428,12 @@
     P.ring = ring;
     P.update = () => {
       const [title, text, tryIt, status] = copy[feature][view];
+      const req = feature === 'seek' && view === 'after';
+      root.classList.toggle('requested', req);
+      q('.sl').textContent = view === 'before' ? (feature === 'seek' ? 'Problem' : 'Before') : (req ? 'Requested' : 'After');
+      q('.sle').textContent = view === 'before' ? '2023 player' : (req ? 'Customer request · not shipped' : 'Redesign · shipped');
       q('.note h3').textContent = title; q('.note p').textContent = text; q('.try').textContent = tryIt;
-      const st = q('.status'); st.textContent = status; st.classList.toggle('deferred', /Deferred/.test(status));
+      const st = q('.status'); st.textContent = status; st.classList.toggle('deferred', false);
       root.classList.toggle('q', feature === 'quality');
       root.classList.toggle('resizable', feature === 'captions' && view === 'after');
       root.classList.toggle('seekprev', feature === 'seek' && view === 'after');
@@ -434,15 +456,20 @@
 
     const prog = q('.prog'), tip = q('.tip');
     const tAt = x => { const r = prog.getBoundingClientRect(); return Math.max(0, Math.min(.999, (x - r.left)/r.width)) * DUR; };
-    function showTip(x){
-      const r = prog.getBoundingClientRect(), tt = tAt(x), thumb = feature === 'seek' && view === 'after';
-      tip.style.left = ((x - r.left)/r.width*100) + '%'; tip.classList.add('show');
-      tip.querySelector('span').textContent = thumb ? `${fmt(tt)} · ${chapterAt(tt).name}` : fmt(tt);
-      if(thumb) scene(tctx, 192, 108, tt);
+    function showFrac(f){
+      const tt = Math.max(0, Math.min(.999, f)) * DUR, thumb = feature === 'seek' && view === 'after';
+      const edge = thumb ? 19 : 6;  // keep the preview inside the screen
+      tip.style.left = Math.max(edge, Math.min(100 - edge, f*100)) + '%'; tip.classList.add('show');
+      tip.querySelector('.tt').textContent = fmt(tt);
+      tip.querySelector('.chap').textContent = chapterAt(tt).name;
+      if(thumb) scene(tctx, 256, 144, tt);
       return tt;
     }
-    prog.addEventListener('pointermove', e => { const tt = showTip(e.clientX); if(scrubber === P) t = tt; });
-    prog.addEventListener('pointerleave', () => { if(scrubber !== P) tip.classList.remove('show'); });
+    P.showFrac = showFrac; P.hideTip = () => tip.classList.remove('show'); P.hover = false;
+    function showTip(x){ const r = prog.getBoundingClientRect(); return showFrac((x - r.left)/r.width); }
+    prog.addEventListener('pointerenter', () => { P.hover = true; });
+    prog.addEventListener('pointermove', e => { P.hover = true; const tt = showTip(e.clientX); if(scrubber === P) t = tt; });
+    prog.addEventListener('pointerleave', () => { P.hover = false; if(scrubber !== P) tip.classList.remove('show'); });
     prog.addEventListener('pointerdown', e => { scrubber = P; prog.setPointerCapture(e.pointerId); t = showTip(e.clientX); });
     prog.addEventListener('pointerup', () => { scrubber = null; tip.classList.remove('show'); });
     return P;
@@ -450,7 +477,7 @@
 
   const players = [Player(document.getElementById('sideBefore'), 'before'), Player(document.getElementById('sideAfter'), 'after')];
   function setFeature(f){
-    feature = f;
+    feature = f; players.forEach(p => p.hideTip());
     document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.f === f));
     players.forEach(p => { p.reset(); p.update(); });
   }
@@ -462,6 +489,10 @@
     const dt = Math.max(0, Math.min(.1, (now - last)/1000)); last = now;
     if(playing && !scrubber) t = (t + dt) % DUR;
     players.forEach(p => p.render());
+    if(feature === 'seek' && !players.some(p => p.hover) && !scrubber){
+      const ph = (now / 4200) % 1, f = .12 + .76 * (ph < .5 ? ph*2 : 2 - ph*2);
+      players.forEach(p => p.showFrac(f));
+    }
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
