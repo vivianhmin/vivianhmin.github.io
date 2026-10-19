@@ -222,6 +222,39 @@
   .trend .row b{font-weight:500;text-align:right}
   .trend small{display:block;margin-top:12px;font-size:13px;color:var(--muted)}
 
+  /* call log */
+  .log{margin:18px 0 10px}
+  .chipsrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .chipsrow button{font:500 13.5px var(--head);border:1px solid var(--soft);background:#fff;padding:7px 12px;border-radius:999px;cursor:pointer;color:var(--ink)}
+  .chipsrow button i{font-style:normal;color:var(--muted);margin-left:4px}
+  .chipsrow button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .chipsrow button.on i{color:#bbb}
+  .logwrap{max-height:360px;overflow:auto;border:1px solid var(--soft);background:#fff}
+  .log table{width:100%;border-collapse:collapse;font-size:14.5px}
+  .log th{position:sticky;top:0;background:#ecebe8;text-align:left;font-weight:600;padding:9px 12px;border-bottom:1px solid var(--soft)}
+  .log td{padding:8px 12px;border-bottom:1px solid #efece7;vertical-align:top}
+  .log td:first-child{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .log td:last-child{white-space:nowrap;color:#4a4742}
+  .log tr.hide{display:none}
+  .log tr.dup td:nth-child(2){font-weight:600}
+  .lognote{font-size:14px!important;color:var(--muted);margin-top:10px}
+
+  /* question map */
+  .fmap{margin:20px 0 34px;background:#fff;border:1px solid var(--soft)}
+  .fmap-title{background:#16235e;color:#fff;text-align:center;font:600 15px var(--head);padding:12px}
+  .fcols{display:grid;grid-template-columns:repeat(5,minmax(200px,1fr));gap:18px;padding:22px 18px 26px;overflow-x:auto}
+  .fhead{background:#16235e;color:#fff;font:600 14px var(--head);padding:10px 12px;border-radius:6px;text-align:center;margin-bottom:14px}
+  .fhead span{opacity:.7;margin-right:6px}
+  .fpar{margin-bottom:14px}
+  .fp{display:block;width:100%;text-align:left;background:#333;color:#fff;border:none;border-radius:6px;padding:10px 12px;font:600 13.5px/1.35 var(--head);cursor:pointer}
+  .fp::after{content:"−";float:right;opacity:.6}
+  .fp[aria-expanded="false"]::after{content:"+"}
+  .fpar ul{list-style:none;margin:6px 0 0 14px!important;border-left:2px solid #ddd;padding-left:10px}
+  .fpar li{background:#e7e6e3;border-radius:6px;padding:8px 10px;font-size:13px!important;line-height:1.35;margin-top:6px!important;color:#2a2927}
+  .fpar.closed ul{display:none}
+  .fpar li.hit{background:#fee500}
+  @media (max-width:860px){ .fcols{grid-template-columns:repeat(5,230px)} }
+
   @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   @keyframes dot{0%,80%,100%{opacity:.3}40%{opacity:1}}
   @media (max-width:860px){
@@ -327,6 +360,18 @@
         <div class="stat"><strong>80%</strong><span>of calls were the same recurring questions</span></div>
         <div class="stat"><strong>70%</strong><span>of routine questions a bot could answer</span></div>
       </div>
+
+      <h3>Step 1 · Log every call</h3>
+      <p>Every question from a new partner went into one shared sheet: the date, the question in the partner's words, and a category. An excerpt from the first two weeks:</p>
+      <div class="log">
+        <div class="chipsrow" id="logChips"><button class="on" data-f="all">All <i>30</i></button><button data-f="Getting Started">Getting Started <i>10</i></button><button data-f="Reservation Management">Reservation Management <i>4</i></button><button data-f="Payments">Payments <i>10</i></button><button data-f="Marketing">Marketing <i>3</i></button><button data-f="Support">Support <i>3</i></button></div>
+        <div class="logwrap"><table><thead><tr><th>Date</th><th>Question</th><th>Category</th></tr></thead><tbody id="logBody"><tr data-c="Support"><td>06-07</td><td>Is there emergency support?</td><td>Support</td></tr><tr data-c="Reservation Management"><td>06-07</td><td>Does Expedia notify me if a guest cancels?</td><td>Reservation Management</td></tr><tr data-c="Payments"><td>06-08</td><td>Are there extra fees I should know about?</td><td>Payments</td></tr><tr data-c="Getting Started"><td>06-08</td><td>How do I manage availability and inventory?</td><td>Getting Started</td></tr><tr data-c="Payments"><td>06-08</td><td>Can commission change over time?</td><td>Payments</td></tr><tr data-c="Getting Started"><td>06-08</td><td>Can I connect a channel manager or PMS?</td><td>Getting Started</td></tr><tr data-c="Getting Started"><td>06-09</td><td>How do I set weekday vs weekend pricing?</td><td>Getting Started</td></tr><tr data-c="Payments"><td>06-09</td><td>Can I negotiate lower commission?</td><td>Payments</td></tr><tr data-c="Payments"><td>06-10</td><td>Can I see a breakdown of taxes?</td><td>Payments</td></tr><tr data-c="Reservation Management"><td>06-10</td><td>How do I receive and confirm reservations?</td><td>Reservation Management</td></tr><tr data-c="Payments"><td>06-10</td><td>How do I issue tax invoices?</td><td>Payments</td></tr><tr data-c="Getting Started"><td>06-10</td><td>What happens if I forget to update availability?</td><td>Getting Started</td></tr><tr data-c="Support"><td>06-10</td><td>Is Korean support available?</td><td>Support</td></tr><tr data-c="Marketing"><td>06-11</td><td>How do I join promotions or campaigns?</td><td>Marketing</td></tr><tr data-c="Payments"><td>06-11</td><td>Can I change my bank account later?</td><td>Payments</td></tr><tr data-c="Payments"><td>06-11</td><td>Can I see a breakdown of taxes?</td><td>Payments</td></tr><tr data-c="Payments"><td>06-11</td><td>Are there extra fees I should know about?</td><td>Payments</td></tr><tr data-c="Getting Started"><td>06-12</td><td>What happens if I forget to update availability?</td><td>Getting Started</td></tr><tr data-c="Marketing"><td>06-12</td><td>Should I join Expedia&#x27;s loyalty program?</td><td>Marketing</td></tr><tr data-c="Getting Started"><td>06-13</td><td>Are there tools to track competitor rates?</td><td>Getting Started</td></tr><tr data-c="Reservation Management"><td>06-13</td><td>How do I receive and confirm reservations?</td><td>Reservation Management</td></tr><tr data-c="Getting Started"><td>06-13</td><td>Can I connect a channel manager or PMS?</td><td>Getting Started</td></tr><tr data-c="Getting Started"><td>06-13</td><td>Can I connect a channel manager or PMS?</td><td>Getting Started</td></tr><tr data-c="Support"><td>06-13</td><td>Can I call someone if chatbot fails?</td><td>Support</td></tr><tr data-c="Payments"><td>06-13</td><td>Can I see a breakdown of taxes?</td><td>Payments</td></tr><tr data-c="Payments"><td>06-13</td><td>How does billing and payment work?</td><td>Payments</td></tr><tr data-c="Getting Started"><td>06-13</td><td>How long does the approval process take?</td><td>Getting Started</td></tr><tr data-c="Getting Started"><td>06-14</td><td>How do I manage availability and inventory?</td><td>Getting Started</td></tr><tr data-c="Marketing"><td>06-14</td><td>Should I join Expedia&#x27;s loyalty program?</td><td>Marketing</td></tr><tr data-c="Reservation Management"><td>06-14</td><td>Does Expedia notify me if a guest cancels?</td><td>Reservation Management</td></tr></tbody></table></div>
+        <p class="lognote">Excerpt, 7–14 June 2019. The same questions came back again and again, from different partners and to different account managers. <b>Bold</b> questions were asked more than once in this week alone.</p>
+      </div>
+
+      <h3>Step 2 · Turn repeats into a question map</h3>
+      <p>Duplicates were merged and grouped into the five menus partners would see, with 12 main questions and 4 follow-ups each. This map became the chatbot's script.</p>
+      <div class="fmap"><div class="fmap-title">FAQs for Onboarding New Customers</div><div class="fcols"><div class="fcol"><div class="fhead"><span>1</span>Getting Started</div><div class="fpar"><button class="fp" aria-expanded="true">How do I list my property online?</button><ul><li>What information do I need to prepare before registering?</li><li>How long does the approval process take?</li><li>Can I edit my property details after the listing goes live?</li><li>Is there a cost to list my property?</li></ul></div><div class="fpar"><button class="fp" aria-expanded="true">How do I set my room types and rates?</button><ul><li>Can I add different room types later?</li><li>How do I set weekday vs weekend pricing?</li><li>Can I change rates after publishing them?</li><li>Is there a bulk edit option for rate changes?</li></ul></div><div class="fpar"><button class="fp" aria-expanded="true">How do I manage availability and inventory?</button><ul><li>How do I close out certain dates if my rooms are sold out?</li><li>Can I connect my channel manager or PMS?</li><li>How often should I update my inventory?</li><li>What happens if I forget to update availability?</li></ul></div></div><div class="fcol"><div class="fhead"><span>2</span>Reservation management</div><div class="fpar"><button class="fp" aria-expanded="true">How do I receive and confirm reservations?</button><ul><li>Will I get notifications for new bookings?</li><li>How do I cancel or modify a booking if needed?</li><li>What if a guest doesn&#x27;t show up?</li><li>How soon do I get paid after a guest&#x27;s stay?</li></ul></div><div class="fpar"><button class="fp" aria-expanded="true">How do I handle guest cancellations and refunds?</button><ul><li>Who pays the refund if the guest cancels?</li><li>Can I set a cancellation policy for my property?</li><li>What happens if I want to waive a cancellation fee?</li><li>Does Expedia notify me if a guest cancels?</li></ul></div></div><div class="fcol"><div class="fhead"><span>3</span>Payments</div><div class="fpar"><button class="fp" aria-expanded="true">How does billing and payment work?</button><ul><li>When will I get paid for completed bookings?</li><li>Can I change my bank account details later?</li><li>Are there service fees or deductions from payouts?</li><li>How do I view or download payment reports?</li></ul></div><div class="fpar"><button class="fp" aria-expanded="true">What is Expedia&#x27;s commission or margin?</button><ul><li>How is commission calculated?</li><li>Can the commission rate change over time?</li><li>Is there a way to negotiate a lower commission?</li><li>Are there extra fees I should know about?</li></ul></div><div class="fpar"><button class="fp" aria-expanded="true">How do I handle taxes and invoices?</button><ul><li>Does Expedia collect taxes on my behalf?</li><li>How do I issue tax invoices to guests if needed?</li><li>Can I see a breakdown of taxes on payouts?</li><li>Do I need to register for VAT or similar local taxes?</li></ul></div></div><div class="fcol"><div class="fhead"><span>4</span>Marketing</div><div class="fpar"><button class="fp" aria-expanded="true">How do I improve my property&#x27;s ranking and visibility?</button><ul><li>What factors affect search ranking on Expedia?</li><li>Does joining promotions help me rank higher?</li><li>How do I get better reviews and ratings?</li><li>Should I use photos or amenities to improve visibility?</li></ul></div><div class="fpar"><button class="fp" aria-expanded="true">How do I join promotions or marketing campaigns?</button><ul><li>How do Expedia promotions work?</li><li>Can I create discounts for specific dates or seasons?</li><li>Will promotions lower my profit margins?</li><li>Can I opt out of a campaign once I&#x27;ve joined?</li></ul></div></div><div class="fcol"><div class="fhead"><span>5</span>Support</div><div class="fpar"><button class="fp" aria-expanded="true">What support options are available if I need help?</button><ul><li>Can I call someone if the chatbot can&#x27;t help?</li><li>Is there an emergency support line for urgent booking issues?</li><li>What&#x27;s the response time for email support?</li><li>Is there support available in Korean (or my local language)?</li></ul></div><div class="fpar"><button class="fp" aria-expanded="true">How can I sell better and attract more bookings?</button><ul><li>Should I join Expedia&#x27;s loyalty program or promotions?</li><li>How do I price competitively against other local properties?</li><li>Are there tools to track my performance vs competitors?</li><li>How can I improve my property photos and descriptions?</li></ul></div></div></div></div>
       <h3>Why it mattered</h3>
       <ul>
         <li>It showed the problem was operational, not just partner inexperience.</li>
@@ -481,6 +526,20 @@
 
   botMsg('Thank you for adding the Expedia Partner Central Support channel.<br><br>Through this channel, you can learn how to sell on Expedia using the <b>Partner Central platform</b> and get answers to frequently asked questions.<br><br>Tap a question below to see the answer.');
   menuTopics(); step(1);
+
+  // call log: filter by category, mark repeated questions
+  const logRows = [...document.querySelectorAll('#logBody tr')], seen = {};
+  logRows.forEach(r => { const q = r.children[1].textContent; seen[q] = (seen[q] || 0) + 1; });
+  logRows.forEach(r => { if(seen[r.children[1].textContent] > 1) r.classList.add('dup'); });
+  document.querySelectorAll('#logChips button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#logChips button').forEach(x => x.classList.toggle('on', x === b));
+    logRows.forEach(r => r.classList.toggle('hide', b.dataset.f !== 'all' && r.dataset.c !== b.dataset.f));
+  });
+  // question map: fold/unfold main questions
+  document.querySelectorAll('.fp').forEach(b => b.onclick = () => {
+    const box = b.parentElement, open = box.classList.toggle('closed');
+    b.setAttribute('aria-expanded', String(!open));
+  });
 
   // outcomes bars grow when scrolled into view
   const trend = document.getElementById('trend');
