@@ -102,7 +102,7 @@
   /* ---------- TICKET v2: blue museum ticket with a perforated stub ---------- */
   .scene,.ticket3d{width:640px}
   .face{--tk:#17345f;--tk2:#3d6aa3;border-radius:10px;color:var(--tk);
-    background:linear-gradient(118deg,#fbfdff 0%,#e3edf8 30%,#a9c6e6 62%,#cfe0f2 82%,#f6f9fd 100%)}
+    background:linear-gradient(118deg,#fdfeff 0%,#eef4fb 30%,#cddff2 62%,#e4eef8 82%,#fafcfe 100%)}
   .face.front,.face.back{display:grid;min-height:300px}
   .face.front{grid-template-columns:1fr 190px}
   .face.back{grid-template-columns:190px 1fr}
@@ -134,15 +134,15 @@
   .back .barcode{height:38px;margin-top:16px;opacity:.85;
     background:repeating-linear-gradient(90deg,var(--tk) 0 2px,transparent 2px 5px,var(--tk) 5px 9px,transparent 9px 11px,var(--tk) 11px 12px,transparent 12px 17px)}
   .stub-mark{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tk)}
-  .stub-mark em{font:400 84px/1 'Pinyon Script',cursive}
+  .stub-mark em{font:400 84px/1 'Pinyon Script',cursive;-webkit-text-stroke:1px currentColor}
   .stub-mark span{font:600 11px 'Manrope',sans-serif;letter-spacing:.3em}
   .face::before{opacity:.18}
 
 
   /* title set like the reference: script M, italic u, Bodoni caps; italic "tic" + caps "KET" */
-  .tk-title{display:block;margin:30px 0 10px;font-family:'Bodoni Moda',Georgia,serif;font-weight:500;color:var(--tk);line-height:1}
+  .tk-title{display:block;margin:50px 0 12px;font-family:'Bodoni Moda',Georgia,serif;font-weight:600;font-variation-settings:'opsz' 20;color:var(--tk);line-height:1}
   .tk-title .l1{font-size:54px;letter-spacing:.01em;white-space:nowrap}
-  .tk-title .sw{font:400 118px/0 'Pinyon Script',cursive;margin-right:-6px;position:relative;top:12px}
+  .tk-title .sw{font:400 118px/0 'Pinyon Script',cursive;margin-right:-6px;position:relative;top:12px;-webkit-text-stroke:1.1px currentColor}
   .tk-title i{font-style:italic;font-size:.95em;margin-right:1px}
   .tk-title .l2{font-size:50px;margin:-4px 0 0 86px;white-space:nowrap}
   .front .showing{margin:4px 0 10px;padding:0;display:flex;align-items:center;gap:10px}
