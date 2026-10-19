@@ -88,9 +88,6 @@
   .requested .note .try::before{color:var(--amber)!important}
   .mock{position:absolute;top:3.5cqh;left:2.5cqw;display:none;font:600 max(8px,3cqh) 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#1b1b1b;background:#f0b43c;padding:.6cqh 1.4cqw;border-radius:4px}
   .requested .mock{display:block}
-  .heat{position:absolute;left:0;right:0;bottom:3.2cqh;height:6cqh;display:none;pointer-events:none}
-  .requested .heat{display:block}
-  .heat path{fill:rgba(255,255,255,.28);stroke:rgba(255,255,255,.75);stroke-width:1.2}
   .tip .chap{display:none;font:600 max(8px,3.2cqh) Inter,sans-serif;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8);background:none!important;padding:0!important}
   .seekprev .tip .chap{display:block}
   .seekprev .tip canvas{width:38cqw}
@@ -134,14 +131,12 @@
   .seekprev .tip canvas{display:block}
   .tip .tt{font:500 max(8px,3cqh) 'IBM Plex Mono',monospace;background:rgba(0,0,0,.85);padding:.5cqh 1.2cqw;border-radius:3px;white-space:nowrap}
   .devwrap{position:relative;aspect-ratio:16/9.4;display:flex;align-items:center;justify-content:center}
-  .devwrap .device{width:100%;transform-origin:center}
+  .devwrap .device{width:100%;transform-origin:center;transition:transform .45s cubic-bezier(.3,.7,.2,1)}
   .winsize{display:none;align-items:center;gap:14px;flex-wrap:wrap;margin:-8px 0 22px;padding:14px 16px;background:var(--bg);font:500 14px 'Inter Tight',Inter,sans-serif}
   .demo.f-captions .winsize{display:flex}
   .winsize b{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
-  .winsize input{flex:1;min-width:160px;accent-color:var(--ink)}
   .winsize button{border:1px solid var(--soft);background:#fff;font:inherit;padding:6px 12px;cursor:pointer}
   .winsize button.on{border-color:var(--ink);background:var(--ink);color:#fff}
-  .winsize .px{font-family:'IBM Plex Mono',monospace;font-size:13px;min-width:92px;text-align:right}
   .menu{position:absolute;right:2.6cqw;bottom:14cqh;min-width:42cqw;background:rgba(20,20,22,.95);color:#fff;border-radius:8px;padding:1cqh 0;display:none;
     font:500 max(9px,3.4cqh) Inter,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.4)}
   .menu.open{display:block}
@@ -258,8 +253,6 @@
     <div class="winsize" id="winsize">
       <b>Window size</b>
       <button data-w="100">Desktop</button><button data-w="70">Tablet</button><button data-w="42">Phone</button>
-      <input type="range" id="winRange" min="38" max="100" value="100" aria-label="Window size">
-      <span class="px" id="winPx">Desktop</span>
     </div>
     <div class="compare">
       <div class="side before" id="sideBefore"></div>
@@ -388,8 +381,8 @@
       after: ['Choose your own quality','A quality menu with High, Medium, Low and Auto lets viewers trade sharpness for data.','Switch between High, Medium and Low and watch the bar shrink.','Shipped · Aug 2023'],
     },
     captions: {
-      before:['Captions stay desktop-sized','Caption size was fixed for desktop. When the window shrank to a phone, the text stayed just as big and covered the slide and the speaker, hurting translated content most.','Drag the window size to Phone. The captions take over the frame.','Pain point'],
-      after: ['Captions scale with the window','Caption font size is now proportional to the screen, so text stays readable on any device without blocking the content.','Drag the window size. The captions shrink and grow with the screen.','Shipped · Aug 2023'],
+      before:['Captions stay desktop-sized','Caption size was fixed for desktop. When the window shrank to a phone, the text stayed just as big and covered the slide and the speaker, hurting translated content most.','Switch to Phone. The captions take over the frame.','Pain point'],
+      after: ['Captions scale with the window','Caption font size is now proportional to the screen, so text stays readable on any device without blocking the content.','Switch between Desktop, Tablet and Phone. The captions resize with the screen.','Shipped · Aug 2023'],
     },
     seek: {
       before:['Scrubbing blind','Hovering the progress bar showed only a timestamp. In a long recording, viewers had to jump, check and jump again to find a moment.','Hover the progress bar. You only get a time.','Pain point'],
@@ -408,7 +401,7 @@
         <canvas class="vid" width="960" height="540"></canvas>
         <div class="badge"></div><div class="mock">REQUESTED · MOCKUP</div><div class="cap"></div><div class="ring"></div><div class="menu"></div>
         <div class="ctrl">
-          <div class="prog"><svg class="heat" viewBox="0 0 100 10" preserveAspectRatio="none"><path></path></svg><div class="fill"></div><div class="knob"></div>
+          <div class="prog"><div class="fill"></div><div class="knob"></div>
             <div class="tip"><span class="chap"></span><canvas width="256" height="144"></canvas><span class="tt">0:00</span></div></div>
           <div class="crow">
             <button class="pp" aria-label="Play or pause"><span class="ip"><svg class="i f" viewBox="0 0 24 24"><rect x="6.5" y="5" width="3.6" height="14" rx=".6"/><rect x="13.9" y="5" width="3.6" height="14" rx=".6"/></svg></span><span class="iq" hidden><svg class="i f" viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></svg></span></button>
@@ -433,9 +426,7 @@
     const q = s => root.querySelector(s);
     const vid = q('.vid'), vctx = vid.getContext('2d'), off = document.createElement('canvas'), octx = off.getContext('2d');
     const tctx = q('.tip canvas').getContext('2d');
-    (() => { let d = 'M0,10', seed = 3; const r = () => (seed = (seed*9301+49297)%233280)/233280;
-      const pts = []; for(let i=0;i<=40;i++){ const x = i*2.5, base = 7.2 - 3*Math.exp(-((x-58)**2)/60) - 2.2*Math.exp(-((x-18)**2)/30); pts.push([x, Math.max(1.2, base - r()*1.4)]); }
-      pts.forEach(([x,y]) => d += ` L${x},${y.toFixed(2)}`); d += ' L100,10 Z'; q('.heat path').setAttribute('d', d); })();
+
     const P = { view, quality: view === 'after' ? 'low' : 'auto', cc:true };
 
     const eff = () => (view === 'after' && feature === 'quality' && P.quality !== 'auto') ? P.quality : 'high';
@@ -527,23 +518,20 @@
   }
 
   const players = [Player(document.getElementById('sideBefore'), 'before'), Player(document.getElementById('sideAfter'), 'after')];
-  let win = 100, winAuto = true;
-  const winRange = document.getElementById('winRange'), winPx = document.getElementById('winPx');
+  let win = 42;   // open on Phone, where the 2023 problem shows
   const winBtns = document.querySelectorAll('#winsize button');
   function setWin(w){
-    win = w; winRange.value = Math.round(w);
-    winPx.textContent = w > 85 ? 'Desktop' : w > 55 ? 'Tablet' : 'Phone';
-    winBtns.forEach(b => b.classList.toggle('on', winPx.textContent === b.textContent));
-    players.forEach(p => { p.size(w); p.ring(); requestAnimationFrame(p.ring); });
+    win = w;
+    winBtns.forEach(b => b.classList.toggle('on', +b.dataset.w === w));
+    players.forEach(p => { p.size(w); p.ring(); setTimeout(p.ring, 480); });
   }
-  winRange.addEventListener('input', () => { winAuto = false; setWin(+winRange.value); });
-  winBtns.forEach(b => b.onclick = () => { winAuto = false; setWin(+b.dataset.w); });
+  winBtns.forEach(b => b.onclick = () => setWin(+b.dataset.w));
   function setFeature(f){
     feature = f; players.forEach(p => p.hideTip());
     document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.f === f));
     players.forEach(p => { p.reset(); p.update(); });
     document.getElementById('demo').classList.toggle('f-captions', f === 'captions');
-    setWin(f === 'captions' ? win : 100);
+    if(f === 'captions') setWin(win); else players.forEach(p => p.size(100));
   }
   document.querySelectorAll('#tabs button').forEach(b => b.onclick = () => setFeature(b.dataset.f));
   window.addEventListener('resize', () => setWin(win));
@@ -553,10 +541,6 @@
     const dt = Math.max(0, Math.min(.1, (now - last)/1000)); last = now;
     if(playing && !scrubber) t = (t + dt) % DUR;
     players.forEach(p => p.render());
-    if(feature === 'captions' && winAuto){
-      const ph = (now / 7000) % 1, e = (1 - Math.cos(ph * 2 * Math.PI)) / 2;   // 0 → 1 → 0
-      setWin(100 - 62 * Math.min(1, e * 1.25));
-    }
     if(feature === 'seek' && !players.some(p => p.hover) && !scrubber){
       const ph = (now / 4200) % 1, f = .12 + .76 * (ph < .5 ? ph*2 : 2 - ph*2);
       players.forEach(p => p.showFrac(f));
