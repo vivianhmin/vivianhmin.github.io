@@ -6,16 +6,16 @@
 <title>Player Redesign — Vivian Min</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
+  :root{--head:Futura,'Futura PT','Jost','Century Gothic',sans-serif;--body:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Inter,'Segoe UI',sans-serif;--bg:#f4f1ee;--ink:#1b1b1b;--muted:#77736c;--line:#1b1b1b;--soft:#e3dfd8;--red:#e8372c;--green:#1f9d55;--amber:#c7870f}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--ink);font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
   a{color:inherit}
 
   .bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;
     padding:16px clamp(16px,4vw,48px);background:rgba(244,241,238,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--soft);font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:15px}
+    border-bottom:1px solid var(--soft);font-family:var(--body);font-size:15px}
   .bar a{text-decoration:none}
   .bar a:hover{color:var(--red)}
   .bar .where{color:var(--muted)}
@@ -23,13 +23,13 @@
   main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 100px}
 
   .hero{padding:clamp(48px,8vw,96px) 0 40px}
-  .kicker{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-  h1{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-weight:700;font-size:clamp(40px,7vw,84px);letter-spacing:-.04em;line-height:.98;margin:14px 0 24px}
+  .kicker{font-family:var(--body);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--body);font-weight:700;font-size:clamp(40px,7vw,84px);letter-spacing:-.04em;line-height:.98;margin:14px 0 24px}
   .lede{font-size:clamp(18px,2vw,22px);line-height:1.6;max-width:780px;color:#33312e}
   .story{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;background:#fff;box-shadow:0 10px 24px rgba(40,30,20,.06)}
   .story li{padding:24px 26px 26px;position:relative}
   .story li+li{border-left:1px solid var(--soft)}
-  .story .step{display:block;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .story .step{display:block;font-family:var(--body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
   .story li:first-child .step{color:var(--red)}
   .story li:last-child .step{color:var(--green)}
   .story p{font-size:16.5px;line-height:1.5}
@@ -37,7 +37,7 @@
   .facts > div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--soft);align-items:baseline}
   .facts > div:not(.wide):first-child{padding-right:24px}
   .facts .wide{grid-column:1 / -1}
-  .facts dt{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .facts dt{font-family:var(--body);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
   .facts dd{font-size:16.5px}
   .facts dd b{font-weight:600}
   .dim{color:var(--muted)}
@@ -48,64 +48,64 @@
 
   .outcomes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .outcomes div{background:#fff;padding:22px 24px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
-  .outcomes strong{display:block;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .outcomes strong{display:block;font-family:var(--body);font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1}
   .outcomes p{font-size:15.5px;color:#4a4742;margin-top:10px;line-height:1.45}
   .lessons{display:grid;grid-template-columns:1fr 1fr;gap:28px}
   .lessons h3{margin-top:0!important}
   .lessons p{font-size:16.5px!important}
   .next-list{list-style:none;counter-reset:n;max-width:760px;margin:0!important}
   .next-list li{counter-increment:n;display:grid;grid-template-columns:44px 1fr;font-size:17px;padding:14px 0;border-bottom:1px solid var(--soft);margin:0!important}
-  .next-list li::before{content:counter(n,decimal-leading-zero);font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:13px;color:var(--muted);padding-top:3px}
+  .next-list li::before{content:counter(n,decimal-leading-zero);font-family:var(--body);font-size:13px;color:var(--muted);padding-top:3px}
   .next-list b{font-weight:600}
-  .reflect{margin-top:28px;padding:4px 0 4px 22px;border-left:3px solid var(--ink);font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:20px;line-height:1.5;max-width:760px}
+  .reflect{margin-top:28px;padding:4px 0 4px 22px;border-left:3px solid var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;max-width:760px}
 
   section{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--soft)}
-  section > h2{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
-  section > h2 small{display:block;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-weight:400;font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
+  section > h2{font-family:var(--body);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  section > h2 small{display:block;font-family:var(--body);font-weight:400;font-size:12px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
   .body p{font-size:17.5px;max-width:740px}
   .body p+p{margin-top:14px}
-  .body h3{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:20px;font-weight:600;margin:28px 0 8px}
+  .body h3{font-family:var(--body);font-size:20px;font-weight:600;margin:28px 0 8px}
   .body ul{margin:12px 0 0 22px;max-width:740px}
   .body li{font-size:17px;margin-top:8px}
 
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
   .stat{background:#fff;padding:22px 22px 20px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
-  .stat strong{display:block;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .stat strong{display:block;font-family:var(--body);font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
   .stat span{display:block;font-size:14.5px;color:#4a4742;margin-top:8px;line-height:1.4}
   .bars{margin-top:22px;max-width:620px}
   .bars div{display:grid;grid-template-columns:150px 1fr 44px;align-items:center;gap:12px;font-size:15px;margin-top:10px}
   .bars i{display:block;height:10px;background:var(--ink)}
-  .bars b{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-weight:500;font-size:14px}
+  .bars b{font-family:var(--body);font-weight:500;font-size:14px}
 
   .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
   .feature{background:#fff;padding:22px;box-shadow:0 10px 20px rgba(40,30,20,.06)}
-  .feature .n{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:12px;color:var(--muted)}
-  .feature b{display:block;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:19px;margin:6px 0 8px;line-height:1.25}
+  .feature .n{font-family:var(--body);font-size:12px;color:var(--muted)}
+  .feature b{display:block;font-family:var(--body);font-size:19px;margin:6px 0 8px;line-height:1.25}
   .feature p{font-size:15px;line-height:1.5}
-  .feature .tag{display:inline-block;margin-top:12px;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line)}
+  .feature .tag{display:inline-block;margin-top:12px;font-family:var(--body);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line)}
   .feature .tag.off{color:var(--muted);border-color:var(--soft)}
 
   .timeline{margin-top:16px;border-left:1.5px solid var(--line)}
   .timeline div{position:relative;padding:0 0 16px 22px;font-size:16.5px}
   .timeline div::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line)}
-  .timeline b{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-weight:600;margin-right:8px}
+  .timeline b{font-family:var(--body);font-weight:600;margin-right:8px}
 
-  .next{padding-top:56px;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif}
+  .next{padding-top:56px;font-family:var(--body)}
   .next a{font-size:20px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
   .next a:hover{color:var(--red);border-color:var(--red)}
   footer{margin-top:60px;font-size:13px;color:var(--muted)}
 
   /* ================= BEFORE / AFTER DEMO ================= */
   .demo{margin:12px 0 8px;padding:36px clamp(16px,3vw,36px) 34px;background:#fff;box-shadow:0 26px 50px rgba(40,30,20,.08),0 4px 10px rgba(40,30,20,.05)}
-  .demo-title{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:clamp(26px,3vw,34px);letter-spacing:-.025em;margin-top:6px;line-height:1.1}
+  .demo-title{font-family:var(--body);font-size:clamp(26px,3vw,34px);letter-spacing:-.025em;margin-top:6px;line-height:1.1}
   .tabs{display:flex;gap:8px;margin:20px 0 26px;flex-wrap:wrap}
-  .tabs button{border:1px solid var(--soft);background:var(--bg);font:500 15px Futura,'Futura PT','Jost','Century Gothic',sans-serif;padding:10px 16px;cursor:pointer;color:var(--ink)}
-  .tabs button span{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:11px;color:var(--muted);margin-right:8px}
+  .tabs button{border:1px solid var(--soft);background:var(--bg);font:500 15px var(--body);padding:10px 16px;cursor:pointer;color:var(--ink)}
+  .tabs button span{font-family:var(--body);font-size:11px;color:var(--muted);margin-right:8px}
   .tabs button.on{border-color:var(--ink);background:var(--ink);color:#fff}
   .tabs button.on span{color:#bbb}
 
   .compare{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,36px)}
-  .side-label{display:flex;align-items:center;gap:10px;font:600 14px Futura,'Futura PT','Jost','Century Gothic',sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+  .side-label{display:flex;align-items:center;gap:10px;font:600 14px var(--body);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
   .side-label i{width:10px;height:10px;border-radius:50%}
   .before .side-label{color:var(--red)} .before .side-label i{background:var(--red)}
   .after .side-label{color:var(--green)} .after .side-label i{background:var(--green)}
@@ -115,13 +115,13 @@
   @keyframes ringa{50%{box-shadow:0 0 0 5px rgba(240,180,60,.28)}}
   .requested .status{color:var(--amber)!important}
   .requested .note .try::before{color:var(--amber)!important}
-  .mock{position:absolute;top:3.5cqh;left:2.5cqw;display:none;font:600 max(8px,3cqh) Futura,'Futura PT','Jost','Century Gothic',sans-serif;letter-spacing:.1em;color:#1b1b1b;background:#f0b43c;padding:.6cqh 1.4cqw;border-radius:4px}
+  .mock{position:absolute;top:3.5cqh;left:2.5cqw;display:none;font:600 max(8px,3cqh) var(--body);letter-spacing:.1em;color:#1b1b1b;background:#f0b43c;padding:.6cqh 1.4cqw;border-radius:4px}
   .requested .mock{display:block}
-  .tip .chap{display:none;font:600 max(8px,3.2cqh) Futura,'Futura PT','Jost','Century Gothic',sans-serif;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8);background:none!important;padding:0!important}
+  .tip .chap{display:none;font:600 max(8px,3.2cqh) var(--body);color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8);background:none!important;padding:0!important}
   .seekprev .tip .chap{display:block}
   .seekprev .tip canvas{width:38cqw}
   .seekprev .tip{bottom:9cqh}
-  .side-label em{font-style:normal;color:var(--muted);font-weight:400;letter-spacing:.06em;text-transform:none;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:13px}
+  .side-label em{font-style:normal;color:var(--muted);font-weight:400;letter-spacing:.06em;text-transform:none;font-family:var(--body);font-size:13px}
 
   .device{background:linear-gradient(145deg,#2a2a2c,#0d0d0e);border-radius:30px;padding:11px 20px;position:relative}
   .device::before{content:"";position:absolute;left:7px;top:50%;width:5px;height:38px;margin-top:-19px;border-radius:4px;background:#000}
@@ -129,12 +129,12 @@
   .after .device{box-shadow:0 0 0 3px var(--green),0 24px 40px rgba(0,0,0,.2)}
   .screen{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;container-type:size;user-select:none}
   .screen canvas.vid{width:100%;height:100%;display:block}
-  .badge{position:absolute;top:3.5cqh;right:2.5cqw;font:600 max(8px,3.4cqh) Futura,'Futura PT','Jost','Century Gothic',sans-serif;color:#fff;background:rgba(0,0,0,.5);padding:.6cqh 1.4cqw;border-radius:4px}
+  .badge{position:absolute;top:3.5cqh;right:2.5cqw;font:600 max(8px,3.4cqh) var(--body);color:#fff;background:rgba(0,0,0,.5);padding:.6cqh 1.4cqw;border-radius:4px}
   .cap{position:absolute;left:50%;transform:translateX(-50%);bottom:17cqh;width:max-content;max-width:90%;text-align:center;
-    font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-weight:500;color:#fff;line-height:1.28;background:rgba(0,0,0,.75);padding:.2em .5em;border-radius:3px}
+    font-family:var(--body);font-weight:500;color:#fff;line-height:1.28;background:rgba(0,0,0,.75);padding:.2em .5em;border-radius:3px}
   /* Panopto embed controls: full-width scrubber over a dark bar, icon row below */
   .ctrl{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;padding:0 2.6cqw 1.6cqh;
-    background:linear-gradient(rgba(14,14,15,0),rgba(14,14,15,.88) 30%,rgba(14,14,15,.96));color:#fff;font:400 max(8px,3.4cqh) Futura,'Futura PT','Jost','Century Gothic',sans-serif}
+    background:linear-gradient(rgba(14,14,15,0),rgba(14,14,15,.88) 30%,rgba(14,14,15,.96));color:#fff;font:400 max(8px,3.4cqh) var(--body)}
   .crow{position:relative;display:flex;align-items:center;gap:1.6cqw;height:8cqh}
   .crow .sp{flex:1}
   .crow .sep{width:1px;height:4.4cqh;background:rgba(255,255,255,.25);margin:0 .4cqw}
@@ -142,7 +142,7 @@
   .ctrl button:hover{background:rgba(255,255,255,.12)}
   .ctrl svg.i{width:max(10px,4.6cqh);height:max(10px,4.6cqh);fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .ctrl svg.i.f{fill:#fff;stroke:none}
-  .cc .ccbox{font:600 max(6px,2.4cqh) Futura,'Futura PT','Jost','Century Gothic',sans-serif;border:1.5px solid #fff;border-radius:3px;padding:.3cqh .5cqw;line-height:1;letter-spacing:.02em}
+  .cc .ccbox{font:600 max(6px,2.4cqh) var(--body);border:1.5px solid #fff;border-radius:3px;padding:.3cqh .5cqw;line-height:1;letter-spacing:.02em}
   .cc.on .ccbox{background:#fff;color:#111}
   .time{white-space:nowrap;margin-left:.6cqw}
   .time b{font-weight:400;font-size:max(9px,4.4cqh)}
@@ -158,16 +158,16 @@
   .tip.show{display:flex}
   .tip canvas{width:30cqw;aspect-ratio:16/9;border:2px solid #fff;border-radius:4px;background:#000;display:none}
   .seekprev .tip canvas{display:block}
-  .tip .tt{font:500 max(8px,3cqh) Futura,'Futura PT','Jost','Century Gothic',sans-serif;background:rgba(0,0,0,.85);padding:.5cqh 1.2cqw;border-radius:3px;white-space:nowrap}
+  .tip .tt{font:500 max(8px,3cqh) var(--body);background:rgba(0,0,0,.85);padding:.5cqh 1.2cqw;border-radius:3px;white-space:nowrap}
   .devwrap{position:relative;aspect-ratio:16/9.4;display:flex;align-items:center;justify-content:center}
   .devwrap .device{width:100%;transform-origin:center;transition:transform .45s cubic-bezier(.3,.7,.2,1)}
-  .winsize{display:none;align-items:center;gap:14px;flex-wrap:wrap;margin:-8px 0 22px;padding:14px 16px;background:var(--bg);font:500 14px Futura,'Futura PT','Jost','Century Gothic',sans-serif}
+  .winsize{display:none;align-items:center;gap:14px;flex-wrap:wrap;margin:-8px 0 22px;padding:14px 16px;background:var(--bg);font:500 14px var(--body)}
   .demo.f-captions .winsize{display:flex}
-  .winsize b{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .winsize b{font-family:var(--body);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
   .winsize button{border:1px solid var(--soft);background:#fff;font:inherit;padding:6px 12px;cursor:pointer}
   .winsize button.on{border-color:var(--ink);background:var(--ink);color:#fff}
   .menu{position:absolute;right:2.6cqw;bottom:14cqh;min-width:42cqw;background:rgba(20,20,22,.95);color:#fff;border-radius:8px;padding:1cqh 0;display:none;
-    font:500 max(9px,3.4cqh) Futura,'Futura PT','Jost','Century Gothic',sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+    font:500 max(9px,3.4cqh) var(--body);box-shadow:0 8px 24px rgba(0,0,0,.4)}
   .menu.open{display:block}
   .menu .row{display:flex;justify-content:space-between;gap:3cqw;padding:1.6cqh 2.4cqw}
   .menu .row span:last-child{color:#aaa}
@@ -182,26 +182,26 @@
   @keyframes ring{50%{box-shadow:0 0 0 5px rgba(232,55,44,.25)}}
   @keyframes ringg{50%{box-shadow:0 0 0 5px rgba(59,210,122,.25)}}
 
-  .note{margin-top:18px;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif}
+  .note{margin-top:18px;font-family:var(--body)}
   .note h3{font-size:21px;letter-spacing:-.015em;line-height:1.25;margin-bottom:6px}
-  .note p{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:15.5px;line-height:1.55;color:#3a3835}
-  .note .try{margin-top:12px;font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-size:14.5px;color:var(--ink);display:flex;gap:8px}
+  .note p{font-family:var(--body);font-size:15.5px;line-height:1.55;color:#3a3835}
+  .note .try{margin-top:12px;font-family:var(--body);font-size:14.5px;color:var(--ink);display:flex;gap:8px}
   .note .try::before{content:"→";font-weight:600}
   .before .note .try::before{color:var(--red)} .after .note .try::before{color:var(--green)}
   .meter{margin-top:14px;padding:12px 14px;background:var(--bg);display:none}
   .q .meter{display:block}
   .mrow{display:flex;justify-content:space-between;font-size:14px}
-  .mrow b{font-family:Futura,'Futura PT','Jost','Century Gothic',sans-serif;font-weight:500}
+  .mrow b{font-family:var(--body);font-weight:500}
   .mrow.small{margin-top:6px;color:var(--muted);font-size:13px}
   .mbar{height:6px;background:#ddd8d0;margin-top:8px}
   .mbar{position:relative}
   .mbar s{position:absolute;inset:0;border:1.5px dashed rgba(232,55,44,.55);display:none}
   .after .mbar s{display:block}
   .mbar i{position:relative;display:block;height:100%;width:100%;transition:width .4s ease,background .4s}
-  .save{display:none;margin-top:10px;font:600 22px Futura,'Futura PT','Jost','Century Gothic',sans-serif;letter-spacing:-.01em;color:var(--green)}
-  .save small{font:500 13px Futura,'Futura PT','Jost','Century Gothic',sans-serif;color:var(--muted);margin-left:6px;letter-spacing:0}
+  .save{display:none;margin-top:10px;font:600 22px var(--body);letter-spacing:-.01em;color:var(--green)}
+  .save small{font:500 13px var(--body);color:var(--muted);margin-left:6px;letter-spacing:0}
   .after.q .save{display:block}
-  .status{display:inline-block;margin-top:14px;font:500 11.5px Futura,'Futura PT','Jost','Century Gothic',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid currentColor}
+  .status{display:inline-block;margin-top:14px;font:500 11.5px var(--body);letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid currentColor}
   .before .status{color:var(--red)} .after .status{color:var(--green)}
   .after .status.deferred{color:var(--muted)}
 
@@ -297,6 +297,16 @@
     section{grid-template-columns:1fr;padding:40px 0}
     .tabs{gap:20px}
   }
+  /* ================= type: Futura for headings, SF Pro (Apple system) for reading ================= */
+  body{font-family:var(--body);letter-spacing:0}
+  h1,h2,h3,.demo-title,section > h2,.kicker,.story .step,.facts dt,.side-label,.winsize b,
+  .stat strong,.outcomes strong,.feature b,.feature .n,.feature .tag,.status,.next-list li::before,
+  .tabs button,.bar,.next a,.facts dd b{font-family:var(--head)}
+  h1{font-weight:500;letter-spacing:-.01em}
+  .body p,.body li,.lede,.story p,.facts dd,.note p,.reflect{letter-spacing:-.003em}
+  .lede{font-size:clamp(18px,1.9vw,22px);line-height:1.6}
+  .body p,.body li{font-size:17.5px;line-height:1.65}
+  .reflect{font-size:20px;line-height:1.55}
 </style>
 </head>
 <body>
