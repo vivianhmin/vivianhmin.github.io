@@ -156,9 +156,13 @@
 
   /* ---------- magnets ---------- */
   .fridge{flex:1;height:100%;margin:0;display:flex;align-items:center;justify-content:center;min-width:0}
-  .fridge{align-items:flex-end}
+  .fridge{align-items:flex-end;position:relative}
+  .stage:not(.portrait) .mag .area,.portrait .mag .area{bottom:calc(var(--floor) - 22px)}
+  .mag .fridge{align-self:stretch}
+  .mag .fridge::after{content:"";position:absolute;left:50%;bottom:-6px;width:var(--fw,300px);height:26px;transform:translateX(-50%);
+    background:radial-gradient(ellipse at center,rgba(0,0,0,.45),transparent 70%);filter:blur(4px);z-index:-1}
   .fridge img{display:block;max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;
-    filter:drop-shadow(0 18px 22px rgba(40,30,20,.22)) drop-shadow(0 3px 4px rgba(40,30,20,.15))}
+    filter:drop-shadow(-6px 0 14px rgba(40,30,20,.12))}
   .portrait .fridge{width:100%;height:auto;flex:1 1 0;min-height:0}
   .portrait .fridge img{height:100%;width:auto}
 
@@ -286,7 +290,7 @@
           <h2>And I collect magnets.</h2>
           <p>Around 250 so far. Finding a new one is half the reason I travel.</p>
         </div>
-        <figure class="fridge"><img src="assets/magnets.png" alt="A refrigerator covered in travel magnets" loading="lazy"></figure>
+        <figure class="fridge"><img src="assets/magnets.png" alt="A refrigerator covered in travel magnets"></figure>
       </div>
     </section>
 
@@ -389,7 +393,10 @@ function fit(){
   lamps();
   hang(document.getElementById('salonP'), PHOTOS, 'photo', 0);
   hang(document.getElementById('salonD'), DRAWINGS, 'drawing', PHOTOS.length);
+  fridgeShadow();
 }
+function fridgeShadow(){ const i = document.querySelector('.fridge img'); if(i) document.querySelector('.fridge').style.setProperty('--fw', (i.offsetWidth * 1.05) + 'px'); }
+document.querySelector('.fridge img').addEventListener('load', fridgeShadow);
 
 // ---------- one wall per screen ----------
 bays.forEach((b, i) => { const d = document.createElement('button'); d.setAttribute('aria-label', b.dataset.label); d.onclick = () => go(i); dots.appendChild(d); });
