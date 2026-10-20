@@ -154,6 +154,12 @@
   .portrait .gal .vinyl{width:100%}
   .portrait .salon{flex:1;width:100%}
 
+  /* ---------- magnets ---------- */
+  .fridge{flex:1;height:100%;margin:0;display:flex;align-items:center;justify-content:center;min-width:0}
+  .fridge img{display:block;max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;
+    box-shadow:0 26px 40px rgba(40,30,20,.18),0 6px 10px rgba(40,30,20,.12)}
+  .portrait .fridge{width:100%}
+
   /* ---------- exit ---------- */
   .exit .area{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:34px}
   .exit h2{font-weight:600;font-size:72px;letter-spacing:-.03em;line-height:1.05}
@@ -268,6 +274,17 @@
           <p>Cities I've lived in, places I miss, and the people in between.</p>
         </div>
         <div class="salon" id="salonD"></div>
+      </div>
+    </section>
+
+    <section class="bay gal mag" data-label="Magnets">
+      <div class="area">
+        <div class="vinyl">
+          <div class="kick">In my free time · III</div>
+          <h2>And I collect magnets.</h2>
+          <p>Around 250 so far. Finding a new one is half the reason I travel.</p>
+        </div>
+        <figure class="fridge"><img src="assets/magnets.jpg" alt="A refrigerator covered in travel magnets" loading="lazy"></figure>
       </div>
     </section>
 
@@ -405,10 +422,11 @@ addEventListener('touchend', e => {
 });
 
 // ---------- viewer ----------
-const ALL = PHOTOS.concat(DRAWINGS), lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+const ALL = PHOTOS.concat(DRAWINGS, [['assets/magnets.jpg','A refrigerator covered in travel magnets',680,941]]), lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
 let cur = 0;
 function show(i){ cur = (i + ALL.length) % ALL.length; lbImg.src = ALL[cur][0]; lbImg.alt = ALL[cur][1]; lbCap.textContent = ''; }
 function openLb(i){ show(i); lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); }
+document.querySelector('.fridge img').onclick = () => openLb(ALL.length - 1);
 function closeLb(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); }
 document.getElementById('lbX').onclick = closeLb;
 document.getElementById('lbP').onclick = e => { e.stopPropagation(); show(cur - 1); };
